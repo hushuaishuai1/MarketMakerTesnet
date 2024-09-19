@@ -1,0 +1,7 @@
+tortoise_orm:
+  connections:
+    default: postgres://oscarsql:ioppoiopi0@localhost:5432/DbBinance  # Sin espacios en la cadena
+  apps:
+    models:
+      models: ['app.models', 'aerich.models']
+      default_connection: default
