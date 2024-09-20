@@ -3,7 +3,7 @@
 import pandas as pd
 from app.models import Signal
 
-def backtest_momentum_strategy(df, initial_capital=1000, commission=0.001, slippage=0.001, trailing_stop_percent=0.02):
+def backtest_momentum_strategy(df, initial_capital=100, commission=0.001, slippage=0.001, trailing_stop_percent=0.04):
     # Eliminar filas con valores faltantes en 'close' y 'signal'
     df.dropna(subset=['close', 'signal'], inplace=True)
 
@@ -144,7 +144,7 @@ async def run_backtesting(symbol: str, interval: str = '1h'):
     df.sort_values('timestamp', inplace=True)
 
     # Llamar a la función de backtesting
-    initial_capital = 1000
+    initial_capital = 100
     final_capital, trade_log = backtest_momentum_strategy(df, initial_capital)
     metrics = calculate_backtesting_metrics(trade_log, initial_capital, final_capital)
 

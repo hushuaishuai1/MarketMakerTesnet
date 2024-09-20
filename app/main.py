@@ -2,20 +2,15 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from tortoise.contrib.fastapi import register_tortoise
 from tortoise.transactions import in_transaction
-from app.models import Trade, HistoricalPrice, Order, CurrencyPair, StrategyResult
+from app.models import Trade, HistoricalPrice, Order, CurrencyPair, StrategyResult, Signal
 from dotenv import load_dotenv
 import os
 import uvicorn
 import asyncio
 from api.momentum_strategy import momentum_strategy
-from api.risk_manager import calculate_atr, set_stop_loss
-from api.trade_executor import execute_trade
-from api.binance_connector import client  # Conexión a Binance desde binance_connector
-from app.models import Signal
-from backtesting.backtesting import run_backtesting
-from api.binance_connector import client, get_historical_data 
-import traceback
-
+from api.backtesting import run_backtesting
+from api.binance_connector import get_historical_data
+from api.grid_search_strategy import run_grid_search
 
 # Cargar variables de entorno
 load_dotenv()
@@ -50,6 +45,24 @@ register_tortoise(
     add_exception_handlers=True,
 )
 
+# Función centralizada para evitar sobrescritura de cualquier tipo de dato
+async def store_data_if_not_exists(model, data_dict):
+    """
+    Almacena datos en la base de datos si no existe una entrada con el mismo timestamp y símbolo.
+    """
+    async with in_transaction():
+        timestamp = data_dict['timestamp'].to_pydatetime()
+        symbol = data_dict['symbol']
+
+        # Verificar si el registro ya existe en la base de datos
+        existing_data = await model.filter(symbol=symbol, timestamp=timestamp).first()
+        if existing_data:
+            return False  # No se inserta si ya existe
+
+        # Si no existe, crear el nuevo registro
+        await model.create(**data_dict)
+        return True
+
 # Pydantic Schemas para validar los datos que recibes
 class TradeSchema(BaseModel):
     symbol: str
@@ -80,80 +93,31 @@ class CurrencyPairSchema(BaseModel):
     base_currency: str
     quote_currency: str
 
-# Funciones auxiliares
-async def init_db():
-    await Tortoise.init(config=DATABASE_CONFIG)
-    await Tortoise.generate_schemas()
-
 # Endpoints para Trades
 @app.post("/trades/")
 async def create_trade(trade: TradeSchema):
     try:
-        async with in_transaction():
-            new_trade = await Trade.create(
-                symbol=trade.symbol,
-                price=trade.price,
-                volume=trade.volume,
-                timestamp=trade.timestamp
-            )
-        return {"status": "Trade created successfully", "trade_id": new_trade.id}
+        data_dict = trade.dict()
+        success = await store_data_if_not_exists(Trade, data_dict)
+        if success:
+            return {"status": "Trade created successfully"}
+        else:
+            return {"status": "Trade already exists"}
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error creating trade: {e}")
-
-@app.get("/trades/")
-async def get_trades():
-    trades = await Trade.all()
-    return trades
-
-@app.get("/trades/{trade_id}")
-async def get_trade(trade_id: int):
-    try:
-        trade = await Trade.get(id=trade_id)
-        return trade
-    except Trade.DoesNotExist:
-        raise HTTPException(status_code=404, detail="Trade not found")
-
-@app.put("/trades/{trade_id}")
-async def update_trade(trade_id: int, trade: TradeSchema):
-    try:
-        existing_trade = await Trade.get(id=trade_id)
-        existing_trade.symbol = trade.symbol
-        existing_trade.price = trade.price
-        existing_trade.volume = trade.volume
-        existing_trade.timestamp = trade.timestamp
-        await existing_trade.save()
-        return {"status": "Trade updated successfully"}
-    except Trade.DoesNotExist:
-        raise HTTPException(status_code=404, detail="Trade not found")
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Error updating trade: {e}")
-
-@app.delete("/trades/{trade_id}")
-async def delete_trade(trade_id: int):
-    try:
-        trade = await Trade.get(id=trade_id)
-        await trade.delete()
-        return {"status": "Trade deleted successfully"}
-    except Trade.DoesNotExist:
-        raise HTTPException(status_code=404, detail="Trade not found")
 
 # Endpoints para HistoricalPrice
 @app.post("/historical_prices/")
 async def create_historical_price(price: HistoricalPriceSchema):
     try:
-        new_price = await HistoricalPrice.create(
-            symbol=price.symbol,
-            price=price.price,
-            timestamp=price.timestamp
-        )
-        return {"status": "Historical price created successfully", "price_id": new_price.id}
+        data_dict = price.dict()
+        success = await store_data_if_not_exists(HistoricalPrice, data_dict)
+        if success:
+            return {"status": "Historical price created successfully"}
+        else:
+            return {"status": "Historical price already exists"}
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error creating historical price: {e}")
-
-@app.get("/historical_prices/")
-async def get_historical_prices():
-    prices = await HistoricalPrice.all()
-    return prices
 
 @app.get("/historical_prices/{symbol}")
 async def get_historical(symbol: str, interval: str = '1h', limit: int = 1000):
@@ -168,67 +132,19 @@ async def get_historical(symbol: str, interval: str = '1h', limit: int = 1000):
     except Exception as e:
         print(f"Error al obtener datos históricos: {e}")
         raise HTTPException(status_code=400, detail=f"Error al obtener datos históricos: {e}")
-@app.put("/historical_prices/{price_id}")
-async def update_historical_price(price_id: int, price: HistoricalPriceSchema):
-    try:
-        existing_price = await HistoricalPrice.get(id=price_id)
-        existing_price.symbol = price.symbol
-        existing_price.price = price.price
-        existing_price.timestamp = price.timestamp
-        await existing_price.save()
-        return {"status": "Historical price updated successfully"}
-    except HistoricalPrice.DoesNotExist:
-        raise HTTPException(status_code=404, detail="Historical price not found")
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Error updating historical price: {e}")
 
-@app.delete("/historical_prices/{price_id}")
-async def delete_historical_price(price_id: int):
-    try:
-        price = await HistoricalPrice.get(id=price_id)
-        await price.delete()
-        return {"status": "Historical price deleted successfully"}
-    except HistoricalPrice.DoesNotExist:
-        raise HTTPException(status_code=404, detail="Historical price not found")
-
-
-
-
-
-
-#  Endpoint para obtener todas las señales almacenadas
- 
-@app.get("/signals/")
-async def get_signals(limit: int = 200):
-    """
-    Endpoint para obtener todas las señales almacenadas.
-    
-    Parameters:
-    - limit: Límite de señales a obtener (por defecto 100)
-    
-    Returns:
-    - Lista de señales en formato JSON
-    """
-    try:
-        # Obtener las señales con un límite
-        signals = await Signal.all().limit(limit)  # Limitar el número de señales obtenidas
-        return signals  # Retornar las señales en formato JSON
-
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Error obteniendo señales: {e}")
-# Inicialización de la base de datos y ejecución del servidor FastAPI
-# Endpoint para ejecutar el backtesting
-# Endpoint para ejecutar el backtesting
 # Endpoint para ejecutar la estrategia de momentum
 @app.get("/momentum/{symbol}")
-async def execute_momentum(symbol: str, interval: str = '1h', limit: int = 100):
+async def execute_momentum(symbol: str, interval: str = '1h', limit: int = 1000):
+    """
+    Ejecuta la estrategia de momentum.
+    """
     try:
         result = await momentum_strategy(symbol, interval=interval, limit=limit)
         return result.to_dict(orient='records')
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error ejecutando la estrategia: {e}")
 
-
 # Endpoint para ejecutar el backtesting
 @app.get("/backtesting/{symbol}")
 async def backtesting_endpoint(symbol: str, interval: str = '1h'):
@@ -238,19 +154,24 @@ async def backtesting_endpoint(symbol: str, interval: str = '1h'):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-if __name__ == "__main__":
-    asyncio.run(init_db())
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+# Endpoint para ejecutar el Grid Search
+@app.get("/run-grid-search/{symbol}")
+async def run_search(symbol: str, interval: str = '1h', limit: int = 1000):
+    result = await run_grid_search(symbol, interval, limit)
+    return result
 
+# Otros endpoints para obtener datos y actualizar los registros
+@app.get("/trades/")
+async def get_trades():
+    trades = await Trade.all()
+    return trades
 
-@app.get("/backtesting/{symbol}")
-async def backtesting_endpoint(symbol: str, interval: str = '1h'):
-    try:
-        result = await run_backtesting(symbol, interval=interval)
-        return result
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+@app.get("/signals/{symbol}")
+async def get_signals(symbol: str, interval: str = '1h'):
+    signals = await Signal.filter(symbol=symbol, interval=interval).all()
+    return signals
 
+# Inicialización de la base de datos y ejecución del servidor FastAPI
 if __name__ == "__main__":
     asyncio.run(init_db())
     uvicorn.run(app, host="127.0.0.1", port=8000)

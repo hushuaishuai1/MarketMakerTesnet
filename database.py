@@ -2,18 +2,18 @@ from tortoise import Tortoise
 
 DATABASE_CONFIG = {
     "connections": {
-        "default": "postgres://oscarsql:ioppoiopi0@localhost:5432/DbBinance",  # Sin espacios en la cadena de conexión
+        "default": "postgres://oscarsql:ioppoiopi0@localhost:5432/DbBinance",  # Conexión a PostgreSQL
     },
     "apps": {
         "models": {
-            "models": ["app.models", "aerich.models"],  # Incluir modelos de Aerich
+            "models": ["app.models", "aerich.models"],  # Modelos de Aerich para migraciones
             "default_connection": "default",
         }
     }
 }
 
 async def init():
-    """Inicializa la conexión a la base de datos y los esquemas"""
+    """Inicializa la conexión a la base de datos y genera esquemas si es necesario"""
     await Tortoise.init(config=DATABASE_CONFIG)
     await Tortoise.generate_schemas()
 

@@ -76,6 +76,10 @@ class Signal(Model):
     interval = fields.CharField(max_length=10)
 
     class Meta:
+        table = "signals"
+        unique_together = ("symbol", "timestamp")  # Evitar duplicados en DB
+    
+    class Meta:
         table = "signals"  # Especificar el nombre correcto de la tabla
 
     def __str__(self):
