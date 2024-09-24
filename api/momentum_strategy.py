@@ -3,28 +3,30 @@ from api.binance_connector import get_historical_data
 from app.models import Signal
 from tortoise.transactions import in_transaction
 import numpy as np
+import requests  # Importa requests si no está importado
 
 async def momentum_strategy(symbol: str, interval: str = '1h', limit: int = 1000):
     # Obtener datos históricos
     df = get_historical_data(symbol, interval, limit)
-    
-    # **Eliminar NaT en 'timestamp'**
+
+    # Eliminar NaT en 'timestamp'
     df = df.dropna(subset=['timestamp'])
 
     # Verificar si hay valores NaN en columnas clave
     df = df.dropna(subset=['close', 'high', 'low', 'volume'])
 
-    # Verificación de las primeras filas para asegurar datos limpios
-    print(f"Primeros 5 valores de 'timestamp' después de eliminar NaT:")
-    print(df['timestamp'].head())
+    # Asegurarse de que los datos estén en la misma zona horaria (UTC)
+    df['timestamp'] = pd.to_datetime(df['timestamp']).dt.tz_localize('UTC')
 
-    # Calcular indicadores técnicos en la temporalidad base
+    # Calcular EMA(8) y EMA(23) en la temporalidad base
     df['EMA_8'] = df['close'].ewm(span=8, adjust=False).mean()
     df['EMA_23'] = df['close'].ewm(span=23, adjust=False).mean()
+
+    # Calcular MACD y su línea de señal
     df['MACD'] = df['EMA_8'] - df['EMA_23']
     df['Signal_Line'] = df['MACD'].ewm(span=9, adjust=False).mean()
 
-    # Calcular RSI
+    # Calcular RSI ajustado con umbrales 30-70
     delta = df['close'].diff()
     gain = delta.clip(lower=0)
     loss = -delta.clip(upper=0)
@@ -33,65 +35,58 @@ async def momentum_strategy(symbol: str, interval: str = '1h', limit: int = 1000
     rs = average_gain / average_loss
     df['RSI'] = 100 - (100 / (1 + rs))
 
-    # Calcular ADX
+    # Calcular ATR para gestionar stop-loss y take-profit basados en volatilidad
     df['TR'] = np.maximum.reduce([
         df['high'] - df['low'],
         abs(df['high'] - df['close'].shift()),
         abs(df['low'] - df['close'].shift())
     ])
+    df['ATR'] = df['TR'].rolling(window=14).mean()
+
+    # Calcular ADX
     df['DM_plus'] = np.where(
         (df['high'] - df['high'].shift()) > (df['low'].shift() - df['low']),
         df['high'] - df['high'].shift(),
         0
     )
-    df['DM_plus'] = np.where(df['DM_plus'] < 0, 0, df['DM_plus'])
-
     df['DM_minus'] = np.where(
         (df['low'].shift() - df['low']) > (df['high'] - df['high'].shift()),
         df['low'].shift() - df['low'],
         0
     )
-    df['DM_minus'] = np.where(df['DM_minus'] < 0, 0, df['DM_minus'])
-
-    # Suavizar TR, DM+ y DM-
     df['TR_smooth'] = df['TR'].rolling(window=14).sum()
     df['DM_plus_smooth'] = df['DM_plus'].rolling(window=14).sum()
     df['DM_minus_smooth'] = df['DM_minus'].rolling(window=14).sum()
-
-    # Calcular DI+ y DI-
     df['DI_plus'] = 100 * (df['DM_plus_smooth'] / df['TR_smooth'])
     df['DI_minus'] = 100 * (df['DM_minus_smooth'] / df['TR_smooth'])
-
-    # Calcular DX y asegurar que no hay valores NaN
     df['DX'] = 100 * (abs(df['DI_plus'] - df['DI_minus']) / (df['DI_plus'] + df['DI_minus']))
-    df['DX'].fillna(0, inplace=True)  # Reemplazar NaN en 'DX' con 0
 
-    # Calcular ADX
+    # Asegurar que no haya valores NaN
+    df['DX'] = df['DX'].fillna(0)
     df['ADX'] = df['DX'].rolling(window=14).mean()
 
-    # Calcular Volumen Promedio
+    # Calcular Volumen Promedio (EMA del volumen)
     df['Volume_EMA'] = df['volume'].ewm(span=20, adjust=False).mean()
 
     # Obtener datos en temporalidad superior (4h)
     df_higher = get_historical_data(symbol, '4h', limit)
-    df_higher['timestamp'] = pd.to_datetime(df_higher['timestamp'], unit='ms', utc=True)
-
-    # **Eliminar NaT en 'timestamp' en el DataFrame superior**
+    df_higher['timestamp'] = pd.to_datetime(df_higher['timestamp'], unit='ms').dt.tz_localize('UTC')
     df_higher = df_higher.dropna(subset=['timestamp'])
-
-    # Calcular EMAs en temporalidad superior
     df_higher['EMA_50'] = df_higher['close'].ewm(span=50, adjust=False).mean()
     df_higher['EMA_200'] = df_higher['close'].ewm(span=200, adjust=False).mean()
 
-    # Alinear temporalidades
+    # Alinear temporalidades y calcular tendencia superior
     df_higher.set_index('timestamp', inplace=True)
     df.set_index('timestamp', inplace=True)
+    
+    # Asegurarse de que ambos DataFrames tengan el mismo tipo de zona horaria (UTC)
     df = df.join(df_higher[['EMA_50', 'EMA_200']], how='left', rsuffix='_higher')
     df.reset_index(inplace=True)
 
     df['Higher_Trend'] = np.where(df['EMA_50'] > df['EMA_200'], 'bullish', 'bearish')
 
-    df.fillna(method='ffill', inplace=True)
+    # Rellenar valores faltantes para evitar problemas de null
+    df.ffill(inplace=True)
     df.fillna(0, inplace=True)
 
     # Generar señales

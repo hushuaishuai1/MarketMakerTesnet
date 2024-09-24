@@ -1,155 +1,113 @@
-# backtesting.py
-
+import backtrader as bt
 import pandas as pd
-from app.models import Signal
+import requests
+from api.binance_connector import get_historical_data
 
-def backtest_momentum_strategy(df, initial_capital=100, commission=0.001, slippage=0.001, trailing_stop_percent=0.04):
-    # Eliminar filas con valores faltantes en 'close' y 'signal'
-    df.dropna(subset=['close', 'signal'], inplace=True)
+# Definir el indicador OBV
+class OnBalanceVolume(bt.Indicator):
+    lines = ('obv',)
 
-    capital = initial_capital
-    position = 0  # 0 = sin posición, 1 = posición larga
-    position_entry_price = 0
-    trade_log = []
-    quantity = 0  # Cantidad de activos comprados
-    stop_loss_price = 0
+    def __init__(self):
+        self.addminperiod(1)
 
-    for index, row in df.iterrows():
-        signal = row['signal']
-        price = float(row['close'])
-        timestamp = row['timestamp']
+    def next(self):
+        if self.data.close[0] > self.data.close[-1]:
+            self.lines.obv[0] = self.lines.obv[-1] + self.data.volume[0]
+        elif self.data.close[0] < self.data.close[-1]:
+            self.lines.obv[0] = self.lines.obv[-1] - self.data.volume[0]
+        else:
+            self.lines.obv[0] = self.lines.obv[-1]
 
-        # Convertir timestamp a datetime sin zona horaria
-        if isinstance(timestamp, pd.Timestamp):
-            timestamp = timestamp.to_pydatetime()
-        if timestamp.tzinfo is not None:
-            timestamp = timestamp.replace(tzinfo=None)
+# Estrategia que incluye MACD, OBV, y señales de momentum
+class MomentumStrategy(bt.Strategy):
+    params = (
+        ('ema_fast', 8),
+        ('ema_slow', 50),
+        ('rsi_period', 14),
+        ('atr_period', 14),
+        ('atr_multiplier_sl', 2),
+        ('atr_multiplier_tp', 3),
+    )
 
-        # Formatear timestamp a cadena
-        timestamp_str = timestamp.strftime('%Y-%m-%d %H:%M:%S')
+    def __init__(self):
+        self.ema_fast = bt.indicators.ExponentialMovingAverage(self.data.close, period=self.params.ema_fast)
+        self.ema_slow = bt.indicators.ExponentialMovingAverage(self.data.close, period=self.params.ema_slow)
+        self.rsi = bt.indicators.RelativeStrengthIndex(self.data.close, period=self.params.rsi_period)
+        self.atr = bt.indicators.AverageTrueRange(self.data, period=self.params.atr_period)
+        self.macd = bt.indicators.MACDHisto(self.data.close)  # MACD
+        self.obv = OnBalanceVolume(self.data)  # OBV
 
-        slippage_adjustment = price * slippage
-        adjusted_price = price + slippage_adjustment if position == 0 else price - slippage_adjustment
+    def next(self):
+        if not self.position:
+            if self.ema_fast > self.ema_slow and self.rsi < 70:
+                print(f"Buying at {self.data.close[0]} on {self.data.datetime.date(0)}")
+                stop_loss = self.data.close[0] - (self.atr[0] * self.params.atr_multiplier_sl)
+                take_profit = self.data.close[0] + (self.atr[0] * self.params.atr_multiplier_tp)
+                self.buy_bracket(stopprice=stop_loss, limitprice=take_profit)
+        elif self.ema_fast < self.ema_slow or self.rsi > 70:
+            print(f"Selling at {self.data.close[0]} on {self.data.datetime.date(0)}")
+            self.sell()
 
-        if position == 1:
-            # Actualizar Trailing Stop-Loss
-            new_stop_loss_price = max(stop_loss_price, adjusted_price * (1 - trailing_stop_percent))
-            stop_loss_price = new_stop_loss_price
+def run_backtesting(symbol: str, interval: str):
+    try:
+        # Hacemos la solicitud a la API para obtener los datos históricos
+        url = f"https://api.binance.com/api/v3/klines?symbol={symbol}&interval={interval}"
+        response = requests.get(url)
+        data = response.json()
 
-            # Verificar si el precio alcanza el Trailing Stop-Loss
-            if adjusted_price <= stop_loss_price:
-                sale_amount = quantity * adjusted_price
-                capital += sale_amount - (sale_amount * commission)
-                profit_loss = sale_amount - (quantity * position_entry_price)
-                trade_log.append(f"Trailing Stop-Loss ejecutado en {adjusted_price:.2f} en {timestamp_str}, P/L: {profit_loss:.2f}")
-                position = 0
-                quantity = 0
-                continue
+        # Convertimos los datos a un DataFrame
+        df = pd.DataFrame(data, columns=[
+            'timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time',
+            'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume',
+            'taker_buy_quote_asset_volume', 'ignore'
+        ])
 
-        if signal == 1 and position == 0:
-            # Comprar
-            position = 1
-            position_entry_price = adjusted_price
-            quantity = capital / (adjusted_price * (1 + commission))
-            total_purchase = quantity * adjusted_price
-            commission_cost = total_purchase * commission
-            capital -= total_purchase + commission_cost
-            stop_loss_price = adjusted_price * (1 - trailing_stop_percent)
-            trade_log.append(f"Compra a {adjusted_price:.2f} en {timestamp_str}, cantidad: {quantity:.6f}")
+        # Convertir las columnas numéricas a float
+        df['open'] = df['open'].astype(float)
+        df['high'] = df['high'].astype(float)
+        df['low'] = df['low'].astype(float)
+        df['close'] = df['close'].astype(float)
+        df['volume'] = df['volume'].astype(float)
 
-        elif signal == -1 and position == 1:
-            # Vender
-            sale_amount = quantity * adjusted_price
-            commission_cost = sale_amount * commission
-            capital += sale_amount - commission_cost
-            profit_loss = sale_amount - (quantity * position_entry_price)
-            trade_log.append(f"Venta a {adjusted_price:.2f} en {timestamp_str}, P/L: {profit_loss:.2f}")
-            position = 0
-            quantity = 0
+        # Convertir el timestamp a formato datetime
+        df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
 
-    # Cerrar posición al final si está abierta
-    if position == 1:
-        adjusted_price = price - price * slippage
-        sale_amount = quantity * adjusted_price
-        commission_cost = sale_amount * commission
-        capital += sale_amount - commission_cost
-        profit_loss = sale_amount - (quantity * position_entry_price)
-        trade_log.append(f"Venta final a {adjusted_price:.2f} en {timestamp_str}, P/L: {profit_loss:.2f}")
-        position = 0
-        quantity = 0
+        # Configurar cerebro de Backtrader
+        cerebro = bt.Cerebro()
 
-    return capital, trade_log
+        # Convertir DataFrame de pandas en un DataFeed de Backtrader
+        data_feed = bt.feeds.PandasData(dataname=df, datetime='timestamp')
+        cerebro.adddata(data_feed)
 
-def calculate_backtesting_metrics(trade_log, initial_capital, final_capital):
-    num_trades = len([log for log in trade_log if 'P/L' in log])
-    num_wins = sum(1 for log in trade_log if 'P/L' in log and float(log.split('P/L:')[-1]) > 0)
-    num_losses = num_trades - num_wins
-    win_rate = (num_wins / num_trades) * 100 if num_trades > 0 else 0
-    roi = ((final_capital - initial_capital) / initial_capital) * 100
+        # Añadir la estrategia
+        cerebro.addstrategy(MomentumStrategy)
 
-    # Calcular drawdown máximo
-    peak = initial_capital
-    max_drawdown = 0
-    current_capital = initial_capital
-    for log in trade_log:
-        if 'P/L' in log:
-            profit_loss = float(log.split('P/L:')[-1])
-            current_capital += profit_loss
-            if current_capital > peak:
-                peak = current_capital
-            drawdown = peak - current_capital
-            if drawdown > max_drawdown:
-                max_drawdown = drawdown
+        # Capital inicial
+        cerebro.broker.set_cash(1000)
 
-    # Evitar división por cero
-    if num_wins > 0:
-        avg_gain = sum(float(log.split('P/L:')[-1]) for log in trade_log if 'P/L' in log and float(log.split('P/L:')[-1]) > 0) / num_wins
-    else:
-        avg_gain = 0
+        # Comisión por operación
+        cerebro.broker.setcommission(commission=0.001)
 
-    if num_losses > 0:
-        avg_loss = sum(float(log.split('P/L:')[-1]) for log in trade_log if 'P/L' in log and float(log.split('P/L:')[-1]) < 0) / num_losses
-    else:
-        avg_loss = 0
+        # Agregar analyzer para registrar la evolución del capital y otras métricas
+        cerebro.addanalyzer(bt.analyzers.TimeReturn, _name="capital")
+        cerebro.addanalyzer(bt.analyzers.SharpeRatio, _name='sharpe')
+        cerebro.addanalyzer(bt.analyzers.DrawDown, _name='drawdown')
 
-    if avg_loss != 0:
-        risk_reward_ratio = avg_gain / abs(avg_loss)
-    else:
-        risk_reward_ratio = None  # O asigna 0 o un valor específico
+        # Ejecutar el backtest
+        results = cerebro.run()
 
-    return {
-        "win_rate": win_rate,
-        "roi": roi,
-        "max_drawdown": max_drawdown,
-        "risk_reward_ratio": risk_reward_ratio
-    }
+        # Obtener las métricas
+        capital_evol = results[0].analyzers.capital.get_analysis()
+        sharpe_ratio = results[0].analyzers.sharpe.get_analysis().get('sharperatio')
+        drawdown = results[0].analyzers.drawdown.get_analysis()
 
-async def run_backtesting(symbol: str, interval: str = '1h'):
-    # Obtener las señales de la base de datos
-    signals = await Signal.filter(symbol=symbol, interval=interval).order_by('timestamp').values()
+        # Retornar las métricas en formato JSON
+        return {
+            "capital_evol": capital_evol,
+            "sharpe_ratio": sharpe_ratio,
+            "max_drawdown": drawdown['max']['drawdown'],
+            "max_drawdown_duration": drawdown['max']['len']
+        }
 
-    # Crear el DataFrame directamente desde la lista de diccionarios
-    df = pd.DataFrame(signals)
-
-    if df.empty:
-        raise ValueError(f"No se encontraron señales para el símbolo {symbol} en el intervalo {interval}")
-
-    # Convertir 'timestamp' a datetime
-    df['timestamp'] = pd.to_datetime(df['timestamp'])
-
-    # Verificar que no haya valores NaT
-    df.dropna(subset=['timestamp', 'close', 'signal'], inplace=True)
-
-    # Ordenar por timestamp
-    df.sort_values('timestamp', inplace=True)
-
-    # Llamar a la función de backtesting
-    initial_capital = 100
-    final_capital, trade_log = backtest_momentum_strategy(df, initial_capital)
-    metrics = calculate_backtesting_metrics(trade_log, initial_capital, final_capital)
-
-    return {
-        "final_capital": final_capital,
-        "metrics": metrics,
-        "trade_log": trade_log
-    }
+    except Exception as e:
+        return {"detail": f"Error ejecutando el backtesting: {e}"}

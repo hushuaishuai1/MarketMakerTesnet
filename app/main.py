@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Query, HTTPException
 from pydantic import BaseModel
 from tortoise.contrib.fastapi import register_tortoise
 from tortoise.transactions import in_transaction
@@ -11,6 +11,12 @@ from api.momentum_strategy import momentum_strategy
 from api.backtesting import run_backtesting
 from api.binance_connector import get_historical_data
 from api.grid_search_strategy import run_grid_search
+from app.models import BestParams
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from api.backtesting import run_backtesting
+from api.grid_search_strategy import run_grid_search
+import requests
+
 
 # Cargar variables de entorno
 load_dotenv()
@@ -47,19 +53,14 @@ register_tortoise(
 
 # Función centralizada para evitar sobrescritura de cualquier tipo de dato
 async def store_data_if_not_exists(model, data_dict):
-    """
-    Almacena datos en la base de datos si no existe una entrada con el mismo timestamp y símbolo.
-    """
     async with in_transaction():
         timestamp = data_dict['timestamp'].to_pydatetime()
         symbol = data_dict['symbol']
 
-        # Verificar si el registro ya existe en la base de datos
         existing_data = await model.filter(symbol=symbol, timestamp=timestamp).first()
         if existing_data:
             return False  # No se inserta si ya existe
 
-        # Si no existe, crear el nuevo registro
         await model.create(**data_dict)
         return True
 
@@ -121,24 +122,17 @@ async def create_historical_price(price: HistoricalPriceSchema):
 
 @app.get("/historical_prices/{symbol}")
 async def get_historical(symbol: str, interval: str = '1h', limit: int = 1000):
-    """
-    Endpoint para obtener datos históricos de precios.
-    """
     try:
         df = get_historical_data(symbol, interval, limit)
-        df['timestamp'] = df['timestamp'].astype(str)  # Convertir timestamp a string para JSON
+        df['timestamp'] = df['timestamp'].astype(str)
         result_json = df.to_dict(orient='records')
         return result_json
     except Exception as e:
-        print(f"Error al obtener datos históricos: {e}")
         raise HTTPException(status_code=400, detail=f"Error al obtener datos históricos: {e}")
 
 # Endpoint para ejecutar la estrategia de momentum
 @app.get("/momentum/{symbol}")
 async def execute_momentum(symbol: str, interval: str = '1h', limit: int = 1000):
-    """
-    Ejecuta la estrategia de momentum.
-    """
     try:
         result = await momentum_strategy(symbol, interval=interval, limit=limit)
         return result.to_dict(orient='records')
@@ -147,14 +141,14 @@ async def execute_momentum(symbol: str, interval: str = '1h', limit: int = 1000)
 
 # Endpoint para ejecutar el backtesting
 @app.get("/backtesting/{symbol}")
-async def backtesting_endpoint(symbol: str, interval: str = '1h'):
+async def backtesting(symbol: str, interval: str = Query('1h')):
     try:
-        result = await run_backtesting(symbol, interval=interval)
+        # Llamar a la función run_backtesting pasando symbol e interval
+        result = run_backtesting(symbol=symbol, interval=interval)
         return result
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        return {"detail": f"Error ejecutando el backtesting: {e}"}
 
-# Endpoint para ejecutar el Grid Search
 @app.get("/run-grid-search/{symbol}")
 async def run_search(symbol: str, interval: str = '1h', limit: int = 1000):
     result = await run_grid_search(symbol, interval, limit)
@@ -170,6 +164,24 @@ async def get_trades():
 async def get_signals(symbol: str, interval: str = '1h'):
     signals = await Signal.filter(symbol=symbol, interval=interval).all()
     return signals
+
+# Automatización de trading cada 5 minutos
+scheduler = AsyncIOScheduler()
+
+async def execute_trading_tasks():
+    pairs = ['BTC/USDT', 'ETH/USDT', 'BNB/USDT']
+    for pair in pairs:
+        await momentum_strategy(pair, '1h', 1000)
+
+scheduler.add_job(execute_trading_tasks, 'interval', minutes=5)
+
+@app.on_event("startup")
+async def start_scheduler():
+    scheduler.start()
+
+@app.on_event("shutdown")
+async def shutdown_scheduler():
+    scheduler.shutdown()
 
 # Inicialización de la base de datos y ejecución del servidor FastAPI
 if __name__ == "__main__":

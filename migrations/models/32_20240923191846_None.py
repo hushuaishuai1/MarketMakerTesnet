@@ -3,7 +3,16 @@ from tortoise import BaseDBAsyncClient
 
 async def upgrade(db: BaseDBAsyncClient) -> str:
     return """
-        CREATE TABLE IF NOT EXISTS "currency_pairs" (
+        CREATE TABLE IF NOT EXISTS "signals" (
+    "id" SERIAL NOT NULL PRIMARY KEY,
+    "symbol" VARCHAR(20) NOT NULL,
+    "interval" VARCHAR(10) NOT NULL,
+    "EMA_8" INT NOT NULL,
+    "EMA_23" INT NOT NULL,
+    "RSI_threshold" DOUBLE PRECISION NOT NULL,
+    "ADX_threshold" DOUBLE PRECISION NOT NULL
+);
+CREATE TABLE IF NOT EXISTS "currency_pairs" (
     "id" SERIAL NOT NULL PRIMARY KEY,
     "base_currency" VARCHAR(10) NOT NULL,
     "quote_currency" VARCHAR(10) NOT NULL,
@@ -24,6 +33,7 @@ CREATE INDEX IF NOT EXISTS "idx_historical__timesta_9cd63e" ON "historical_price
 CREATE TABLE IF NOT EXISTS "orders" (
     "id" SERIAL NOT NULL PRIMARY KEY,
     "symbol" VARCHAR(20) NOT NULL,
+    "open" DOUBLE PRECISION NOT NULL,
     "type" VARCHAR(10) NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
     "volume" DOUBLE PRECISION NOT NULL,
@@ -32,21 +42,25 @@ CREATE TABLE IF NOT EXISTS "orders" (
 );
 CREATE INDEX IF NOT EXISTS "idx_orders_symbol_2bc01c" ON "orders" ("symbol");
 CREATE INDEX IF NOT EXISTS "idx_orders_timesta_1b82ff" ON "orders" ("timestamp");
-CREATE TABLE IF NOT EXISTS "signals" (
+CREATE TABLE IF NOT EXISTS "signal" (
     "id" SERIAL NOT NULL PRIMARY KEY,
     "symbol" VARCHAR(20) NOT NULL,
     "close" DOUBLE PRECISION NOT NULL,
     "ema_8" DOUBLE PRECISION NOT NULL,
     "ema_23" DOUBLE PRECISION NOT NULL,
-    "macd" DOUBLE PRECISION NOT NULL,
     "signal_line" DOUBLE PRECISION NOT NULL,
-    "rsi" DOUBLE PRECISION NOT NULL,
     "adx" DOUBLE PRECISION NOT NULL,
     "volume" DOUBLE PRECISION NOT NULL,
     "higher_trend" VARCHAR(10) NOT NULL,
     "signal" INT NOT NULL,
     "timestamp" TIMESTAMPTZ NOT NULL,
-    "interval" VARCHAR(10) NOT NULL
+    "interval" VARCHAR(10) NOT NULL,
+    "macd" DOUBLE PRECISION,
+    "obv" DOUBLE PRECISION,
+    "rsi" DOUBLE PRECISION,
+    "ema_fast" DOUBLE PRECISION,
+    "ema_slow" DOUBLE PRECISION,
+    CONSTRAINT "uid_signal_symbol_c9f8d6" UNIQUE ("symbol", "timestamp", "interval")
 );
 CREATE TABLE IF NOT EXISTS "strategy_results" (
     "id" SERIAL NOT NULL PRIMARY KEY,

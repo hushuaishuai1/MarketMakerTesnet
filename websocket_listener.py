@@ -5,7 +5,8 @@ import websockets
 from app.models import HistoricalPrice
 from database import init, close  # Tortoise setup
 from settings import settings  # Settings con las credenciales de Binance
-
+import pytz
+from datetime import datetime
 logging.basicConfig(level=logging.INFO)
 
 async def listen_to_binance_websocket():
@@ -30,7 +31,7 @@ async def handle_message(message):
 
     # Convertir el timestamp a datetime (milisegundos)
     from datetime import datetime
-    timestamp = datetime.utcfromtimestamp(timestamp / 1000)
+    timestamp = datetime.fromtimestamp(timestamp / 1000, pytz.UTC)
 
     # Guardar en la base de datos usando Tortoise
     new_price = HistoricalPrice(symbol=symbol, price=price, timestamp=timestamp)
