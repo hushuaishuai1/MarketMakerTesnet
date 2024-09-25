@@ -79,7 +79,9 @@ class Signal(Model):
     rsi = fields.FloatField(null=True)  # Valor del RSI
     ema_fast = fields.FloatField(null=True)  # EMA rápida personalizada
     ema_slow = fields.FloatField(null=True)  # EMA lenta personalizada
-
+    trailing_stop = fields.FloatField(null=True)  # Para el Trailing Stop
+    return_anualizado = fields.FloatField(null=True)  # Retorno anualizado
+    tasa_aciertos = fields.FloatField(null=True)  #
     # Campo único basado en el par (symbol) y el timestamp para evitar duplicados
     class Meta:
         unique_together = ("symbol", "timestamp", "interval")  # Evitar duplicados por par y tiempo

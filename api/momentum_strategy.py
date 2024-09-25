@@ -3,11 +3,14 @@ from api.binance_connector import get_historical_data
 from app.models import Signal
 from tortoise.transactions import in_transaction
 import numpy as np
-import requests  # Importa requests si no está importado
+import requests
 
-async def momentum_strategy(symbol: str, interval: str = '1h', limit: int = 1000):
+async def momentum_strategy(symbol: str, interval: str = '1h', limit: int = 1000, min_rsi: int = 20, max_rsi: int = 80, ema_fast_period: int = 8, ema_slow_period: int = 50, atr_mult_sl: float = 2, atr_mult_tp: float = 3):
     # Obtener datos históricos
     df = get_historical_data(symbol, interval, limit)
+
+    # Asegurar que los datos son float, especialmente las columnas de precios
+    df[['open', 'high', 'low', 'close', 'volume']] = df[['open', 'high', 'low', 'close', 'volume']].astype(float)
 
     # Eliminar NaT en 'timestamp'
     df = df.dropna(subset=['timestamp'])
@@ -15,18 +18,15 @@ async def momentum_strategy(symbol: str, interval: str = '1h', limit: int = 1000
     # Verificar si hay valores NaN en columnas clave
     df = df.dropna(subset=['close', 'high', 'low', 'volume'])
 
-    # Asegurarse de que los datos estén en la misma zona horaria (UTC)
-    df['timestamp'] = pd.to_datetime(df['timestamp']).dt.tz_localize('UTC')
-
-    # Calcular EMA(8) y EMA(23) en la temporalidad base
-    df['EMA_8'] = df['close'].ewm(span=8, adjust=False).mean()
-    df['EMA_23'] = df['close'].ewm(span=23, adjust=False).mean()
+    # Calcular EMA(ema_fast_period) y EMA(ema_slow_period) en la temporalidad base
+    df[f'EMA_{ema_fast_period}'] = df['close'].ewm(span=ema_fast_period, adjust=False).mean()
+    df[f'EMA_{ema_slow_period}'] = df['close'].ewm(span=ema_slow_period, adjust=False).mean()
 
     # Calcular MACD y su línea de señal
-    df['MACD'] = df['EMA_8'] - df['EMA_23']
+    df['MACD'] = df[f'EMA_{ema_fast_period}'] - df[f'EMA_{ema_slow_period}']
     df['Signal_Line'] = df['MACD'].ewm(span=9, adjust=False).mean()
 
-    # Calcular RSI ajustado con umbrales 30-70
+    # Calcular RSI ajustado con umbrales min_rsi - max_rsi
     delta = df['close'].diff()
     gain = delta.clip(lower=0)
     loss = -delta.clip(upper=0)
@@ -60,8 +60,8 @@ async def momentum_strategy(symbol: str, interval: str = '1h', limit: int = 1000
     df['DI_plus'] = 100 * (df['DM_plus_smooth'] / df['TR_smooth'])
     df['DI_minus'] = 100 * (df['DM_minus_smooth'] / df['TR_smooth'])
     df['DX'] = 100 * (abs(df['DI_plus'] - df['DI_minus']) / (df['DI_plus'] + df['DI_minus']))
-
-    # Asegurar que no haya valores NaN
+    
+    # Evitar valores nulos
     df['DX'] = df['DX'].fillna(0)
     df['ADX'] = df['DX'].rolling(window=14).mean()
 
@@ -70,7 +70,9 @@ async def momentum_strategy(symbol: str, interval: str = '1h', limit: int = 1000
 
     # Obtener datos en temporalidad superior (4h)
     df_higher = get_historical_data(symbol, '4h', limit)
-    df_higher['timestamp'] = pd.to_datetime(df_higher['timestamp'], unit='ms').dt.tz_localize('UTC')
+    
+    # Convertir 'timestamp' a tz-naive
+    df_higher['timestamp'] = pd.to_datetime(df_higher['timestamp'], unit='ms').dt.tz_localize(None)
     df_higher = df_higher.dropna(subset=['timestamp'])
     df_higher['EMA_50'] = df_higher['close'].ewm(span=50, adjust=False).mean()
     df_higher['EMA_200'] = df_higher['close'].ewm(span=200, adjust=False).mean()
@@ -78,22 +80,20 @@ async def momentum_strategy(symbol: str, interval: str = '1h', limit: int = 1000
     # Alinear temporalidades y calcular tendencia superior
     df_higher.set_index('timestamp', inplace=True)
     df.set_index('timestamp', inplace=True)
-    
-    # Asegurarse de que ambos DataFrames tengan el mismo tipo de zona horaria (UTC)
     df = df.join(df_higher[['EMA_50', 'EMA_200']], how='left', rsuffix='_higher')
     df.reset_index(inplace=True)
 
     df['Higher_Trend'] = np.where(df['EMA_50'] > df['EMA_200'], 'bullish', 'bearish')
 
-    # Rellenar valores faltantes para evitar problemas de null
+    # Evitar valores nulos
     df.ffill(inplace=True)
     df.fillna(0, inplace=True)
 
-    # Generar señales
+    # Generar señales de trading con RSI ampliado
     df['signal'] = 0
     df.loc[
-        (df['EMA_8'] > df['EMA_23']) &
-        (df['RSI'] < 70) &
+        (df[f'EMA_{ema_fast_period}'] > df[f'EMA_{ema_slow_period}']) &
+        (df['RSI'] < max_rsi) &
         (df['ADX'] > 25) &
         (df['Higher_Trend'] == 'bullish') &
         (df['volume'] > df['Volume_EMA']),
@@ -101,8 +101,8 @@ async def momentum_strategy(symbol: str, interval: str = '1h', limit: int = 1000
     ] = 1
 
     df.loc[
-        (df['EMA_8'] < df['EMA_23']) &
-        (df['RSI'] > 30) &
+        (df[f'EMA_{ema_fast_period}'] < df[f'EMA_{ema_slow_period}']) &
+        (df['RSI'] > min_rsi) &
         (df['ADX'] > 25) &
         (df['Higher_Trend'] == 'bearish') &
         (df['volume'] > df['Volume_EMA']),
@@ -118,8 +118,8 @@ async def momentum_strategy(symbol: str, interval: str = '1h', limit: int = 1000
             await Signal.create(
                 symbol=symbol,
                 close=row['close'],
-                ema_8=row['EMA_8'],
-                ema_23=row['EMA_23'],
+                ema_8=row[f'EMA_{ema_fast_period}'],
+                ema_23=row[f'EMA_{ema_slow_period}'],
                 macd=row['MACD'],
                 signal_line=row['Signal_Line'],
                 rsi=row['RSI'],

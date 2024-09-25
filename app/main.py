@@ -169,7 +169,7 @@ async def get_signals(symbol: str, interval: str = '1h'):
 scheduler = AsyncIOScheduler()
 
 async def execute_trading_tasks():
-    pairs = ['BTC/USDT', 'ETH/USDT', 'BNB/USDT']
+    pairs = ['BTCUSDT', 'ETHUSDT', 'BNBUSDT']
     for pair in pairs:
         await momentum_strategy(pair, '1h', 1000)
 

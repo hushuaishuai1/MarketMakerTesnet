@@ -60,6 +60,9 @@ CREATE TABLE IF NOT EXISTS "signal" (
     "rsi" DOUBLE PRECISION,
     "ema_fast" DOUBLE PRECISION,
     "ema_slow" DOUBLE PRECISION,
+    "trailing_stop" DOUBLE PRECISION,
+    "return_anualizado" DOUBLE PRECISION,
+    "tasa_aciertos" DOUBLE PRECISION,
     CONSTRAINT "uid_signal_symbol_c9f8d6" UNIQUE ("symbol", "timestamp", "interval")
 );
 CREATE TABLE IF NOT EXISTS "strategy_results" (

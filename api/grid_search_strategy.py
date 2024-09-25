@@ -4,7 +4,7 @@ from app.models import Signal, BestParams
 from api.binance_connector import get_historical_data
 from tortoise.transactions import in_transaction
 import numpy as np
-
+import requests
 # Definir las combinaciones de parámetros con EMA 8 y EMA 23
 def grid_search_combinations():
     ema_8_values = [8, 12, 16]
@@ -15,7 +15,7 @@ def grid_search_combinations():
     for combination in itertools.product(ema_8_values, ema_23_values, rsi_values, adx_values):
         yield combination
 
-# Evaluar la estrategia de trading
+# Evaluar la estrategia de trading con Trailing Stop
 def evaluate_strategy(df, ema_8, ema_23, rsi, adx):
     capital_inicial = 10000
     capital_actual = capital_inicial
@@ -25,14 +25,27 @@ def evaluate_strategy(df, ema_8, ema_23, rsi, adx):
     pérdidas_totales = 0
     drawdown = 0
     capital_maximo = capital_inicial
+    trailing_stop = None
 
     for index, row in df.iterrows():
         if row['signal'] == 1:  # Compra
             n_operaciones += 1
             precio_entrada = row['close']
+            stop_loss = precio_entrada - 2 * row['ATR']  # Stop inicial
+            take_profit = precio_entrada + 3 * row['ATR']  # Take profit
+
             for i in range(index + 1, len(df)):
-                if df.iloc[i]['signal'] == -1:  # Venta
-                    precio_salida = df.iloc[i]['close']
+                precio_actual = df.iloc[i]['close']
+                
+                # Actualizar trailing stop
+                if trailing_stop is None:
+                    trailing_stop = stop_loss
+                else:
+                    trailing_stop = max(trailing_stop, precio_actual - 2 * df.iloc[i]['ATR'])
+                
+                # Verificar si se alcanza el trailing stop o take profit
+                if precio_actual <= trailing_stop or precio_actual >= take_profit:
+                    precio_salida = precio_actual
                     break
             else:
                 precio_salida = df.iloc[-1]['close']
