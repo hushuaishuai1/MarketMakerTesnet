@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 import os
 import uvicorn
 import asyncio
-from api.momentum_strategy import momentum_strategy
+from api.momentum_strategy import MomentumStrategy
 from api.backtesting import run_backtesting
 from api.binance_connector import get_historical_data
 from api.grid_search_strategy import run_grid_search
@@ -16,7 +16,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from api.backtesting import run_backtesting
 from api.grid_search_strategy import run_grid_search
 import requests
-
+import backtrader as bt
 
 # Cargar variables de entorno
 load_dotenv()
@@ -132,12 +132,18 @@ async def get_historical(symbol: str, interval: str = '1h', limit: int = 1000):
 
 # Endpoint para ejecutar la estrategia de momentum
 @app.get("/momentum/{symbol}")
-async def execute_momentum(symbol: str, interval: str = '1h', limit: int = 1000):
+async def run_momentum(symbol: str, interval: str, limit: int):
     try:
-        result = await momentum_strategy(symbol, interval=interval, limit=limit)
-        return result.to_dict(orient='records')
+        # Lógica para ejecutar tu estrategia
+        cerebro = bt.Cerebro()
+        # Aquí agregarías tu feed de datos y estrategia
+        cerebro.addstrategy(MomentumStrategy)
+        result = cerebro.run()
+
+        return {"result": "Estrategia ejecutada con éxito"}
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Error ejecutando la estrategia: {e}")
+        raise HTTPException(status_code=500, detail=f"Error ejecutando la estrategia: {str(e)}")
+
 
 # Endpoint para ejecutar el backtesting
 @app.get("/backtesting/{symbol}")
@@ -171,9 +177,10 @@ scheduler = AsyncIOScheduler()
 async def execute_trading_tasks():
     pairs = ['BTCUSDT', 'ETHUSDT', 'BNBUSDT']
     for pair in pairs:
-        await momentum_strategy(pair, '1h', 1000)
+        strategy = MomentumStrategy(pair, '1h', 1000)
+        await strategy.ejecutar() 
 
-scheduler.add_job(execute_trading_tasks, 'interval', minutes=5)
+scheduler.add_job(execute_trading_tasks, 'interval', minutes= 90)
 
 @app.on_event("startup")
 async def start_scheduler():

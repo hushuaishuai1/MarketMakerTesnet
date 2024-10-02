@@ -1,6 +1,5 @@
 from tortoise.models import Model
 from tortoise import fields
-import datetime
 
 class Trade(Model):
     id = fields.IntField(pk=True)
@@ -31,7 +30,6 @@ class HistoricalPrice(Model):
 class Order(Model):
     id = fields.IntField(pk=True)
     symbol = fields.CharField(max_length=20, index=True)
-    open = fields.FloatField() 
     type = fields.CharField(max_length=10)  # Tipo de orden (compra/venta)
     price = fields.FloatField()  # Precio de la orden
     volume = fields.FloatField()  # Volumen de la orden
@@ -61,6 +59,7 @@ class CurrencyPair(Model):
     class Meta:
         table = "currency_pairs"
         unique_together = ("base_currency", "quote_currency")
+
 class Signal(Model):
     id = fields.IntField(pk=True)  # Clave primaria
     symbol = fields.CharField(max_length=20)  # Par de trading, ej: BTCUSDT
@@ -81,10 +80,11 @@ class Signal(Model):
     ema_slow = fields.FloatField(null=True)  # EMA lenta personalizada
     trailing_stop = fields.FloatField(null=True)  # Para el Trailing Stop
     return_anualizado = fields.FloatField(null=True)  # Retorno anualizado
-    tasa_aciertos = fields.FloatField(null=True)  #
-    # Campo único basado en el par (symbol) y el timestamp para evitar duplicados
+    tasa_aciertos = fields.FloatField(null=True)  # Tasa de aciertos
+
     class Meta:
         unique_together = ("symbol", "timestamp", "interval")  # Evitar duplicados por par y tiempo
+        table = "signals"  # Especificar el nombre correcto de la tabla
 
 class BestParams(Model):
     symbol = fields.CharField(max_length=20)
@@ -95,11 +95,8 @@ class BestParams(Model):
     ADX_threshold = fields.FloatField()
 
     class Meta:
-        table = "signals"
-        unique_together = ("symbol", "timestamp")  # Evitar duplicados en DB
-    
-    class Meta:
-        table = "signals"  # Especificar el nombre correcto de la tabla
+        table = "best_params"
+        unique_together = ("symbol", "interval")  # Evitar duplicados en DB
 
     def __str__(self):
-        return f"Signal(symbol={self.symbol}, timestamp={self.timestamp}, signal={self.signal})"
+        return f"BestParams(symbol={self.symbol}, interval={self.interval})"

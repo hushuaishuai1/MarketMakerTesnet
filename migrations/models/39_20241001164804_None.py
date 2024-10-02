@@ -3,14 +3,15 @@ from tortoise import BaseDBAsyncClient
 
 async def upgrade(db: BaseDBAsyncClient) -> str:
     return """
-        CREATE TABLE IF NOT EXISTS "signals" (
+        CREATE TABLE IF NOT EXISTS "best_params" (
     "id" SERIAL NOT NULL PRIMARY KEY,
     "symbol" VARCHAR(20) NOT NULL,
     "interval" VARCHAR(10) NOT NULL,
     "EMA_8" INT NOT NULL,
     "EMA_23" INT NOT NULL,
     "RSI_threshold" DOUBLE PRECISION NOT NULL,
-    "ADX_threshold" DOUBLE PRECISION NOT NULL
+    "ADX_threshold" DOUBLE PRECISION NOT NULL,
+    CONSTRAINT "uid_best_params_symbol_a7d9fa" UNIQUE ("symbol", "interval")
 );
 CREATE TABLE IF NOT EXISTS "currency_pairs" (
     "id" SERIAL NOT NULL PRIMARY KEY,
@@ -33,7 +34,6 @@ CREATE INDEX IF NOT EXISTS "idx_historical__timesta_9cd63e" ON "historical_price
 CREATE TABLE IF NOT EXISTS "orders" (
     "id" SERIAL NOT NULL PRIMARY KEY,
     "symbol" VARCHAR(20) NOT NULL,
-    "open" DOUBLE PRECISION NOT NULL,
     "type" VARCHAR(10) NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
     "volume" DOUBLE PRECISION NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS "orders" (
 );
 CREATE INDEX IF NOT EXISTS "idx_orders_symbol_2bc01c" ON "orders" ("symbol");
 CREATE INDEX IF NOT EXISTS "idx_orders_timesta_1b82ff" ON "orders" ("timestamp");
-CREATE TABLE IF NOT EXISTS "signal" (
+CREATE TABLE IF NOT EXISTS "signals" (
     "id" SERIAL NOT NULL PRIMARY KEY,
     "symbol" VARCHAR(20) NOT NULL,
     "close" DOUBLE PRECISION NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS "signal" (
     "trailing_stop" DOUBLE PRECISION,
     "return_anualizado" DOUBLE PRECISION,
     "tasa_aciertos" DOUBLE PRECISION,
-    CONSTRAINT "uid_signal_symbol_c9f8d6" UNIQUE ("symbol", "timestamp", "interval")
+    CONSTRAINT "uid_signals_symbol_272a4f" UNIQUE ("symbol", "timestamp", "interval")
 );
 CREATE TABLE IF NOT EXISTS "strategy_results" (
     "id" SERIAL NOT NULL PRIMARY KEY,

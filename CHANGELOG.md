@@ -28,7 +28,7 @@ Errores con Tipos de Datos: Solución al error que trataba las columnas close, h
 Error en Backtesting: Solución al problema de to_pydatetime con columnas que contenían valores int en lugar de datetime.
 [v1.2.1] - 2024-09-26
 # Added
-Migraciones de Base de Datos: Actualización de la base de datos para incluir nuevos campos (obv, macd, adx, volume, etc.) en el modelo Signal.
+Migraciones de Base de Datos: Actualización de la base de datos para incluir nuevos campos  volume, etc.) en el modelo Signal.
 # Fixed
 Importaciones Incorrectas: Se corrigieron importaciones faltantes como requests en varios archivos.
 Errores en la Función de Backtesting: Solución al error que requería pasar los argumentos de symbol e interval correctamente en el backtesting.
@@ -38,3 +38,21 @@ Manejo de Datos NaN: Se implementó el relleno con ffill para asegurar que no ha
 Nuevo Modelo de Datos: Se agregó la columna signal para representar las señales de compra/venta en el modelo Signal.
 Validación de Datos: Se mejoró la validación de los datos antes de guardarlos en la base de datos para prevenir errores de tipo.
 API Mejorada para la Estrategia Momentum: Se añadió una verificación más robusta de los indicadores calculados (como MACD, OBV, y ADX) para asegurar su correcta ejecución y almacenamiento.
+## [v1.3.0] - 2024-09-25
+### Added
+- **Trailing Stop**: Se implementó un Trailing Stop dinámico para mejorar la gestión de riesgo en la estrategia de momentum.
+- **Optimización de Parámetros**: Se ajustaron los parámetros de **EMA**, **RSI**, **ATR**, y **ADX** para hacer la estrategia más flexible y menos restrictiva.
+- **Métricas Adicionales**: Se añadieron métricas adicionales como:
+  - **Retorno Anualizado**
+  - **Tasa de Aciertos**
+  - **Drawdown Máximo**
+  - **Factor de Recuperación**
+- **Ajuste en Condiciones de Entrada/Salida**: Se flexibilizaron las condiciones para las señales de compra y venta, permitiendo más operaciones.
+  
+### Fixed
+- **Problemas de Operaciones Nulas**: Se solucionó el problema donde las señales de compra/venta no se generaban correctamente debido a condiciones demasiado restrictivas.
+- **Lógica de Backtesting**: Mejoras en la ejecución de operaciones de compra y venta dentro de la simulación para reflejar correctamente el rendimiento de la estrategia.
+  
+### Improved
+- **Ajuste de ATR**: Se ajustaron los multiplicadores de **ATR** para mejorar la precisión de los niveles de **stop-loss** y **take-profit**.
+- **Rendimiento del Grid Search**: Se mejoró la búsqueda de parámetros óptimos al flexibilizar las condiciones y reducir el sobreajuste.
