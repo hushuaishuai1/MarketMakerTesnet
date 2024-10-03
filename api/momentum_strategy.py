@@ -4,13 +4,14 @@ import logging
 from api.binance_connector import get_historical_data
 from app.models import Signal
 from tortoise.transactions import in_transaction
-import backtrader as bt
+
 # Configuración del logging
-
-
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class MomentumStrategy:
-    def __init__(self, symbol: str, interval: str = '1h', limit: int = 1000, min_rsi: int = 20, max_rsi: int = 80, ema_fast_period: int = 8, ema_slow_period: int = 50, atr_mult_sl: float = 2, atr_mult_tp: float = 3):
+    def __init__(self, symbol: str, interval: str = '1h', limit: int = 1000, 
+                 min_rsi: int = 20, max_rsi: int = 80, ema_fast_period: int = 8, 
+                 ema_slow_period: int = 50, atr_mult_sl: float = 2, atr_mult_tp: float = 3):
         self.symbol = symbol
         self.interval = interval
         self.limit = limit
@@ -24,18 +25,17 @@ class MomentumStrategy:
     async def run(self):
         # Obtener datos históricos
         df = get_historical_data(self.symbol, self.interval, self.limit)
+        logging.info(f"Datos obtenidos para {self.symbol} en el intervalo {self.interval}")
 
-        # Asegurar que los datos son float
+        # Asegurar que los datos son float y eliminar filas con valores NaT o NaN
         df[['open', 'high', 'low', 'close', 'volume']] = df[['open', 'high', 'low', 'close', 'volume']].astype(float)
-
-        # Eliminar filas con valores NaT o NaN
         df = df.dropna(subset=['timestamp', 'close', 'high', 'low', 'volume'])
 
-        # Calcular EMA(ema_fast_period) y EMA(ema_slow_period)
+        # Calcular EMA
         df[f'EMA_{self.ema_fast_period}'] = df['close'].ewm(span=self.ema_fast_period, adjust=False).mean()
         df[f'EMA_{self.ema_slow_period}'] = df['close'].ewm(span=self.ema_slow_period, adjust=False).mean()
 
-        # Calcular MACD y su línea de señal
+        # Calcular MACD
         df['MACD'] = df[f'EMA_{self.ema_fast_period}'] - df[f'EMA_{self.ema_slow_period}']
         df['Signal_Line'] = df['MACD'].ewm(span=9, adjust=False).mean()
 
@@ -87,8 +87,6 @@ class MomentumStrategy:
 
         # Calcular la tendencia de la temporalidad superior (higher_trend)
         df['Higher_Trend'] = np.where(df['EMA_50'] > df['EMA_200'], 'bullish', 'bearish')
-
-        # Manejar valores nulos en higher_trend
         df['Higher_Trend'].fillna('unknown', inplace=True)
 
         # Generar señales de trading
