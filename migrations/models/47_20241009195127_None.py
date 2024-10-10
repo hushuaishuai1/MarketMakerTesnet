@@ -63,16 +63,20 @@ CREATE TABLE IF NOT EXISTS "signals" (
     "trailing_stop" DOUBLE PRECISION,
     "return_anualizado" DOUBLE PRECISION,
     "tasa_aciertos" DOUBLE PRECISION,
+    "sharpe_ratio" DOUBLE PRECISION,
+    "max_drawdown" DOUBLE PRECISION,
+    "profit_factor" DOUBLE PRECISION,
+    "win_rate" DOUBLE PRECISION,
     CONSTRAINT "uid_signals_symbol_272a4f" UNIQUE ("symbol", "timestamp", "interval")
 );
 CREATE TABLE IF NOT EXISTS "strategy_results" (
     "id" SERIAL NOT NULL PRIMARY KEY,
     "strategy_name" VARCHAR(50) NOT NULL,
-    "return_on_investment" DOUBLE PRECISION NOT NULL,
-    "success_rate" DOUBLE PRECISION NOT NULL,
+    "final_value" DOUBLE PRECISION NOT NULL,
+    "pnl" DOUBLE PRECISION NOT NULL,
+    "sharpe_ratio" DOUBLE PRECISION NOT NULL,
     "timestamp" TIMESTAMPTZ NOT NULL
 );
-CREATE INDEX IF NOT EXISTS "idx_strategy_re_timesta_76d06f" ON "strategy_results" ("timestamp");
 CREATE TABLE IF NOT EXISTS "trades" (
     "id" SERIAL NOT NULL PRIMARY KEY,
     "symbol" VARCHAR(20) NOT NULL,
@@ -83,6 +87,16 @@ CREATE TABLE IF NOT EXISTS "trades" (
 );
 CREATE INDEX IF NOT EXISTS "idx_trades_symbol_22c6ae" ON "trades" ("symbol");
 CREATE INDEX IF NOT EXISTS "idx_trades_timesta_6f1df0" ON "trades" ("timestamp");
+CREATE TABLE IF NOT EXISTS "trading_data" (
+    "id" SERIAL NOT NULL PRIMARY KEY,
+    "timestamp" TIMESTAMPTZ NOT NULL,
+    "close" DECIMAL(10,2),
+    "open" DECIMAL(10,2),
+    "high" DECIMAL(10,2),
+    "low" DECIMAL(10,2),
+    "volume" DECIMAL(10,2),
+    "target" SMALLINT
+);
 CREATE TABLE IF NOT EXISTS "aerich" (
     "id" SERIAL NOT NULL PRIMARY KEY,
     "version" VARCHAR(255) NOT NULL,
