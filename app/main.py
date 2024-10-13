@@ -2,21 +2,23 @@ from fastapi import FastAPI, Query, HTTPException
 from pydantic import BaseModel
 from tortoise.contrib.fastapi import register_tortoise
 from tortoise.transactions import in_transaction
-from app.models import Trade, HistoricalPrice, Order, CurrencyPair, StrategyResult, Signal
+from app.models import Trade, HistoricalPrice, Order, StrategyResult, Signal, BestParams
 from dotenv import load_dotenv
 import os
 import uvicorn
 import asyncio
-from api.momentum_strategy import run_backtesting
+from api.backtesting import run_backtesting
 from api.binance_connector import get_historical_data
-from api.grid_search_strategy import run_grid_search
-from app.models import BestParams
+from ML.model_training import train_model
+from ML.ml_strategy import run_ml_backtesting
+
+from ML.data_insert import insert_data
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from concurrent.futures import ThreadPoolExecutor
 import logging
-import pandas as pd  # Importación necesaria para manejar pandas
+import pandas as pd
 from typing import Dict, Any
-from datetime import datetime  # Agregar datetime para timestamps
+from datetime import datetime
 
 # Cargar variables de entorno desde un archivo .env
 load_dotenv()
@@ -141,7 +143,6 @@ async def save_metrics_to_db(metrics: Dict[str, Any]):
     except Exception as e:
         logging.error(f"Error al guardar las métricas en la base de datos: {e}")
 
-
 # Endpoint para crear un nuevo trade
 @app.post("/trades/")
 async def create_trade(trade: TradeSchema):
@@ -187,7 +188,7 @@ async def get_historical(symbol: str, interval: str = '1h', limit: int = 1000):
 
 # Endpoint para ejecutar la estrategia de momentum
 @app.get("/momentum/{symbol}")
-async def run_momentum(symbol: str, interval: str = '5m', limit: int = 8000, window_size: int = 10):
+async def run_momentum(symbol: str, interval: str = '5m', limit: int = 5000, window_size: int = 10):
     try:
         # Ejecutar el backtesting de manera asíncrona
         result = await run_backtest_async(symbol, interval, limit, window_size)
@@ -210,7 +211,7 @@ async def run_momentum(symbol: str, interval: str = '5m', limit: int = 8000, win
 
 # Endpoint para ejecutar el backtesting
 @app.get("/backtesting/{symbol}")
-async def backtesting(symbol: str, interval: str = Query('5m'), limit: int = 8000, window_size: int = 10):
+async def backtesting(symbol: str, interval: str = Query('5m'), limit: int = 5000, window_size: int = 10):
     try:
         # Ejecutar el backtesting de manera asíncrona
         result = await run_backtest_async(symbol, interval, limit, window_size)
@@ -222,8 +223,9 @@ async def backtesting(symbol: str, interval: str = Query('5m'), limit: int = 800
 @app.get("/run-grid-search/{symbol}")
 async def run_search(symbol: str, interval: str = '1h', limit: int = 1000):
     try:
-        result = await run_grid_search(symbol, interval, limit)
-        return result
+        # Implementa aquí la función run_grid_search similar a run_backtesting
+        # Por ahora, devolvemos un mensaje de placeholder
+        return {"detail": "Función de grid search aún no implementada."}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error ejecutando grid search: {e}")
 
@@ -240,4 +242,4 @@ async def get_signals(symbol: str, interval: str = '1h'):
 
 # Inicialización de la base de datos y ejecución del servidor FastAPI
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run("app.main:app", host="127.0.0.1", port=8000, reload=True)

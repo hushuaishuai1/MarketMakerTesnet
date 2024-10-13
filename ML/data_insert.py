@@ -1,65 +1,92 @@
-import aiohttp
+import sys
+import os
 import asyncio
+import aiohttp
 import logging
-from tortoise import Tortoise
-from app.models import HistoricalPrice  # Asegúrate de que esta ruta sea correcta
+from datetime import datetime, timezone
+from tortoise.transactions import in_transaction
 
-# Configurar el logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+# Agregar directorio raíz del proyecto al sys.path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Configuración de la base de datos
-DATABASE_CONFIG = {
-    "connections": {
-        "default": "postgres://oscarsql:ioppoiopi0@localhost:5432/DbBinance",  # Ajusta la URI si es necesario
-    },
-    "apps": {
-        "models": {
-            "models": ["app.models", "aerich.models"],  # Ajusta según tu estructura de directorios
-            "default_connection": "default",
-        }
-    }
-}
+from app.models import Trade  # Modelo Trade
+from database import init, close  # Inicialización y cierre de DB
 
-async def init():
-    """Inicializa la conexión a la base de datos."""
-    await Tortoise.init(config=DATABASE_CONFIG)
-    await Tortoise.generate_schemas()
+# Configuración de logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-async def close():
-    """Cierra las conexiones a la base de datos."""
-    await Tortoise.close_connections()
-
-async def fetch_data(symbol):
-    """Obtiene datos históricos de la API."""
-    url = f"http://localhost:8000/historical_prices/{symbol}?interval=5m&limit=9000"
+async def fetch_data(symbol: str):
+    url = f"https://api.binance.com/api/v3/trades?symbol={symbol}&limit=5000"
     async with aiohttp.ClientSession() as session:
-        async with session.get(url) as response:
-            data = await response.json()
-            logging.info(f"Datos recuperados para {symbol}: {data}")  # Agrega esta línea
-            return data
+        try:
+            async with session.get(url) as response:
+                if response.status != 200:
+                    logger.error(f"Error al obtener datos: {response.status}")
+                    return []
+                data = await response.json()
+                logger.info(f"Datos recibidos para {symbol}: {len(data)} trades")
+                return data
+        except aiohttp.ClientError as e:
+            logger.error(f"Error del cliente: {e}")
+            return []
+        except Exception as e:
+            logger.error(f"Error inesperado: {e}")
+            return []
 
-async def insert_data(symbol):
-    """Inserta los datos históricos en la base de datos."""
-    await init()  # Inicializa la conexión
+async def upsert_trade(symbol, price, volume, timestamp):
+    """
+    Inserta o actualiza un trade en la base de datos utilizando SQL manual.
+    """
+    query = """
+    INSERT INTO trades (symbol, price, volume, timestamp)
+    VALUES ($1, $2, $3, $4)
+    ON CONFLICT (symbol, timestamp)
+    DO UPDATE SET price = EXCLUDED.price, volume = EXCLUDED.volume;
+    """
+    try:
+        async with in_transaction() as conn:
+            await conn.execute_query(query, [symbol, price, volume, timestamp])
+        logger.debug(f"Trade insertado o actualizado: {symbol}, {timestamp}")
+    except Exception as e:
+        logger.error(f"Error al insertar/actualizar trade: {e}")
 
-    data = await fetch_data(symbol)  # Obtiene los datos
+async def insert_data():
+    """
+    Inserta los datos de trades en la base de datos.
+    """
+    try:
+        await init()  # Inicializa la base de datos
+        trades = await fetch_data('BTCUSDT')  # Obtener datos de trades
 
-    if data:
-        for entry in data:
-            # Verifica que todos los campos requeridos estén presentes
-            if all(key in entry for key in ['symbol', 'open', 'high', 'low', 'close', 'volume', 'timestamp']):
-                await HistoricalPrice.create(**entry)  # Inserta cada registro en la base de datos
-            else:
-                logging.warning(f"Registro incompleto, no se insertó: {entry}")
-        logging.info(f"Datos insertados exitosamente para {symbol}.")
-    else:
-        logging.warning(f"No se encontraron datos para {symbol}.")
+        if not trades:
+            logger.warning("No se obtuvieron datos para insertar.")
+            return
 
-    await close()  # Cierra la conexión
+        inserted_trades = 0  # Contador para trades insertados
+
+        for trade in trades:
+            # Verificar y obtener valores de trade
+            symbol = trade.get('symbol', 'BTCUSDT')
+            price = float(trade.get('price', 0.0))
+            volume = float(trade.get('qty', 0.0))
+            time = trade.get('time')
+
+            if not time:
+                logger.warning(f"Registro malformado: {trade}")
+                continue  # Saltar registros malformados
+
+            timestamp = datetime.utcfromtimestamp(int(time) / 1000.0).replace(tzinfo=timezone.utc)
+
+            # Insertar o actualizar trade
+            await upsert_trade(symbol, price, volume, timestamp)
+            inserted_trades += 1
+
+        logger.info(f"Se insertaron o actualizaron {inserted_trades} trades.")
+    except Exception as e:
+        logger.error(f"Error al insertar trades: {e}", exc_info=True)
+    finally:
+        await close()  # Cerrar conexión a la base de datos
 
 if __name__ == "__main__":
-    try:
-        symbol = "BTCUSDT"  # Cambia esto si deseas otro símbolo
-        asyncio.run(insert_data(symbol))  # Ejecuta la inserción de datos
-    except Exception as e:
-        logging.error(f"Error al insertar datos: {e}")  # Manejo de errores
+    asyncio.run(insert_data())

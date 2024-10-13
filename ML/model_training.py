@@ -1,45 +1,36 @@
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split, cross_val_score
+import joblib
 import pandas as pd
-import asyncio
-from tortoise import Tortoise
-from app.models import HistoricalPrice
-import logging
+from ML.data_processing import prepare_dataset, label_data
 
-# Configurar el logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+def train_model(symbol: str, interval: str, limit: int = 1000):
+    # Preparar los datos
+    df = prepare_dataset(symbol, interval, limit)
+    df = label_data(df)
 
-# Configuración de la base de datos
-DATABASE_CONFIG = {
-    "connections": {
-        "default": "postgres://oscarsql:ioppoiopi0@localhost:5432/DbBinance",
-    },
-    "apps": {
-        "models": {
-            "models": ["app.models", "aerich.models"],
-            "default_connection": "default",
-        }
-    }
-}
+    feature_cols = ['ema_12', 'ema_26', 'rsi', 'macd', 'bollinger_hband', 'bollinger_lband']
+    X = df[feature_cols]
+    y = df['signal']
 
-async def init():
-    """Inicializa la conexión a la base de datos."""
-    await Tortoise.init(config=DATABASE_CONFIG)
-    await Tortoise.generate_schemas()
+    # Dividir en entrenamiento y prueba
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
 
-async def close():
-    """Cierra las conexiones a la base de datos."""
-    await Tortoise.close_connections()
+    # Evitar el Look-Ahead Bias al no mezclar los datos temporalmente
+    model = RandomForestClassifier(n_estimators=100, random_state=42)
+    model.fit(X_train, y_train)
 
-async def load_data():
-    """Carga los datos históricos desde la base de datos."""
-    await init()
-    prices = await HistoricalPrice.all().values()  # Obtiene todos los registros en formato de diccionario
-    await close()
-    return pd.DataFrame(prices)  # Convierte a DataFrame
+    # Validación cruzada
+    scores = cross_val_score(model, X_train, y_train, cv=5)
+    print(f"Cross-validation accuracy scores: {scores}")
+    print(f"Mean cross-validation accuracy: {scores.mean()}")
+
+    # Guardar el modelo entrenado
+    joblib.dump(model, 'ML/trained_model.pkl')
+    print("Modelo entrenado y guardado como 'ML/trained_model.pkl'")
+
+    return model
 
 if __name__ == "__main__":
-    try:
-        df = asyncio.run(load_data())
-        logging.info("Datos cargados exitosamente:")
-        print(df)  # Muestra el DataFrame
-    except Exception as e:
-        logging.error(f"Error al cargar datos: {e}")
+    # Ejemplo de entrenamiento
+    train_model('BTCUSDT', '5m', 5000)

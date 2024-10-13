@@ -3,7 +3,13 @@ from tortoise import BaseDBAsyncClient
 
 async def upgrade(db: BaseDBAsyncClient) -> str:
     return """
-        CREATE TABLE IF NOT EXISTS "best_params" (
+        CREATE TABLE IF NOT EXISTS "aerich" (
+    "id" SERIAL NOT NULL PRIMARY KEY,
+    "version" VARCHAR(255) NOT NULL,
+    "app" VARCHAR(100) NOT NULL,
+    "content" JSONB NOT NULL
+);
+CREATE TABLE IF NOT EXISTS "best_params" (
     "id" SERIAL NOT NULL PRIMARY KEY,
     "symbol" VARCHAR(20) NOT NULL,
     "interval" VARCHAR(10) NOT NULL,
@@ -27,7 +33,8 @@ CREATE TABLE IF NOT EXISTS "historical_prices" (
     "low" DOUBLE PRECISION NOT NULL,
     "close" DOUBLE PRECISION NOT NULL,
     "volume" DOUBLE PRECISION NOT NULL,
-    "timestamp" TIMESTAMPTZ NOT NULL
+    "timestamp" TIMESTAMPTZ NOT NULL,
+    CONSTRAINT "uid_historical__symbol_312a20" UNIQUE ("symbol", "timestamp")
 );
 CREATE INDEX IF NOT EXISTS "idx_historical__symbol_75cb84" ON "historical_prices" ("symbol");
 CREATE INDEX IF NOT EXISTS "idx_historical__timesta_9cd63e" ON "historical_prices" ("timestamp");
@@ -38,7 +45,8 @@ CREATE TABLE IF NOT EXISTS "orders" (
     "price" DOUBLE PRECISION NOT NULL,
     "volume" DOUBLE PRECISION NOT NULL,
     "status" VARCHAR(10) NOT NULL,
-    "timestamp" TIMESTAMPTZ NOT NULL
+    "timestamp" TIMESTAMPTZ NOT NULL,
+    CONSTRAINT "uid_orders_symbol_3c7024" UNIQUE ("symbol", "timestamp")
 );
 CREATE INDEX IF NOT EXISTS "idx_orders_symbol_2bc01c" ON "orders" ("symbol");
 CREATE INDEX IF NOT EXISTS "idx_orders_timesta_1b82ff" ON "orders" ("timestamp");
@@ -83,7 +91,8 @@ CREATE TABLE IF NOT EXISTS "trades" (
     "price" DOUBLE PRECISION NOT NULL,
     "volume" DOUBLE PRECISION NOT NULL,
     "timestamp" TIMESTAMPTZ NOT NULL,
-    "currency_pair_id" INT REFERENCES "currency_pairs" ("id") ON DELETE CASCADE
+    "currency_pair_id" INT REFERENCES "currency_pairs" ("id") ON DELETE CASCADE,
+    CONSTRAINT "uid_trades_symbol_875c4c" UNIQUE ("symbol", "timestamp")
 );
 CREATE INDEX IF NOT EXISTS "idx_trades_symbol_22c6ae" ON "trades" ("symbol");
 CREATE INDEX IF NOT EXISTS "idx_trades_timesta_6f1df0" ON "trades" ("timestamp");
@@ -96,12 +105,6 @@ CREATE TABLE IF NOT EXISTS "trading_data" (
     "low" DECIMAL(10,2),
     "volume" DECIMAL(10,2),
     "target" SMALLINT
-);
-CREATE TABLE IF NOT EXISTS "aerich" (
-    "id" SERIAL NOT NULL PRIMARY KEY,
-    "version" VARCHAR(255) NOT NULL,
-    "app" VARCHAR(100) NOT NULL,
-    "content" JSONB NOT NULL
 );"""
 
 

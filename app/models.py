@@ -1,5 +1,15 @@
-from tortoise.models import Model
 from tortoise import fields
+from tortoise.models import Model
+
+class CurrencyPair(Model):
+    id = fields.IntField(pk=True)
+    base_currency = fields.CharField(max_length=10)  # Moneda base
+    quote_currency = fields.CharField(max_length=10)  # Moneda de cotización
+
+    class Meta:
+        table = "currency_pairs"
+        unique_together = ("base_currency", "quote_currency")
+
 
 class Trade(Model):
     id = fields.IntField(pk=True)
@@ -12,6 +22,7 @@ class Trade(Model):
     class Meta:
         table = "trades"
         ordering = ["-timestamp"]
+        unique_together = ("symbol", "timestamp")
 
 
 class HistoricalPrice(Model):
@@ -27,6 +38,9 @@ class HistoricalPrice(Model):
     class Meta:
         table = "historical_prices"
         ordering = ["-timestamp"]
+        unique_together = ("symbol", "timestamp")  # Evitar duplicados por símbolo y tiempo
+
+
 class Order(Model):
     id = fields.IntField(pk=True)
     symbol = fields.CharField(max_length=20, index=True)
@@ -39,13 +53,8 @@ class Order(Model):
     class Meta:
         table = "orders"
         ordering = ["-timestamp"]
+        unique_together = ("symbol", "timestamp")  # Evitar duplicados por símbolo y tiempo
 
-class StrategyResult(Model):
-    id = fields.IntField(pk=True)
-    strategy_name = fields.CharField(max_length=50)
-    return_on_investment = fields.FloatField()  # ROI de la estrategia
-    success_rate = fields.FloatField()  # Tasa de éxito de la estrategia
-    timestamp = fields.DatetimeField(index=True)
 
 class StrategyResult(Model):
     id = fields.IntField(pk=True)
@@ -58,14 +67,6 @@ class StrategyResult(Model):
     class Meta:
         table = "strategy_results"
 
-class CurrencyPair(Model):
-    id = fields.IntField(pk=True)
-    base_currency = fields.CharField(max_length=10)  # Moneda base
-    quote_currency = fields.CharField(max_length=10)  # Moneda de cotización
-
-    class Meta:
-        table = "currency_pairs"
-        unique_together = ("base_currency", "quote_currency")
 
 class Signal(Model):
     id = fields.IntField(pk=True)  # Clave primaria
@@ -92,11 +93,14 @@ class Signal(Model):
     max_drawdown = fields.FloatField(null=True)  # Añadir Max Drawdown
     profit_factor = fields.FloatField(null=True)  # Añadir Profit Factor
     win_rate = fields.FloatField(null=True)  # Añadir Tasa de Aciertos
+
     class Meta:
         unique_together = ("symbol", "timestamp", "interval")  # Evitar duplicados por par y tiempo
         table = "signals"  # Especificar el nombre correcto de la tabla
 
+
 class BestParams(Model):
+    id = fields.IntField(pk=True)
     symbol = fields.CharField(max_length=20)
     interval = fields.CharField(max_length=10)
     EMA_8 = fields.IntField()
@@ -107,7 +111,8 @@ class BestParams(Model):
     class Meta:
         table = "best_params"
         unique_together = ("symbol", "interval")  # Evitar duplicados en DB
-    
+
+
 class TradingData(Model):
     id = fields.IntField(pk=True)
     timestamp = fields.DatetimeField()
@@ -121,8 +126,5 @@ class TradingData(Model):
     class Meta:
         table = "trading_data"  # Asegúrate de que coincida con el nombre de la tabla en la base de datos
 
-    
-    
-    
     def __str__(self):
-        return f"BestParams(symbol={self.symbol}, interval={self.interval})"
+        return f"TradingData(timestamp={self.timestamp}, close={self.close})"

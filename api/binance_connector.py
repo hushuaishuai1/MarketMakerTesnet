@@ -6,9 +6,10 @@ from binance.exceptions import BinanceAPIException
 import os
 import logging
 
+
 # Configurar el logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
+logger = logging.getLogger(__name__)
 # Cargar las claves de API desde variables de entorno
 BINANCE_API_KEY = os.getenv("BINANCE_API_KEY")
 BINANCE_API_SECRET = os.getenv("BINANCE_API_SECRET")
@@ -51,3 +52,53 @@ def get_historical_data(symbol: str, interval: str, limit: int) -> pd.DataFrame:
     except Exception as e:
         logging.error(f"Error inesperado al obtener datos históricos: {e}")
         raise e
+
+# Configurar logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+async def fetch_trades(symbol: str, interval: str, limit: int = 5000):
+    """
+    Obtiene datos históricos de trades desde Binance.
+
+    Args:
+        symbol (str): Símbolo de trading, por ejemplo, 'BTCUSDT'.
+        interval (str): Intervalo de tiempo, por ejemplo, '5m'.
+        limit (int): Número de velas a obtener.
+
+    Returns:
+        list: Lista de diccionarios con datos de trades.
+    """
+    url = f"https://api.binance.com/api/v3/klines"
+    params = {
+        'symbol': symbol,
+        'interval': interval,
+        'limit': 5000
+    }
+
+    async with aiohttp.ClientSession() as session:
+        try:
+            async with session.get(url, params=params) as response:
+                if response.status != 200:
+                    logger.error(f"Error al obtener datos de Binance: {response.status}")
+                    return []
+                data = await response.json()
+                trades = []
+                for entry in data:
+                    # Convertir el timestamp de milisegundos a datetime offset-naive
+                    timestamp = datetime.fromtimestamp(entry[0] / 1000.0)
+                    trade = {
+                        'symbol': symbol,
+                        'open': float(entry[1]),
+                        'high': float(entry[2]),
+                        'low': float(entry[3]),
+                        'close': float(entry[4]),
+                        'volume': float(entry[5]),
+                        'timestamp': timestamp  # Objeto datetime sin zona horaria
+                    }
+                    trades.append(trade)
+                logger.info(f"Datos recibidos para {symbol}: {len(trades)} trades")
+                return trades
+        except Exception as e:
+            logger.error(f"Excepción al obtener datos de Binance: {e}")
+            return []

@@ -3,7 +3,7 @@ import pandas as pd
 import logging
 import numpy as np
 from api.binance_connector import get_historical_data
-
+from api.momentum_strategy import MomentumStrategy
 # Configuración del logging detallado
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
