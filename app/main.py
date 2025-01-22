@@ -19,7 +19,7 @@ import logging
 import pandas as pd
 from typing import Dict, Any
 from datetime import datetime
-
+from settings import settings 
 # Cargar variables de entorno desde un archivo .env
 load_dotenv()
 
@@ -171,7 +171,7 @@ async def create_historical_price(price: HistoricalPriceSchema):
 
 # Endpoint para obtener precios históricos de un símbolo específico
 @app.get("/historical_prices/{symbol}")
-async def get_historical(symbol: str, interval: str = '1h', limit: int = 1000):
+async def get_historical(symbol: str, interval: str = '5m', limit: int = 8000):
     try:
         df = get_historical_data(symbol, interval, limit)
         if df.empty:
@@ -239,6 +239,22 @@ async def get_trades():
 async def get_signals(symbol: str, interval: str = '1h'):
     signals = await Signal.filter(symbol=symbol, interval=interval).all()
     return signals
+     
+# @app.post("/train_model/")
+# async def train(model_type: str = 'SVM'):
+#     try:
+#         train_model('BTCUSDT', '5m', 8000, model_type=model_type)
+#         return {"message": f"Modelo {model_type} entrenado exitosamente"}
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/run_backtesting/")
+async def run_backtest():
+    try:
+        run_ml_backtesting('BTCUSDT', '5m', 8000)
+        return {"message": "Backtesting completado"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 # Inicialización de la base de datos y ejecución del servidor FastAPI
 if __name__ == "__main__":

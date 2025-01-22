@@ -1,0 +1,30 @@
+2025-01-09 21:40:20 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 254773
+2025-01-09 21:40:20 - INFO - Columnas de indicadores existentes eliminadas: ['OBV', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'SMA_200']
+2025-01-09 21:40:21 - INFO - Indicadores técnicos agregados. Filas antes: 254773, después: 254574 (descartadas: 199)
+2025-01-09 21:40:21 - INFO - Columnas renombradas: {'RSI_14': 'RSI', 'MACD_12_26_9': 'MACD', 'MACDs_12_26_9': 'MACDs', 'MACDh_12_26_9': 'MACDh', 'VWAP': 'VWAP', 'BBL_20_2.0': 'BBL', 'BBM_20_2.0': 'BBM', 'BBU_20_2.0': 'BBU', 'ATR_14': 'ATR', 'STOCHk_14_3_3': 'STOCHk', 'STOCHd_14_3_3': 'STOCHd', 'CCI_14_0.015': 'CCI', 'SMA_10': 'SMA_10', 'SMA_50': 'SMA_50', 'SMA_200': 'SMA_200', 'EMA_10': 'EMA_10', 'EMA_50': 'EMA_50'}
+2025-01-09 21:40:21 - WARNING - Columna faltante 'VWAP' añadida con NaN.
+2025-01-09 21:40:21 - WARNING - Columna faltante 'ATR' añadida con NaN.
+2025-01-09 21:40:21 - INFO - Target binario con look_ahead=4, min_change=0.015
+2025-01-09 21:40:21 - INFO - Distribución de clases (0=Vender, 1=Comprar):
+target
+0.0    7279
+1.0    7260
+Name: count, dtype: int64
+2025-01-09 21:40:21 - INFO - Muestra de datos con target:
+                        close  future_close  change_pct  target
+open_time                                                      
+2022-07-14 16:45:00  20223.21      20738.17    0.025464     1.0
+2017-12-22 22:15:00  14043.22      13430.26   -0.043648     0.0
+2022-07-20 20:30:00  23190.76      23665.41    0.020467     1.0
+2017-09-07 00:45:00   4599.78       4453.01   -0.031908     0.0
+2020-10-25 05:00:00  13269.28      12982.22   -0.021633     0.0
+2023-10-16 13:15:00  29330.53      28207.64   -0.038284     0.0
+2018-01-16 00:30:00  13143.47      12620.00   -0.039827     0.0
+2019-05-03 08:00:00   5677.04       5778.13    0.017807     1.0
+2017-11-30 04:30:00  10554.49      10199.00   -0.033681     0.0
+2018-01-16 16:45:00  11611.01      10910.88   -0.060299     0.0
+2025-01-09 21:40:21 - INFO - División de datos en Train/Test completada.
+2025-01-09 21:40:21 - INFO - === Búsqueda de hiperparámetros (Optuna) en muestra de Training ===
+2025-01-09 21:40:21 - INFO - No se han identificado características categóricas.
+2025-01-09 21:40:21 - INFO - Columnas extra eliminadas: ['future_close', 'change_pct']
+2025-01-09 21:40:21 - ERROR - Error en main(): Shape of passed values is (3053, 21), indices imply (3053, 23)

@@ -1,0 +1,403 @@
+2025-01-04 22:37:28 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251947
+2025-01-04 22:37:28 - INFO - Columnas de indicadores técnicos existentes eliminadas: ['OBV']
+2025-01-04 22:37:29 - INFO - Indicadores técnicos agregados al DataFrame. Filas antes: 251947, después: 251898
+2025-01-04 22:37:29 - INFO - Columnas después de agregar indicadores técnicos: ['open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'RSI_14', 'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP_D', 'BBL_20_2.0', 'BBM_20_2.0', 'BBU_20_2.0', 'BBB_20_2.0', 'BBP_20_2.0', 'ATRr_14', 'STOCHk_14_3_3', 'STOCHd_14_3_3', 'CCI_14_0.015', 'hour_of_day', 'day_of_week', 'is_weekend', 'RSI_14_', 'MACD_12_26_9_', 'MACDh_12_26_9_', 'MACDs_12_26_9_', 'SMA_10_', 'SMA_50_', 'EMA_10_', 'EMA_50_', 'VWAP_D_', 'OBV_', 'BBL_20_2.0_', 'BBM_20_2.0_', 'BBU_20_2.0_', 'BBB_20_2.0_', 'BBP_20_2.0_', 'ATRr_14_', 'STOCHk_14_3_3_', 'STOCHd_14_3_3_', 'CCI_14_0.015_']
+2025-01-04 22:37:29 - INFO - Columnas renombradas: {'RSI_14': 'RSI', 'RSI_14_': 'RSI_', 'MACD_12_26_9': 'MACD', 'MACD_12_26_9_': 'MACD_', 'MACDh_12_26_9': 'MACDh', 'MACDh_12_26_9_': 'MACDh_', 'MACDs_12_26_9': 'MACDs', 'MACDs_12_26_9_': 'MACDs_', 'VWAP_D': 'VWAP', 'VWAP_D_': 'VWAP_', 'BBL_20_2.0': 'BBL', 'BBL_20_2.0_': 'BBL_', 'BBM_20_2.0': 'BBM', 'BBM_20_2.0_': 'BBM_', 'BBU_20_2.0': 'BBU', 'BBU_20_2.0_': 'BBU_', 'ATRr_14': 'ATR', 'ATRr_14_': 'ATR_', 'STOCHk_14_3_3': 'STOCHk', 'STOCHk_14_3_3_': 'STOCHk_', 'STOCHd_14_3_3': 'STOCHd', 'STOCHd_14_3_3_': 'STOCHd_', 'CCI_14_0.015': 'CCI', 'CCI_14_0.015_': 'CCI_'}
+2025-01-04 22:37:29 - INFO - Columnas duplicadas eliminadas: ['RSI_', 'MACD_', 'MACDh_', 'MACDs_', 'SMA_10_', 'SMA_50_', 'EMA_10_', 'EMA_50_', 'VWAP_', 'OBV_', 'BBL_', 'BBM_', 'BBU_', 'BBB_20_2.0_', 'BBP_20_2.0_', 'ATR_', 'STOCHk_', 'STOCHd_', 'CCI_']
+2025-01-04 22:37:29 - WARNING - La columna 'OBV' no está presente después de agregar indicadores. Añadiendo 'OBV' con valor 0.
+2025-01-04 22:37:29 - INFO - Target binario mejorado con look_ahead=48, min_change=0.007, max_change=0.12
+2025-01-04 22:37:29 - INFO - Distribución de clases (0/1):
+target
+0    171420
+1     79541
+Name: count, dtype: int64
+2025-01-04 22:37:29 - INFO - División de datos en train y test completada.
+2025-01-04 22:37:29 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2025-01-04 22:37:29 - INFO - Características utilizadas: ['open', 'high', 'low', 'close', 'volume', 'hour_of_day', 'day_of_week', 'is_weekend', 'RSI', 'MACD', 'MACDs', 'MACDh', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP', 'OBV', 'BBL', 'BBM', 'BBU', 'ATR', 'STOCHk', 'STOCHd', 'CCI']
+2025-01-04 22:37:29 - INFO - No se han identificado características categóricas.
+2025-01-04 22:37:29 - INFO - Columnas presentes en el DataFrame: ['open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'RSI', 'MACD', 'MACDh', 'MACDs', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP', 'BBL', 'BBM', 'BBU', 'BBB_20_2.0', 'BBP_20_2.0', 'ATR', 'STOCHk', 'STOCHd', 'CCI', 'hour_of_day', 'day_of_week', 'is_weekend', 'OBV', 'future_close', 'change_pct', 'target']
+2025-01-04 22:37:29 - INFO - Columnas eliminadas durante la preparación: ['close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'BBB_20_2.0', 'BBP_20_2.0', 'future_close', 'change_pct']
+2025-01-04 22:37:29 - INFO - Conjunto de datos preparado con 43918 filas y 25 características.
+2025-01-04 22:37:29 - INFO - Tipo de y_train_sample: <class 'pandas.core.series.Series'>
+2025-01-04 22:37:29 - INFO - Shape de y_train_sample: (43918,)
+2025-01-04 22:37:29 - INFO - Después de SMOTE: target
+0    3951
+1    3951
+Name: count, dtype: int64
+2025-01-04 22:37:29 - INFO - Después de SMOTE: target
+0    3951
+1    3951
+Name: count, dtype: int64
+2025-01-04 22:37:30 - INFO - Después de SMOTE: target
+0    7746
+1    7746
+Name: count, dtype: int64
+2025-01-04 22:37:31 - INFO - Después de SMOTE: target
+0    7746
+1    7746
+Name: count, dtype: int64
+2025-01-04 22:37:31 - INFO - Después de SMOTE: target
+0    12060
+1    12060
+Name: count, dtype: int64
+2025-01-04 22:37:33 - INFO - Después de SMOTE: target
+0    16789
+1    16789
+Name: count, dtype: int64
+2025-01-04 22:37:34 - INFO - Después de SMOTE: target
+0    12060
+1    12060
+Name: count, dtype: int64
+2025-01-04 22:37:36 - INFO - Después de SMOTE: target
+0    21712
+1    21712
+Name: count, dtype: int64
+2025-01-04 22:37:37 - INFO - Después de SMOTE: target
+0    16789
+1    16789
+Name: count, dtype: int64
+2025-01-04 22:37:38 - INFO - Después de SMOTE: target
+0    3951
+1    3951
+Name: count, dtype: int64
+2025-01-04 22:37:41 - INFO - Después de SMOTE: target
+0    21712
+1    21712
+Name: count, dtype: int64
+2025-01-04 22:37:41 - INFO - Después de SMOTE: target
+0    7746
+1    7746
+Name: count, dtype: int64
+2025-01-04 22:37:43 - INFO - Después de SMOTE: target
+0    3951
+1    3951
+Name: count, dtype: int64
+2025-01-04 22:37:44 - INFO - Después de SMOTE: target
+0    12060
+1    12060
+Name: count, dtype: int64
+2025-01-04 22:37:45 - INFO - Después de SMOTE: target
+0    7746
+1    7746
+Name: count, dtype: int64
+2025-01-04 22:37:47 - INFO - Después de SMOTE: target
+0    12060
+1    12060
+Name: count, dtype: int64
+2025-01-04 22:37:48 - INFO - Después de SMOTE: target
+0    16789
+1    16789
+Name: count, dtype: int64
+2025-01-04 22:37:52 - INFO - Después de SMOTE: target
+0    16789
+1    16789
+Name: count, dtype: int64
+2025-01-04 22:37:55 - INFO - Después de SMOTE: target
+0    21712
+1    21712
+Name: count, dtype: int64
+2025-01-04 22:37:55 - INFO - Después de SMOTE: target
+0    21712
+1    21712
+Name: count, dtype: int64
+2025-01-04 22:37:58 - INFO - Después de SMOTE: target
+0    3951
+1    3951
+Name: count, dtype: int64
+2025-01-04 22:38:00 - INFO - Después de SMOTE: target
+0    3951
+1    3951
+Name: count, dtype: int64
+2025-01-04 22:38:02 - INFO - Después de SMOTE: target
+0    7746
+1    7746
+Name: count, dtype: int64
+2025-01-04 22:38:03 - INFO - Después de SMOTE: target
+0    7746
+1    7746
+Name: count, dtype: int64
+2025-01-04 22:38:05 - INFO - Después de SMOTE: target
+0    12060
+1    12060
+Name: count, dtype: int64
+2025-01-04 22:38:06 - INFO - Después de SMOTE: target
+0    12060
+1    12060
+Name: count, dtype: int64
+2025-01-04 22:38:08 - INFO - Después de SMOTE: target
+0    16789
+1    16789
+Name: count, dtype: int64
+2025-01-04 22:38:11 - INFO - Después de SMOTE: target
+0    16789
+1    16789
+Name: count, dtype: int64
+2025-01-04 22:38:12 - INFO - Después de SMOTE: target
+0    21712
+1    21712
+Name: count, dtype: int64
+2025-01-04 22:38:15 - INFO - Después de SMOTE: target
+0    3951
+1    3951
+Name: count, dtype: int64
+2025-01-04 22:38:16 - INFO - Después de SMOTE: target
+0    21712
+1    21712
+Name: count, dtype: int64
+2025-01-04 22:38:17 - INFO - Después de SMOTE: target
+0    7746
+1    7746
+Name: count, dtype: int64
+2025-01-04 22:38:20 - INFO - Después de SMOTE: target
+0    12060
+1    12060
+Name: count, dtype: int64
+2025-01-04 22:38:21 - INFO - Después de SMOTE: target
+0    3951
+1    3951
+Name: count, dtype: int64
+2025-01-04 22:38:22 - INFO - Después de SMOTE: target
+0    16789
+1    16789
+Name: count, dtype: int64
+2025-01-04 22:38:22 - INFO - Después de SMOTE: target
+0    7746
+1    7746
+Name: count, dtype: int64
+2025-01-04 22:38:23 - INFO - Después de SMOTE: target
+0    12060
+1    12060
+Name: count, dtype: int64
+2025-01-04 22:38:25 - INFO - Después de SMOTE: target
+0    16789
+1    16789
+Name: count, dtype: int64
+2025-01-04 22:38:25 - INFO - Después de SMOTE: target
+0    21712
+1    21712
+Name: count, dtype: int64
+2025-01-04 22:38:27 - INFO - Después de SMOTE: target
+0    21712
+1    21712
+Name: count, dtype: int64
+2025-01-04 22:38:28 - INFO - Después de SMOTE: target
+0    3951
+1    3951
+Name: count, dtype: int64
+2025-01-04 22:38:28 - INFO - Después de SMOTE: target
+0    3951
+1    3951
+Name: count, dtype: int64
+2025-01-04 22:38:29 - INFO - Después de SMOTE: target
+0    7746
+1    7746
+Name: count, dtype: int64
+2025-01-04 22:38:29 - INFO - Después de SMOTE: target
+0    7746
+1    7746
+Name: count, dtype: int64
+2025-01-04 22:38:31 - INFO - Después de SMOTE: target
+0    12060
+1    12060
+Name: count, dtype: int64
+2025-01-04 22:38:31 - INFO - Después de SMOTE: target
+0    12060
+1    12060
+Name: count, dtype: int64
+2025-01-04 22:38:32 - INFO - Después de SMOTE: target
+0    16789
+1    16789
+Name: count, dtype: int64
+2025-01-04 22:38:33 - INFO - Después de SMOTE: target
+0    16789
+1    16789
+Name: count, dtype: int64
+2025-01-04 22:38:34 - INFO - Después de SMOTE: target
+0    21712
+1    21712
+Name: count, dtype: int64
+2025-01-04 22:38:35 - INFO - Después de SMOTE: target
+0    21712
+1    21712
+Name: count, dtype: int64
+2025-01-04 22:38:36 - INFO - Después de SMOTE: target
+0    3951
+1    3951
+Name: count, dtype: int64
+2025-01-04 22:38:37 - INFO - Después de SMOTE: target
+0    3951
+1    3951
+Name: count, dtype: int64
+2025-01-04 22:38:37 - INFO - Después de SMOTE: target
+0    7746
+1    7746
+Name: count, dtype: int64
+2025-01-04 22:38:38 - INFO - Después de SMOTE: target
+0    12060
+1    12060
+Name: count, dtype: int64
+2025-01-04 22:38:39 - INFO - Después de SMOTE: target
+0    7746
+1    7746
+Name: count, dtype: int64
+2025-01-04 22:38:40 - INFO - Después de SMOTE: target
+0    16789
+1    16789
+Name: count, dtype: int64
+2025-01-04 22:38:41 - INFO - Después de SMOTE: target
+0    21712
+1    21712
+Name: count, dtype: int64
+2025-01-04 22:38:42 - INFO - Después de SMOTE: target
+0    12060
+1    12060
+Name: count, dtype: int64
+2025-01-04 22:38:42 - INFO - Después de SMOTE: target
+0    3951
+1    3951
+Name: count, dtype: int64
+2025-01-04 22:38:43 - INFO - Después de SMOTE: target
+0    7746
+1    7746
+Name: count, dtype: int64
+2025-01-04 22:38:44 - INFO - Después de SMOTE: target
+0    12060
+1    12060
+Name: count, dtype: int64
+2025-01-04 22:38:45 - INFO - Después de SMOTE: target
+0    16789
+1    16789
+Name: count, dtype: int64
+2025-01-04 22:38:47 - INFO - Después de SMOTE: target
+0    16789
+1    16789
+Name: count, dtype: int64
+2025-01-04 22:38:47 - INFO - Después de SMOTE: target
+0    21712
+1    21712
+Name: count, dtype: int64
+2025-01-04 22:38:48 - INFO - Después de SMOTE: target
+0    3951
+1    3951
+Name: count, dtype: int64
+2025-01-04 22:38:49 - INFO - Después de SMOTE: target
+0    7746
+1    7746
+Name: count, dtype: int64
+2025-01-04 22:38:49 - INFO - Después de SMOTE: target
+0    12060
+1    12060
+Name: count, dtype: int64
+2025-01-04 22:38:51 - INFO - Después de SMOTE: target
+0    16789
+1    16789
+Name: count, dtype: int64
+2025-01-04 22:38:51 - INFO - Después de SMOTE: target
+0    21712
+1    21712
+Name: count, dtype: int64
+2025-01-04 22:38:52 - INFO - Después de SMOTE: target
+0    21712
+1    21712
+Name: count, dtype: int64
+2025-01-04 22:38:53 - INFO - Después de SMOTE: target
+0    3951
+1    3951
+Name: count, dtype: int64
+2025-01-04 22:38:55 - INFO - Después de SMOTE: target
+0    7746
+1    7746
+Name: count, dtype: int64
+2025-01-04 22:38:56 - INFO - Después de SMOTE: target
+0    3951
+1    3951
+Name: count, dtype: int64
+2025-01-04 22:38:56 - INFO - Después de SMOTE: target
+0    12060
+1    12060
+Name: count, dtype: int64
+2025-01-04 22:38:57 - INFO - Después de SMOTE: target
+0    7746
+1    7746
+Name: count, dtype: int64
+2025-01-04 22:38:58 - INFO - Después de SMOTE: target
+0    16789
+1    16789
+Name: count, dtype: int64
+2025-01-04 22:38:59 - INFO - Después de SMOTE: target
+0    12060
+1    12060
+Name: count, dtype: int64
+2025-01-04 22:39:01 - INFO - Después de SMOTE: target
+0    16789
+1    16789
+Name: count, dtype: int64
+2025-01-04 22:39:01 - INFO - Después de SMOTE: target
+0    21712
+1    21712
+Name: count, dtype: int64
+2025-01-04 22:39:03 - INFO - Después de SMOTE: target
+0    21712
+1    21712
+Name: count, dtype: int64
+2025-01-04 22:39:05 - INFO - Mejor valor de F1: 0.5088
+2025-01-04 22:39:05 - INFO - Mejores parámetros: {'max_depth': 7, 'learning_rate': 0.0010562768526372899, 'n_estimators': 117, 'subsample': 0.7857342385930557, 'colsample_bytree': 0.8546516042047818, 'gamma': 0.47793489177609705, 'reg_alpha': 0.02869640931491297, 'reg_lambda': 0.02118324726476531}
+2025-01-04 22:39:05 - INFO - === Entrenando Pipeline Final con TODO el training ===
+2025-01-04 22:39:05 - INFO - Columnas presentes en el DataFrame: ['open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'RSI', 'MACD', 'MACDh', 'MACDs', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP', 'BBL', 'BBM', 'BBU', 'BBB_20_2.0', 'BBP_20_2.0', 'ATR', 'STOCHk', 'STOCHd', 'CCI', 'hour_of_day', 'day_of_week', 'is_weekend', 'OBV', 'future_close', 'change_pct', 'target']
+2025-01-04 22:39:05 - INFO - Columnas eliminadas durante la preparación: ['close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'BBB_20_2.0', 'BBP_20_2.0', 'future_close', 'change_pct']
+2025-01-04 22:39:05 - INFO - Conjunto de datos preparado con 175672 filas y 25 características.
+2025-01-04 22:39:05 - INFO - Tipo de y_train_full: <class 'pandas.core.series.Series'>
+2025-01-04 22:39:05 - INFO - Shape de y_train_full: (175672,)
+2025-01-04 22:39:12 - INFO - Después de SMOTE: target
+0    115918
+1    115918
+Name: count, dtype: int64
+2025-01-04 22:39:12 - INFO - Balance de clases aplicado mediante SMOTE.
+2025-01-04 22:39:15 - INFO - Pipeline final entrenado con todos los datos de entrenamiento (binario).
+2025-01-04 22:39:15 - INFO - Pipeline completo guardado en: ./results/XGBoost_Binario_trained_pipeline.joblib
+2025-01-04 22:39:15 - INFO - Parámetros guardados en: ./results/XGBoost_Binario_model_params.txt
+2025-01-04 22:39:15 - INFO - Lista de features guardada en: ./results/XGBoost_Binario_feature_cols.txt
+2025-01-04 22:39:15 - INFO - Columnas de indicadores técnicos existentes eliminadas: ['RSI', 'MACD', 'MACDs', 'MACDh', 'VWAP', 'OBV', 'BBL', 'BBM', 'BBU', 'ATR', 'STOCHk', 'STOCHd', 'CCI']
+2025-01-04 22:39:15 - INFO - Indicadores técnicos agregados al DataFrame. Filas antes: 75289, después: 75240
+2025-01-04 22:39:15 - INFO - Columnas después de agregar indicadores técnicos: ['open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'BBB_20_2.0', 'BBP_20_2.0', 'hour_of_day', 'day_of_week', 'is_weekend', 'future_close', 'change_pct', 'target', 'RSI_14_', 'MACD_12_26_9_', 'MACDh_12_26_9_', 'MACDs_12_26_9_', 'SMA_10_', 'SMA_50_', 'EMA_10_', 'EMA_50_', 'VWAP_D_', 'OBV_', 'BBL_20_2.0_', 'BBM_20_2.0_', 'BBU_20_2.0_', 'BBB_20_2.0_', 'BBP_20_2.0_', 'ATRr_14_', 'STOCHk_14_3_3_', 'STOCHd_14_3_3_', 'CCI_14_0.015_']
+2025-01-04 22:39:15 - INFO - Columnas renombradas: {'RSI_14_': 'RSI', 'MACD_12_26_9_': 'MACD', 'MACDh_12_26_9_': 'MACDh', 'MACDs_12_26_9_': 'MACDs', 'VWAP_D_': 'VWAP', 'BBL_20_2.0_': 'BBL', 'BBM_20_2.0_': 'BBM', 'BBU_20_2.0_': 'BBU', 'ATRr_14_': 'ATR', 'STOCHk_14_3_3_': 'STOCHk', 'STOCHd_14_3_3_': 'STOCHd', 'CCI_14_0.015_': 'CCI'}
+2025-01-04 22:39:15 - INFO - Columnas duplicadas eliminadas: ['SMA_10_', 'SMA_50_', 'EMA_10_', 'EMA_50_', 'OBV_', 'BBB_20_2.0_', 'BBP_20_2.0_']
+2025-01-04 22:39:15 - WARNING - La columna 'OBV' no está presente después de agregar indicadores. Añadiendo 'OBV' con valor 0.
+2025-01-04 22:39:15 - INFO - Target binario mejorado con look_ahead=48, min_change=0.007, max_change=0.12
+2025-01-04 22:39:15 - INFO - Distribución de clases (0/1):
+target
+0    55433
+1    19740
+Name: count, dtype: int64
+2025-01-04 22:39:15 - INFO - Columnas presentes en el DataFrame: ['open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'BBB_20_2.0', 'BBP_20_2.0', 'hour_of_day', 'day_of_week', 'is_weekend', 'future_close', 'change_pct', 'target', 'RSI', 'MACD', 'MACDh', 'MACDs', 'VWAP', 'BBL', 'BBM', 'BBU', 'ATR', 'STOCHk', 'STOCHd', 'CCI', 'OBV']
+2025-01-04 22:39:15 - INFO - Columnas eliminadas durante la preparación: ['close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'BBB_20_2.0', 'BBP_20_2.0', 'future_close', 'change_pct']
+2025-01-04 22:39:15 - INFO - Conjunto de datos preparado con 75173 filas y 25 características.
+2025-01-04 22:39:15 - INFO - Características en X_test_final: ['open', 'high', 'low', 'close', 'volume', 'hour_of_day', 'day_of_week', 'is_weekend', 'RSI', 'MACD', 'MACDs', 'MACDh', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP', 'OBV', 'BBL', 'BBM', 'BBU', 'ATR', 'STOCHk', 'STOCHd', 'CCI']
+2025-01-04 22:39:15 - INFO - Tipo de y_test_final: <class 'pandas.core.series.Series'>
+2025-01-04 22:39:15 - INFO - Shape de y_test_final: (75173,)
+2025-01-04 22:39:15 - INFO - Las características del test coinciden perfectamente con las del entrenamiento.
+2025-01-04 22:39:15 - INFO - === Evaluación en Test ===
+2025-01-04 22:39:16 - INFO - Matriz de confusión [1,0]:
+[[12139  7601]
+ [30766 24667]]
+2025-01-04 22:39:16 - INFO - Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           1       0.28      0.61      0.39     19740
+           0       0.76      0.44      0.56     55433
+
+    accuracy                           0.49     75173
+   macro avg       0.52      0.53      0.48     75173
+weighted avg       0.64      0.49      0.52     75173
+
+2025-01-04 22:39:16 - INFO - F1-score: 0.3875
+2025-01-04 22:39:16 - INFO - Precisión: 0.2829
+2025-01-04 22:39:16 - INFO - Recall: 0.6149
+2025-01-04 22:39:16 - INFO - AUC Score: 0.5327
+2025-01-04 22:39:18 - INFO - F1 final en Test (Binario): 0.3875
+2025-01-04 22:39:18 - INFO - === Analizando importancia de características ===
+2025-01-04 22:39:18 - INFO - Tabla de importancia de características guardada en ./results/feature_importances_binario.csv.
+2025-01-04 22:39:18 - INFO - Gráfico de importancia de características guardado.
+2025-01-04 22:39:19 - INFO - Señales generadas con umbrales high=0.76, low=0.25
+2025-01-04 22:39:20 - INFO - Señales guardadas en: ./results/signals.csv
+2025-01-04 22:39:20 - INFO - === Proceso Completado con Éxito ===

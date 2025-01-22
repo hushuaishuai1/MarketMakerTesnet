@@ -1,0 +1,35 @@
+2024-12-31 00:16:26 - INFO - Datos cargados desde /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251797
+2024-12-31 00:16:27 - INFO - Indicadores técnicos agregados al DataFrame.
+2024-12-31 00:16:27 - INFO - feature_columns.pkl actualizado con nuevas características.
+2024-12-31 00:16:32 - INFO - Target con look_ahead=6, lower=28, upper=75, min_change=0.006
+2024-12-31 00:16:32 - INFO - Umbral inferior=-0.002520, superior=0.003374
+2024-12-31 00:16:32 - INFO - Distribución de clases:
+target
+0    178302
+2     37920
+1     35520
+Name: count, dtype: int64
+2024-12-31 00:16:33 - INFO - División de datos en train y test completada.
+2024-12-31 00:16:33 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2024-12-31 00:16:33 - INFO - Características cargadas desde: /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/feature_columns.pkl
+2024-12-31 00:16:33 - INFO - Balance de clases en muestra de entrenamiento:
+target
+0    16865
+2     8563
+1     7801
+Name: count, dtype: int64
+2024-12-31 00:16:33 - WARNING - early_stopping_rounds no soportado o error en entrenamiento. Entrenando sin early stopping.
+2024-12-31 00:16:45 - WARNING - early_stopping_rounds no soportado o error en entrenamiento. Entrenando sin early stopping.
+2024-12-31 00:17:00 - WARNING - early_stopping_rounds no soportado o error en entrenamiento. Entrenando sin early stopping.
+2024-12-31 00:17:16 - WARNING - early_stopping_rounds no soportado o error en entrenamiento. Entrenando sin early stopping.
+2024-12-31 00:17:33 - WARNING - early_stopping_rounds no soportado o error en entrenamiento. Entrenando sin early stopping.
+2024-12-31 00:17:51 - WARNING - early_stopping_rounds no soportado o error en entrenamiento. Entrenando sin early stopping.
+2024-12-31 00:18:04 - WARNING - early_stopping_rounds no soportado o error en entrenamiento. Entrenando sin early stopping.
+2024-12-31 00:18:23 - WARNING - early_stopping_rounds no soportado o error en entrenamiento. Entrenando sin early stopping.
+2024-12-31 00:18:38 - WARNING - early_stopping_rounds no soportado o error en entrenamiento. Entrenando sin early stopping.
+2024-12-31 00:18:53 - WARNING - early_stopping_rounds no soportado o error en entrenamiento. Entrenando sin early stopping.
+2024-12-31 00:19:13 - WARNING - early_stopping_rounds no soportado o error en entrenamiento. Entrenando sin early stopping.
+2024-12-31 00:19:28 - WARNING - early_stopping_rounds no soportado o error en entrenamiento. Entrenando sin early stopping.
+2024-12-31 00:19:42 - WARNING - early_stopping_rounds no soportado o error en entrenamiento. Entrenando sin early stopping.
+2024-12-31 00:20:04 - WARNING - early_stopping_rounds no soportado o error en entrenamiento. Entrenando sin early stopping.
+2024-12-31 00:20:29 - WARNING - early_stopping_rounds no soportado o error en entrenamiento. Entrenando sin early stopping.

@@ -1,0 +1,69 @@
+2024-12-21 15:14:56 - INFO - Datos cargados correctamente desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 245845
+2024-12-21 15:14:56 - INFO - Eliminados 199 registros con valores faltantes.
+2024-12-21 15:14:56 - INFO - Indicadores calculados y filas NaN eliminadas.
+2024-12-21 15:14:59 - INFO - Variable objetivo generada con look_ahead: 1, lower_percentile: 20, upper_percentile: 80
+2024-12-21 15:14:59 - INFO - Umbrales calculados - lower: -0.001838, upper: 0.001900
+2024-12-21 15:14:59 - INFO - Distribución de clases:
+target
+0    147387
+2     49129
+1     49129
+Name: count, dtype: int64
+2024-12-21 15:15:00 - INFO - No se eliminaron columnas por correlación > 0.85
+2024-12-21 15:15:00 - INFO - Distribución de clases en todo el conjunto: 
+target
+0    147387
+2     49129
+1     49129
+Name: count, dtype: int64
+2024-12-21 15:15:00 - INFO - Tamaño train: (157212, 12), valid: (39304, 12), test: (49129, 12)
+2024-12-21 15:15:00 - INFO - Distribución de clases en train: 
+target
+0    85432
+2    35994
+1    35786
+Name: count, dtype: int64
+2024-12-21 15:15:00 - INFO - Distribución de clases en validación: 
+target
+0    25999
+1     6744
+2     6561
+Name: count, dtype: int64
+2024-12-21 15:15:00 - INFO - Distribución de clases en test: 
+target
+0    35956
+1     6599
+2     6574
+Name: count, dtype: int64
+2024-12-21 15:15:00 - INFO - Pesos de clases: {0: 0.6134001310984174, 1: 1.4643715419437768, 2: 1.4559093182197034}
+2024-12-21 15:15:00 - INFO - === Entrenando XGBoost ===
+2024-12-21 15:22:20 - INFO - XGBoost - Mejores parámetros: {'subsample': 0.7, 'reg_lambda': 10, 'reg_alpha': 0, 'n_estimators': 200, 'max_depth': 5, 'learning_rate': 0.3, 'gamma': 0.2, 'colsample_bytree': 1.0}
+2024-12-21 15:22:20 - INFO - XGBoost - F1-score en validación: 0.3849
+2024-12-21 15:22:20 - INFO - XGBoost - Distribución de clases en validación:
+2    17292
+0    15535
+1     6477
+Name: count, dtype: int64
+2024-12-21 15:22:20 - INFO - Modelo XGBoost guardado en: results/XGBoost_trained_model.joblib
+2024-12-21 15:22:20 - INFO - Pipeline guardado en: results/XGBoost_pipeline.joblib
+2024-12-21 15:22:20 - INFO - Parámetros del modelo XGBoost guardados en: results/XGBoost_model_params.txt
+2024-12-21 15:22:20 - INFO - Columnas de características XGBoost guardadas en: results/XGBoost_feature_cols.txt
+2024-12-21 15:22:20 - INFO - Columnas eliminadas XGBoost guardadas en: results/XGBoost_drop_cols.txt
+2024-12-21 15:22:20 - INFO - === Evaluación de XGBoost en Test ===
+2024-12-21 15:22:20 - INFO - Matriz de Confusión (clases [2,1,0]):
+[[ 2368  1384  2822]
+ [ 2217  1466  2916]
+ [ 6591  3197 26168]]
+2024-12-21 15:22:20 - INFO - Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           2       0.21      0.36      0.27      6574
+           1       0.24      0.22      0.23      6599
+           0       0.82      0.73      0.77     35956
+
+    accuracy                           0.61     49129
+   macro avg       0.42      0.44      0.42     49129
+weighted avg       0.66      0.61      0.63     49129
+
+2024-12-21 15:22:20 - INFO - F1-score macro en test: 0.4233
+2024-12-21 15:22:22 - INFO - === Iniciando Backtest con XGBoost ===

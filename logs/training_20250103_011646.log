@@ -1,0 +1,16 @@
+2025-01-03 01:16:50 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251947
+2025-01-03 01:16:50 - INFO - Columnas de indicadores técnicos existentes eliminadas: ['OBV']
+2025-01-03 01:16:51 - INFO - Indicadores técnicos agregados al DataFrame. Filas antes: 251947, después: 251898
+2025-01-03 01:16:51 - INFO - Columnas después de agregar indicadores técnicos: ['open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'RSI_14', 'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP_D', 'BBL_20_2.0', 'BBM_20_2.0', 'BBU_20_2.0', 'BBB_20_2.0', 'BBP_20_2.0', 'ATRr_14', 'STOCHk_14_3_3', 'STOCHd_14_3_3', 'CCI_14_0.015', 'hour_of_day', 'day_of_week', 'is_weekend', 'RSI', 'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9', 'VWAP', 'OBV', 'BBL_20_2.0', 'BBM_20_2.0', 'BBU_20_2.0', 'BBB_20_2.0', 'BBP_20_2.0', 'ATR', 'STOCHk_14_3_3', 'STOCHd_14_3_3', 'CCI']
+2025-01-03 01:16:51 - INFO - Columnas renombradas: {'RSI_14': 'RSI', 'MACD_12_26_9': 'MACD_9', 'MACDh_12_26_9': 'MACDh_9', 'MACDs_12_26_9': 'MACDs_9', 'VWAP_D': 'VWAP', 'BBL_20_2.0': 'BBL_2.0', 'BBM_20_2.0': 'BBM_2.0', 'BBU_20_2.0': 'BBU_2.0', 'ATRr_14': 'ATR', 'STOCHk_14_3_3': 'STOCHk_3', 'STOCHd_14_3_3': 'STOCHd_3', 'CCI_14_0.015': 'CCI'}
+2025-01-03 01:16:51 - INFO - Target binario mejorado con look_ahead=20, min_change=0.005, max_change=0.08
+2025-01-03 01:16:51 - INFO - Distribución de clases (0/1):
+target
+0    178433
+1     72160
+Name: count, dtype: int64
+2025-01-03 01:16:51 - INFO - División de datos en train y test completada.
+2025-01-03 01:16:51 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2025-01-03 01:16:51 - INFO - Características utilizadas: ['open', 'high', 'low', 'close', 'volume', 'hour_of_day', 'day_of_week', 'is_weekend', 'RSI', 'MACD', 'MACDs', 'MACDh', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP', 'OBV', 'BBL', 'BBM', 'BBU', 'ATR', 'STOCHk', 'STOCHd', 'CCI']
+2025-01-03 01:16:51 - ERROR - Faltan las siguientes características en df_train_sample: ['MACD', 'MACDs', 'MACDh', 'BBL', 'BBM', 'BBU', 'STOCHk', 'STOCHd']
+2025-01-03 01:16:51 - ERROR - Después de renombrar, aún faltan las siguientes características en df_train_sample: ['MACD', 'MACDs', 'MACDh', 'BBL', 'BBM', 'BBU', 'STOCHk', 'STOCHd']

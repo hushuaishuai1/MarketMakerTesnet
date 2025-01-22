@@ -1,0 +1,28 @@
+2024-12-21 14:11:36 - INFO - Datos cargados correctamente desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 245845
+2024-12-21 14:11:36 - INFO - Eliminados 199 registros con valores faltantes.
+2024-12-21 14:11:36 - INFO - Indicadores calculados y filas NaN eliminadas.
+2024-12-21 14:11:41 - INFO - Variable objetivo generada con look_ahead: 1, atr_factor: 0.1
+2024-12-21 14:11:41 - INFO - Distribución de clases:
+target
+-1    245645
+Name: count, dtype: int64
+2024-12-21 14:11:41 - INFO - Columnas eliminadas por correlación > 0.82: ['ATR_28', 'volume_lag_1', 'volume_lag_2', 'volume_lag_3', 'STDDEV_20']
+2024-12-21 14:11:41 - INFO - Distribución de clases en todo el conjunto: 
+target
+-1    245645
+Name: count, dtype: int64
+2024-12-21 14:11:41 - INFO - Tamaño train: (157212, 12), valid: (39304, 12), test: (49129, 12)
+2024-12-21 14:11:41 - INFO - Distribución de clases en train: 
+target
+-1    157212
+Name: count, dtype: int64
+2024-12-21 14:11:41 - INFO - Distribución de clases en validación: 
+target
+-1    39304
+Name: count, dtype: int64
+2024-12-21 14:11:41 - INFO - Distribución de clases en test: 
+target
+-1    49129
+Name: count, dtype: int64
+2024-12-21 14:11:41 - WARNING - Clase(s) faltante(s) en el conjunto de entrenamiento: {0, 1}
+2024-12-21 14:11:47 - ERROR - Error durante el ajuste de RandomizedSearchCV: Invalid classes inferred from unique values of `y`.  Expected: [0], got [-1]

@@ -1,7 +1,9 @@
 
-# psql postgres://oscarsql:ioppoiopi0@localhost:5432/DbBinance
+# psql postgres://oscarr:ioppoiopi0@localhost:5432/DbBinance
 
-
+#chsh -s /bin/zsh
+#cd /Users/oscarr/Desarrollo/Python0/ApiBinance
+# brew services start postgresql
 # rm -rf migrations/
 #  aerich init-db
 #  aerich init -t database.DATABASE_CONFIG
@@ -22,13 +24,32 @@
 
 # git status
 # git add .
-# git commit -m "Implementación de nuevos parámetros en estrategia Momentum y ajustes en backtesting"
+# git commit -m "Implementación  de archivos ML para ontencion de datos, guardado en DB y PreProcesamiento"
 # git push origin main
 
+# python -m ML.data_insert
+# python -m ML.data_processing
+# python -m ML.model_training
+# python -m ML.ml_strategy
+# python -m ML.data_coin
+# python -m ML.cointegration_test
 
 
+# python -m Ws.ws_client
+# python -m Ws.ws_processing
+# python -m Ws.ws_model
+# python -m Ws.arb_strategy
+# python -m Ws.ws_backtesting
+#
+#python -m r_bot.data_revers
+# python -m r_bot.analysis
+# 
+# 
+# 
 
 
-# cd ML
-# python model_training.py
-# cd /Users/oscarr/Desarrollo/Python0/ApiBinance
+# #     start_date: "01 Jan, 2023"
+#   end_date: "01 Jul, 2024" 
+
+#  start_date: "03 Jan, 2018"
+#   end_date: "10 Jul, 2024" 

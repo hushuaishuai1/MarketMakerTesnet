@@ -1,0 +1,682 @@
+2025-01-02 19:39:52 - INFO - Datos cargados desde /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251947
+2025-01-02 19:39:53 - INFO - Indicadores técnicos agregados al DataFrame. Filas antes: 251947, después: 251898
+2025-01-02 19:39:53 - INFO - feature_columns.pkl actualizado con nuevas características.
+2025-01-02 19:39:53 - INFO - Target binario mejorado con look_ahead=8, min_change=0.009, max_change=0.02
+2025-01-02 19:39:53 - INFO - Distribución de clases (0/1):
+target
+0    215342
+1     19906
+Name: count, dtype: int64
+2025-01-02 19:39:53 - INFO - División de datos en train y test completada.
+2025-01-02 19:39:53 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2025-01-02 19:39:53 - INFO - Características cargadas desde: /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/feature_columns.pkl
+2025-01-02 19:39:53 - INFO - Cantidad de características antes de quitar problemáticas: 30
+2025-01-02 19:39:53 - INFO - Cantidad de características después de quitar problemáticas: 30
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: open
+2025-01-02 19:39:53 - INFO - Tipo de open: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: high
+2025-01-02 19:39:53 - INFO - Tipo de high: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: low
+2025-01-02 19:39:53 - INFO - Tipo de low: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: close
+2025-01-02 19:39:53 - INFO - Tipo de close: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: volume
+2025-01-02 19:39:53 - INFO - Tipo de volume: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: close_time
+2025-01-02 19:39:53 - INFO - Tipo de close_time: int64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: quote_asset_volume
+2025-01-02 19:39:53 - INFO - Tipo de quote_asset_volume: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: number_of_trades
+2025-01-02 19:39:53 - INFO - Tipo de number_of_trades: int64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: taker_buy_base_asset_volume
+2025-01-02 19:39:53 - INFO - Tipo de taker_buy_base_asset_volume: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: taker_buy_quote_asset_volume
+2025-01-02 19:39:53 - INFO - Tipo de taker_buy_quote_asset_volume: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: ignore
+2025-01-02 19:39:53 - INFO - Tipo de ignore: int64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: RSI_14
+2025-01-02 19:39:53 - INFO - Tipo de RSI_14: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: MACD_12_26_9
+2025-01-02 19:39:53 - INFO - Tipo de MACD_12_26_9: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: MACDh_12_26_9
+2025-01-02 19:39:53 - INFO - Tipo de MACDh_12_26_9: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: MACDs_12_26_9
+2025-01-02 19:39:53 - INFO - Tipo de MACDs_12_26_9: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: SMA_10
+2025-01-02 19:39:53 - INFO - Tipo de SMA_10: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: SMA_50
+2025-01-02 19:39:53 - INFO - Tipo de SMA_50: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: EMA_10
+2025-01-02 19:39:53 - INFO - Tipo de EMA_10: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: EMA_50
+2025-01-02 19:39:53 - INFO - Tipo de EMA_50: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: VWAP_D
+2025-01-02 19:39:53 - INFO - Tipo de VWAP_D: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: OBV
+2025-01-02 19:39:53 - INFO - Tipo de OBV: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: BBL_20_2.0
+2025-01-02 19:39:53 - INFO - Tipo de BBL_20_2.0: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: BBM_20_2.0
+2025-01-02 19:39:53 - INFO - Tipo de BBM_20_2.0: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: BBU_20_2.0
+2025-01-02 19:39:53 - INFO - Tipo de BBU_20_2.0: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: BBB_20_2.0
+2025-01-02 19:39:53 - INFO - Tipo de BBB_20_2.0: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: BBP_20_2.0
+2025-01-02 19:39:53 - INFO - Tipo de BBP_20_2.0: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: ATRr_14
+2025-01-02 19:39:53 - INFO - Tipo de ATRr_14: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: STOCHk_14_3_3
+2025-01-02 19:39:53 - INFO - Tipo de STOCHk_14_3_3: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: STOCHd_14_3_3
+2025-01-02 19:39:53 - INFO - Tipo de STOCHd_14_3_3: float64
+2025-01-02 19:39:53 - INFO - Verificando tipo de la columna: CCI_14_0.015
+2025-01-02 19:39:53 - INFO - Tipo de CCI_14_0.015: float64
+2025-01-02 19:39:53 - INFO - No se han identificado características categóricas.
+2025-01-02 19:39:53 - INFO - Tipo de y_train_sample: <class 'pandas.core.series.Series'>
+2025-01-02 19:39:53 - INFO - Shape de y_train_sample: (41403,)
+2025-01-02 19:39:53 - INFO - Después de undersampling: target
+0    1137
+1    1137
+Name: count, dtype: int64
+2025-01-02 19:39:53 - INFO - Después de undersampling: target
+0    1137
+1    1137
+Name: count, dtype: int64
+2025-01-02 19:39:53 - INFO - Fold 1:
+2025-01-02 19:39:53 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:39:53 - INFO - Fold 1:
+2025-01-02 19:39:53 - INFO - Shape de X_train_balanced: (2274, 30)
+2025-01-02 19:39:53 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:39:53 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:39:53 - INFO - Shape de X_train_balanced: (2274, 30)
+2025-01-02 19:39:53 - INFO - Shape de y_train_balanced: (2274,)
+2025-01-02 19:39:53 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:39:53 - INFO - Shape de y_train_balanced: (2274,)
+2025-01-02 19:39:54 - INFO - Después de undersampling: target
+0    2839
+1    2839
+Name: count, dtype: int64
+2025-01-02 19:39:54 - INFO - Fold 2:
+2025-01-02 19:39:54 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:39:54 - INFO - Shape de X_train_balanced: (5678, 30)
+2025-01-02 19:39:54 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:39:54 - INFO - Shape de y_train_balanced: (5678,)
+2025-01-02 19:39:55 - INFO - Después de undersampling: target
+0    2839
+1    2839
+Name: count, dtype: int64
+2025-01-02 19:39:55 - INFO - Fold 2:
+2025-01-02 19:39:55 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:39:55 - INFO - Shape de X_train_balanced: (5678, 30)
+2025-01-02 19:39:55 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:39:55 - INFO - Shape de y_train_balanced: (5678,)
+2025-01-02 19:39:56 - INFO - Después de undersampling: target
+0    3794
+1    3794
+Name: count, dtype: int64
+2025-01-02 19:39:56 - INFO - Fold 3:
+2025-01-02 19:39:56 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:39:56 - INFO - Shape de X_train_balanced: (7588, 30)
+2025-01-02 19:39:56 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:39:56 - INFO - Shape de y_train_balanced: (7588,)
+2025-01-02 19:39:57 - INFO - Después de undersampling: target
+0    4139
+1    4139
+Name: count, dtype: int64
+2025-01-02 19:39:57 - INFO - Fold 4:
+2025-01-02 19:39:57 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:39:57 - INFO - Shape de X_train_balanced: (8278, 30)
+2025-01-02 19:39:57 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:39:57 - INFO - Shape de y_train_balanced: (8278,)
+2025-01-02 19:39:57 - INFO - Después de undersampling: target
+0    3794
+1    3794
+Name: count, dtype: int64
+2025-01-02 19:39:57 - INFO - Fold 3:
+2025-01-02 19:39:57 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:39:57 - INFO - Shape de X_train_balanced: (7588, 30)
+2025-01-02 19:39:57 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:39:57 - INFO - Shape de y_train_balanced: (7588,)
+2025-01-02 19:39:58 - INFO - Después de undersampling: target
+0    4505
+1    4505
+Name: count, dtype: int64
+2025-01-02 19:39:58 - INFO - Fold 5:
+2025-01-02 19:39:58 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:39:58 - INFO - Shape de X_train_balanced: (9010, 30)
+2025-01-02 19:39:58 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:39:58 - INFO - Shape de y_train_balanced: (9010,)
+2025-01-02 19:40:00 - INFO - Después de undersampling: target
+0    1137
+1    1137
+Name: count, dtype: int64
+2025-01-02 19:40:00 - INFO - Fold 1:
+2025-01-02 19:40:00 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:00 - INFO - Shape de X_train_balanced: (2274, 30)
+2025-01-02 19:40:00 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:00 - INFO - Shape de y_train_balanced: (2274,)
+2025-01-02 19:40:00 - INFO - Después de undersampling: target
+0    4139
+1    4139
+Name: count, dtype: int64
+2025-01-02 19:40:00 - INFO - Fold 4:
+2025-01-02 19:40:00 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:00 - INFO - Shape de X_train_balanced: (8278, 30)
+2025-01-02 19:40:00 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:00 - INFO - Shape de y_train_balanced: (8278,)
+2025-01-02 19:40:00 - INFO - Después de undersampling: target
+0    2839
+1    2839
+Name: count, dtype: int64
+2025-01-02 19:40:00 - INFO - Fold 2:
+2025-01-02 19:40:00 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:00 - INFO - Shape de X_train_balanced: (5678, 30)
+2025-01-02 19:40:00 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:00 - INFO - Shape de y_train_balanced: (5678,)
+2025-01-02 19:40:01 - INFO - Después de undersampling: target
+0    3794
+1    3794
+Name: count, dtype: int64
+2025-01-02 19:40:01 - INFO - Fold 3:
+2025-01-02 19:40:01 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:01 - INFO - Shape de X_train_balanced: (7588, 30)
+2025-01-02 19:40:01 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:01 - INFO - Shape de y_train_balanced: (7588,)
+2025-01-02 19:40:02 - INFO - Después de undersampling: target
+0    4139
+1    4139
+Name: count, dtype: int64
+2025-01-02 19:40:02 - INFO - Fold 4:
+2025-01-02 19:40:02 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:02 - INFO - Shape de X_train_balanced: (8278, 30)
+2025-01-02 19:40:02 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:02 - INFO - Shape de y_train_balanced: (8278,)
+2025-01-02 19:40:02 - INFO - Después de undersampling: target
+0    4505
+1    4505
+Name: count, dtype: int64
+2025-01-02 19:40:02 - INFO - Fold 5:
+2025-01-02 19:40:02 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:02 - INFO - Shape de X_train_balanced: (9010, 30)
+2025-01-02 19:40:02 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:02 - INFO - Shape de y_train_balanced: (9010,)
+2025-01-02 19:40:03 - INFO - Después de undersampling: target
+0    1137
+1    1137
+Name: count, dtype: int64
+2025-01-02 19:40:03 - INFO - Fold 1:
+2025-01-02 19:40:03 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:03 - INFO - Shape de X_train_balanced: (2274, 30)
+2025-01-02 19:40:03 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:03 - INFO - Shape de y_train_balanced: (2274,)
+2025-01-02 19:40:03 - INFO - Después de undersampling: target
+0    4505
+1    4505
+Name: count, dtype: int64
+2025-01-02 19:40:03 - INFO - Fold 5:
+2025-01-02 19:40:03 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:03 - INFO - Shape de X_train_balanced: (9010, 30)
+2025-01-02 19:40:03 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:03 - INFO - Shape de y_train_balanced: (9010,)
+2025-01-02 19:40:05 - INFO - Después de undersampling: target
+0    2839
+1    2839
+Name: count, dtype: int64
+2025-01-02 19:40:05 - INFO - Fold 2:
+2025-01-02 19:40:05 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:05 - INFO - Shape de X_train_balanced: (5678, 30)
+2025-01-02 19:40:05 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:05 - INFO - Shape de y_train_balanced: (5678,)
+2025-01-02 19:40:08 - INFO - Después de undersampling: target
+0    3794
+1    3794
+Name: count, dtype: int64
+2025-01-02 19:40:08 - INFO - Fold 3:
+2025-01-02 19:40:08 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:08 - INFO - Shape de X_train_balanced: (7588, 30)
+2025-01-02 19:40:08 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:08 - INFO - Shape de y_train_balanced: (7588,)
+2025-01-02 19:40:09 - INFO - Después de undersampling: target
+0    4139
+1    4139
+Name: count, dtype: int64
+2025-01-02 19:40:09 - INFO - Fold 4:
+2025-01-02 19:40:09 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:09 - INFO - Shape de X_train_balanced: (8278, 30)
+2025-01-02 19:40:09 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:09 - INFO - Shape de y_train_balanced: (8278,)
+2025-01-02 19:40:10 - INFO - Después de undersampling: target
+0    1137
+1    1137
+Name: count, dtype: int64
+2025-01-02 19:40:10 - INFO - Fold 1:
+2025-01-02 19:40:10 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:10 - INFO - Shape de X_train_balanced: (2274, 30)
+2025-01-02 19:40:10 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:10 - INFO - Shape de y_train_balanced: (2274,)
+2025-01-02 19:40:10 - INFO - Después de undersampling: target
+0    2839
+1    2839
+Name: count, dtype: int64
+2025-01-02 19:40:10 - INFO - Fold 2:
+2025-01-02 19:40:10 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:10 - INFO - Shape de X_train_balanced: (5678, 30)
+2025-01-02 19:40:10 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:10 - INFO - Shape de y_train_balanced: (5678,)
+2025-01-02 19:40:10 - INFO - Después de undersampling: target
+0    4505
+1    4505
+Name: count, dtype: int64
+2025-01-02 19:40:10 - INFO - Fold 5:
+2025-01-02 19:40:10 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:10 - INFO - Shape de X_train_balanced: (9010, 30)
+2025-01-02 19:40:10 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:10 - INFO - Shape de y_train_balanced: (9010,)
+2025-01-02 19:40:11 - INFO - Después de undersampling: target
+0    3794
+1    3794
+Name: count, dtype: int64
+2025-01-02 19:40:11 - INFO - Fold 3:
+2025-01-02 19:40:11 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:11 - INFO - Shape de X_train_balanced: (7588, 30)
+2025-01-02 19:40:11 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:11 - INFO - Shape de y_train_balanced: (7588,)
+2025-01-02 19:40:11 - INFO - Después de undersampling: target
+0    4139
+1    4139
+Name: count, dtype: int64
+2025-01-02 19:40:11 - INFO - Fold 4:
+2025-01-02 19:40:11 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:11 - INFO - Shape de X_train_balanced: (8278, 30)
+2025-01-02 19:40:11 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:11 - INFO - Shape de y_train_balanced: (8278,)
+2025-01-02 19:40:11 - INFO - Después de undersampling: target
+0    1137
+1    1137
+Name: count, dtype: int64
+2025-01-02 19:40:11 - INFO - Fold 1:
+2025-01-02 19:40:11 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:11 - INFO - Shape de X_train_balanced: (2274, 30)
+2025-01-02 19:40:11 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:11 - INFO - Shape de y_train_balanced: (2274,)
+2025-01-02 19:40:12 - INFO - Después de undersampling: target
+0    4505
+1    4505
+Name: count, dtype: int64
+2025-01-02 19:40:12 - INFO - Fold 5:
+2025-01-02 19:40:12 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:12 - INFO - Shape de X_train_balanced: (9010, 30)
+2025-01-02 19:40:12 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:12 - INFO - Shape de y_train_balanced: (9010,)
+2025-01-02 19:40:12 - INFO - Después de undersampling: target
+0    1137
+1    1137
+Name: count, dtype: int64
+2025-01-02 19:40:12 - INFO - Fold 1:
+2025-01-02 19:40:12 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:12 - INFO - Shape de X_train_balanced: (2274, 30)
+2025-01-02 19:40:12 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:12 - INFO - Shape de y_train_balanced: (2274,)
+2025-01-02 19:40:12 - INFO - Después de undersampling: target
+0    2839
+1    2839
+Name: count, dtype: int64
+2025-01-02 19:40:12 - INFO - Fold 2:
+2025-01-02 19:40:12 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:12 - INFO - Shape de X_train_balanced: (5678, 30)
+2025-01-02 19:40:12 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:12 - INFO - Shape de y_train_balanced: (5678,)
+2025-01-02 19:40:13 - INFO - Después de undersampling: target
+0    3794
+1    3794
+Name: count, dtype: int64
+2025-01-02 19:40:13 - INFO - Fold 3:
+2025-01-02 19:40:13 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:13 - INFO - Shape de X_train_balanced: (7588, 30)
+2025-01-02 19:40:13 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:13 - INFO - Shape de y_train_balanced: (7588,)
+2025-01-02 19:40:14 - INFO - Después de undersampling: target
+0    2839
+1    2839
+Name: count, dtype: int64
+2025-01-02 19:40:14 - INFO - Fold 2:
+2025-01-02 19:40:14 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:14 - INFO - Shape de X_train_balanced: (5678, 30)
+2025-01-02 19:40:14 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:14 - INFO - Shape de y_train_balanced: (5678,)
+2025-01-02 19:40:15 - INFO - Después de undersampling: target
+0    4139
+1    4139
+Name: count, dtype: int64
+2025-01-02 19:40:15 - INFO - Fold 4:
+2025-01-02 19:40:15 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:15 - INFO - Shape de X_train_balanced: (8278, 30)
+2025-01-02 19:40:15 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:15 - INFO - Shape de y_train_balanced: (8278,)
+2025-01-02 19:40:16 - INFO - Después de undersampling: target
+0    4505
+1    4505
+Name: count, dtype: int64
+2025-01-02 19:40:16 - INFO - Fold 5:
+2025-01-02 19:40:16 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:16 - INFO - Shape de X_train_balanced: (9010, 30)
+2025-01-02 19:40:16 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:16 - INFO - Shape de y_train_balanced: (9010,)
+2025-01-02 19:40:17 - INFO - Después de undersampling: target
+0    3794
+1    3794
+Name: count, dtype: int64
+2025-01-02 19:40:17 - INFO - Fold 3:
+2025-01-02 19:40:17 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:17 - INFO - Shape de X_train_balanced: (7588, 30)
+2025-01-02 19:40:17 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:17 - INFO - Shape de y_train_balanced: (7588,)
+2025-01-02 19:40:17 - INFO - Después de undersampling: target
+0    1137
+1    1137
+Name: count, dtype: int64
+2025-01-02 19:40:17 - INFO - Fold 1:
+2025-01-02 19:40:17 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:17 - INFO - Shape de X_train_balanced: (2274, 30)
+2025-01-02 19:40:17 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:17 - INFO - Shape de y_train_balanced: (2274,)
+2025-01-02 19:40:18 - INFO - Después de undersampling: target
+0    2839
+1    2839
+Name: count, dtype: int64
+2025-01-02 19:40:18 - INFO - Fold 2:
+2025-01-02 19:40:18 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:18 - INFO - Shape de X_train_balanced: (5678, 30)
+2025-01-02 19:40:18 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:18 - INFO - Shape de y_train_balanced: (5678,)
+2025-01-02 19:40:19 - INFO - Después de undersampling: target
+0    4139
+1    4139
+Name: count, dtype: int64
+2025-01-02 19:40:19 - INFO - Fold 4:
+2025-01-02 19:40:19 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:19 - INFO - Shape de X_train_balanced: (8278, 30)
+2025-01-02 19:40:19 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:19 - INFO - Shape de y_train_balanced: (8278,)
+2025-01-02 19:40:20 - INFO - Después de undersampling: target
+0    3794
+1    3794
+Name: count, dtype: int64
+2025-01-02 19:40:20 - INFO - Fold 3:
+2025-01-02 19:40:20 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:20 - INFO - Shape de X_train_balanced: (7588, 30)
+2025-01-02 19:40:20 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:20 - INFO - Shape de y_train_balanced: (7588,)
+2025-01-02 19:40:22 - INFO - Después de undersampling: target
+0    4505
+1    4505
+Name: count, dtype: int64
+2025-01-02 19:40:22 - INFO - Fold 5:
+2025-01-02 19:40:22 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:22 - INFO - Shape de X_train_balanced: (9010, 30)
+2025-01-02 19:40:22 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:22 - INFO - Shape de y_train_balanced: (9010,)
+2025-01-02 19:40:23 - INFO - Después de undersampling: target
+0    4139
+1    4139
+Name: count, dtype: int64
+2025-01-02 19:40:23 - INFO - Fold 4:
+2025-01-02 19:40:23 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:23 - INFO - Shape de X_train_balanced: (8278, 30)
+2025-01-02 19:40:23 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:23 - INFO - Shape de y_train_balanced: (8278,)
+2025-01-02 19:40:24 - INFO - Después de undersampling: target
+0    1137
+1    1137
+Name: count, dtype: int64
+2025-01-02 19:40:24 - INFO - Fold 1:
+2025-01-02 19:40:24 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:24 - INFO - Shape de X_train_balanced: (2274, 30)
+2025-01-02 19:40:24 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:24 - INFO - Shape de y_train_balanced: (2274,)
+2025-01-02 19:40:25 - INFO - Después de undersampling: target
+0    4505
+1    4505
+Name: count, dtype: int64
+2025-01-02 19:40:25 - INFO - Fold 5:
+2025-01-02 19:40:25 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:25 - INFO - Shape de X_train_balanced: (9010, 30)
+2025-01-02 19:40:25 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:25 - INFO - Shape de y_train_balanced: (9010,)
+2025-01-02 19:40:27 - INFO - Después de undersampling: target
+0    2839
+1    2839
+Name: count, dtype: int64
+2025-01-02 19:40:27 - INFO - Fold 2:
+2025-01-02 19:40:27 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:27 - INFO - Shape de X_train_balanced: (5678, 30)
+2025-01-02 19:40:27 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:27 - INFO - Shape de y_train_balanced: (5678,)
+2025-01-02 19:40:27 - INFO - Después de undersampling: target
+0    1137
+1    1137
+Name: count, dtype: int64
+2025-01-02 19:40:27 - INFO - Fold 1:
+2025-01-02 19:40:27 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:27 - INFO - Shape de X_train_balanced: (2274, 30)
+2025-01-02 19:40:27 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:27 - INFO - Shape de y_train_balanced: (2274,)
+2025-01-02 19:40:28 - INFO - Después de undersampling: target
+0    2839
+1    2839
+Name: count, dtype: int64
+2025-01-02 19:40:28 - INFO - Fold 2:
+2025-01-02 19:40:28 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:28 - INFO - Shape de X_train_balanced: (5678, 30)
+2025-01-02 19:40:28 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:28 - INFO - Shape de y_train_balanced: (5678,)
+2025-01-02 19:40:28 - INFO - Después de undersampling: target
+0    3794
+1    3794
+Name: count, dtype: int64
+2025-01-02 19:40:28 - INFO - Fold 3:
+2025-01-02 19:40:28 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:28 - INFO - Shape de X_train_balanced: (7588, 30)
+2025-01-02 19:40:28 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:28 - INFO - Shape de y_train_balanced: (7588,)
+2025-01-02 19:40:29 - INFO - Después de undersampling: target
+0    3794
+1    3794
+Name: count, dtype: int64
+2025-01-02 19:40:29 - INFO - Fold 3:
+2025-01-02 19:40:29 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:29 - INFO - Shape de X_train_balanced: (7588, 30)
+2025-01-02 19:40:29 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:29 - INFO - Shape de y_train_balanced: (7588,)
+2025-01-02 19:40:30 - INFO - Después de undersampling: target
+0    4139
+1    4139
+Name: count, dtype: int64
+2025-01-02 19:40:30 - INFO - Fold 4:
+2025-01-02 19:40:30 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:30 - INFO - Shape de X_train_balanced: (8278, 30)
+2025-01-02 19:40:30 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:30 - INFO - Shape de y_train_balanced: (8278,)
+2025-01-02 19:40:30 - INFO - Después de undersampling: target
+0    4139
+1    4139
+Name: count, dtype: int64
+2025-01-02 19:40:30 - INFO - Fold 4:
+2025-01-02 19:40:30 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:30 - INFO - Shape de X_train_balanced: (8278, 30)
+2025-01-02 19:40:30 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:30 - INFO - Shape de y_train_balanced: (8278,)
+2025-01-02 19:40:31 - INFO - Después de undersampling: target
+0    4505
+1    4505
+Name: count, dtype: int64
+2025-01-02 19:40:31 - INFO - Fold 5:
+2025-01-02 19:40:31 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:31 - INFO - Shape de X_train_balanced: (9010, 30)
+2025-01-02 19:40:31 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:31 - INFO - Shape de y_train_balanced: (9010,)
+2025-01-02 19:40:31 - INFO - Después de undersampling: target
+0    4505
+1    4505
+Name: count, dtype: int64
+2025-01-02 19:40:31 - INFO - Fold 5:
+2025-01-02 19:40:31 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:31 - INFO - Shape de X_train_balanced: (9010, 30)
+2025-01-02 19:40:31 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:31 - INFO - Shape de y_train_balanced: (9010,)
+2025-01-02 19:40:32 - INFO - Después de undersampling: target
+0    1137
+1    1137
+Name: count, dtype: int64
+2025-01-02 19:40:32 - INFO - Fold 1:
+2025-01-02 19:40:32 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:32 - INFO - Shape de X_train_balanced: (2274, 30)
+2025-01-02 19:40:32 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:32 - INFO - Shape de y_train_balanced: (2274,)
+2025-01-02 19:40:33 - INFO - Después de undersampling: target
+0    1137
+1    1137
+Name: count, dtype: int64
+2025-01-02 19:40:33 - INFO - Fold 1:
+2025-01-02 19:40:33 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:33 - INFO - Shape de X_train_balanced: (2274, 30)
+2025-01-02 19:40:33 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:33 - INFO - Shape de y_train_balanced: (2274,)
+2025-01-02 19:40:35 - INFO - Después de undersampling: target
+0    2839
+1    2839
+Name: count, dtype: int64
+2025-01-02 19:40:35 - INFO - Fold 2:
+2025-01-02 19:40:35 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:35 - INFO - Shape de X_train_balanced: (5678, 30)
+2025-01-02 19:40:35 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:35 - INFO - Shape de y_train_balanced: (5678,)
+2025-01-02 19:40:35 - INFO - Después de undersampling: target
+0    2839
+1    2839
+Name: count, dtype: int64
+2025-01-02 19:40:35 - INFO - Fold 2:
+2025-01-02 19:40:35 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:35 - INFO - Shape de X_train_balanced: (5678, 30)
+2025-01-02 19:40:35 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:35 - INFO - Shape de y_train_balanced: (5678,)
+2025-01-02 19:40:37 - INFO - Después de undersampling: target
+0    3794
+1    3794
+Name: count, dtype: int64
+2025-01-02 19:40:37 - INFO - Fold 3:
+2025-01-02 19:40:37 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:37 - INFO - Shape de X_train_balanced: (7588, 30)
+2025-01-02 19:40:37 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:37 - INFO - Shape de y_train_balanced: (7588,)
+2025-01-02 19:40:39 - INFO - Después de undersampling: target
+0    3794
+1    3794
+Name: count, dtype: int64
+2025-01-02 19:40:39 - INFO - Fold 3:
+2025-01-02 19:40:39 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:39 - INFO - Shape de X_train_balanced: (7588, 30)
+2025-01-02 19:40:39 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:39 - INFO - Shape de y_train_balanced: (7588,)
+2025-01-02 19:40:40 - INFO - Después de undersampling: target
+0    4139
+1    4139
+Name: count, dtype: int64
+2025-01-02 19:40:40 - INFO - Fold 4:
+2025-01-02 19:40:40 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:40 - INFO - Shape de X_train_balanced: (8278, 30)
+2025-01-02 19:40:40 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:40 - INFO - Shape de y_train_balanced: (8278,)
+2025-01-02 19:40:42 - INFO - Después de undersampling: target
+0    4505
+1    4505
+Name: count, dtype: int64
+2025-01-02 19:40:42 - INFO - Fold 5:
+2025-01-02 19:40:42 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:42 - INFO - Shape de X_train_balanced: (9010, 30)
+2025-01-02 19:40:42 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:42 - INFO - Shape de y_train_balanced: (9010,)
+2025-01-02 19:40:43 - INFO - Después de undersampling: target
+0    4139
+1    4139
+Name: count, dtype: int64
+2025-01-02 19:40:43 - INFO - Fold 4:
+2025-01-02 19:40:43 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:43 - INFO - Shape de X_train_balanced: (8278, 30)
+2025-01-02 19:40:43 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:43 - INFO - Shape de y_train_balanced: (8278,)
+2025-01-02 19:40:46 - INFO - Después de undersampling: target
+0    4505
+1    4505
+Name: count, dtype: int64
+2025-01-02 19:40:46 - INFO - Fold 5:
+2025-01-02 19:40:46 - INFO - Tipo de X_train_balanced: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:46 - INFO - Shape de X_train_balanced: (9010, 30)
+2025-01-02 19:40:46 - INFO - Tipo de y_train_balanced: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:46 - INFO - Shape de y_train_balanced: (9010,)
+2025-01-02 19:40:49 - INFO - Mejor valor de F1: 0.1950
+2025-01-02 19:40:49 - INFO - Mejores parámetros: {'max_depth': 6, 'learning_rate': 0.007589721468908031, 'n_estimators': 285, 'subsample': 0.5851876401709659, 'colsample_bytree': 0.6670036290732754, 'gamma': 0.00017602426855518741, 'reg_alpha': 0.017607571598336095, 'reg_lambda': 0.0054564223633913195}
+2025-01-02 19:40:49 - INFO - === Entrenando Pipeline Final con TODO el training ===
+2025-01-02 19:40:49 - INFO - Tipo de y_train_full: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:49 - INFO - Shape de y_train_full: (188198,)
+2025-01-02 19:40:50 - INFO - Después de undersampling: target
+0    17539
+1    17539
+Name: count, dtype: int64
+2025-01-02 19:40:50 - INFO - Balance de clases aplicado mediante undersampling.
+2025-01-02 19:40:50 - INFO - Tipo de X_train_full balanceado: <class 'pandas.core.frame.DataFrame'>
+2025-01-02 19:40:50 - INFO - Shape de X_train_full balanceado: (35078, 30)
+2025-01-02 19:40:50 - INFO - Tipo de y_train_full balanceado: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:50 - INFO - Shape de y_train_full balanceado: (35078,)
+2025-01-02 19:40:51 - INFO - Pipeline final entrenado con todos los datos de entrenamiento (binario).
+2025-01-02 19:40:51 - INFO - Modelo guardado en: /Users/oscarr/Desarrollo/Python0/ApiBinance/results/XGBoost_Binario_trained_pipeline.joblib
+2025-01-02 19:40:51 - INFO - Parámetros guardados en: /Users/oscarr/Desarrollo/Python0/ApiBinance/results/XGBoost_Binario_model_params.txt
+2025-01-02 19:40:51 - INFO - Lista de features guardada en: /Users/oscarr/Desarrollo/Python0/ApiBinance/results/XGBoost_Binario_feature_cols.txt
+2025-01-02 19:40:51 - INFO - Indicadores técnicos agregados al DataFrame. Filas antes: 47050, después: 47001
+2025-01-02 19:40:51 - INFO - Target binario mejorado con look_ahead=8, min_change=0.009, max_change=0.02
+2025-01-02 19:40:51 - INFO - Distribución de clases (0/1):
+target
+0    43807
+1     2289
+Name: count, dtype: int64
+2025-01-02 19:40:51 - INFO - Tipo de y_test_final: <class 'pandas.core.series.Series'>
+2025-01-02 19:40:51 - INFO - Shape de y_test_final: (46096,)
+2025-01-02 19:40:51 - INFO - === Evaluación en Test ===
+2025-01-02 19:40:52 - INFO - Matriz de confusión [1,0]:
+[[ 2289     0]
+ [43807     0]]
+2025-01-02 19:40:52 - INFO - Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           1       0.05      1.00      0.09      2289
+           0       0.00      0.00      0.00     43807
+
+    accuracy                           0.05     46096
+   macro avg       0.02      0.50      0.05     46096
+weighted avg       0.00      0.05      0.00     46096
+
+2025-01-02 19:40:52 - INFO - F1-score: 0.0946
+2025-01-02 19:40:52 - INFO - Precisión: 0.0497
+2025-01-02 19:40:52 - INFO - Recall: 1.0000
+2025-01-02 19:40:52 - INFO - AUC Score: 0.6473
+2025-01-02 19:40:54 - INFO - F1 final en Test (Binario): 0.0946
+2025-01-02 19:40:54 - INFO - === Analizando importancia de características ===
+2025-01-02 19:40:54 - INFO - Tabla de importancia de características guardada en /Users/oscarr/Desarrollo/Python0/ApiBinance/results/feature_importances_binario.csv.
+2025-01-02 19:40:54 - INFO - Gráfico de importancia de características guardado.
+2025-01-02 19:40:54 - INFO - Características seleccionadas por importancia (> 0.02): ['close_time', 'number_of_trades', 'quote_asset_volume', 'OBV', 'BBL_20_2.0', 'taker_buy_quote_asset_volume', 'SMA_10']
+2025-01-02 19:40:54 - INFO - Después de undersampling: target
+0    17539
+1    17539
+Name: count, dtype: int64
+2025-01-02 19:40:55 - INFO - Balance de clases aplicado mediante undersampling después de selección de características.
+2025-01-02 19:40:56 - INFO - Pipeline final entrenado con todos los datos de entrenamiento (binario).
+2025-01-02 19:40:56 - ERROR - Error en la ejecución principal: The feature names should match those that were passed during fit.
+Feature names unseen at fit time:
+- ATRr_14
+- BBB_20_2.0
+- BBM_20_2.0
+- BBP_20_2.0
+- BBU_20_2.0
+- ...
+

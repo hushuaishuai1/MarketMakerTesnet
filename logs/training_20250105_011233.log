@@ -1,0 +1,180 @@
+2025-01-05 01:12:37 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251947
+2025-01-05 01:12:37 - INFO - Columnas de indicadores técnicos existentes eliminadas: ['OBV']
+2025-01-05 01:12:37 - INFO - Indicadores técnicos agregados al DataFrame. Filas antes: 251947, después: 251898
+2025-01-05 01:12:37 - INFO - Columnas después de agregar indicadores técnicos: ['open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'RSI_14', 'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP_D', 'BBL_20_2.0', 'BBM_20_2.0', 'BBU_20_2.0', 'BBB_20_2.0', 'BBP_20_2.0', 'ATRr_14', 'STOCHk_14_3_3', 'STOCHd_14_3_3', 'CCI_14_0.015', 'OBV']
+2025-01-05 01:12:37 - INFO - Columnas renombradas: {'RSI_14': 'RSI', 'MACD_12_26_9': 'MACD', 'MACDs_12_26_9': 'MACDs', 'MACDh_12_26_9': 'MACDh', 'VWAP': 'VWAP', 'VWAP_D': 'VWAP', 'BBL_20_2.0': 'BBL', 'BBM_20_2.0': 'BBM', 'BBU_20_2.0': 'BBU', 'ATRr_14': 'ATR', 'STOCHk_14_3_3': 'STOCHk', 'STOCHd_14_3_3': 'STOCHd', 'CCI_14_0.015': 'CCI', 'BBB_20_2.0': 'BBB', 'BBP_20_2.0': 'BBP'}
+2025-01-05 01:12:37 - INFO - Target multiclase con look_ahead=4, min_change=0.03, max_change=0.14
+2025-01-05 01:12:37 - INFO - Distribución de clases (0: Vender, 1: Mantener, 2: Comprar):
+target
+1    248900
+0      1587
+2      1389
+Name: count, dtype: int64
+2025-01-05 01:12:38 - INFO - Muestra de datos con target:
+                        close  future_close  change_pct  target
+open_time                                                      
+2024-08-02 09:00:00  64475.57      64466.00   -0.000148       1
+2019-07-29 06:00:00   9593.78       9607.06    0.001384       1
+2021-11-11 12:00:00  64748.99      64769.61    0.000318       1
+2017-10-28 19:45:00   5726.02       5707.69   -0.003201       1
+2022-02-22 17:30:00  37579.00      37848.61    0.007174       1
+2021-05-29 11:30:00  35520.08      34840.91   -0.019121       1
+2023-02-20 03:45:00  24418.95      24484.26    0.002675       1
+2019-03-06 04:00:00   3827.14       3837.35    0.002668       1
+2024-01-11 01:15:00  46732.00      46550.00   -0.003895       1
+2023-03-02 21:15:00  23452.12      23532.00    0.003406       1
+2025-01-05 01:12:38 - INFO - División de datos en train y test completada.
+2025-01-05 01:12:38 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2025-01-05 01:12:38 - INFO - Características utilizadas: ['open', 'high', 'low', 'close', 'volume', 'RSI', 'MACD', 'MACDs', 'MACDh', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP', 'OBV', 'BBL', 'BBM', 'BBU', 'ATR', 'STOCHk', 'STOCHd', 'CCI']
+2025-01-05 01:12:38 - INFO - No se han identificado características categóricas.
+2025-01-05 01:12:38 - INFO - Columnas presentes en el DataFrame: ['open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'RSI', 'MACD', 'MACDh', 'MACDs', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP', 'BBL', 'BBM', 'BBU', 'BBB', 'BBP', 'ATR', 'STOCHk', 'STOCHd', 'CCI', 'OBV', 'future_close', 'change_pct', 'target']
+2025-01-05 01:12:38 - INFO - Columnas eliminadas durante la preparación: ['close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'BBB', 'BBP', 'future_close', 'change_pct']
+2025-01-05 01:12:38 - INFO - Conjunto de datos preparado con 52893 filas y 22 características.
+2025-01-05 01:13:24 - INFO - Después de SMOTETomek: target
+2    41038
+0    41012
+1    40962
+Name: count, dtype: int64
+2025-01-05 01:13:24 - INFO - Después de SMOTETomek: target
+2    41038
+0    41012
+1    40962
+Name: count, dtype: int64
+2025-01-05 01:14:25 - INFO - Después de SMOTETomek: target
+2    41036
+0    41012
+1    40957
+Name: count, dtype: int64
+2025-01-05 01:14:31 - INFO - Después de SMOTETomek: target
+2    41036
+0    41012
+1    40957
+Name: count, dtype: int64
+2025-01-05 01:15:28 - INFO - Después de SMOTETomek: target
+2    41038
+0    41008
+1    40961
+Name: count, dtype: int64
+2025-01-05 01:15:42 - INFO - Después de SMOTETomek: target
+2    41038
+0    41008
+1    40961
+Name: count, dtype: int64
+2025-01-05 01:16:30 - INFO - Después de SMOTETomek: target
+2    41030
+0    41014
+1    40955
+Name: count, dtype: int64
+2025-01-05 01:16:46 - INFO - Después de SMOTETomek: target
+2    41030
+0    41014
+1    40955
+Name: count, dtype: int64
+2025-01-05 01:17:28 - INFO - Después de SMOTETomek: target
+2    41035
+0    41007
+1    40953
+Name: count, dtype: int64
+2025-01-05 01:17:50 - INFO - Después de SMOTETomek: target
+2    41035
+0    41007
+1    40953
+Name: count, dtype: int64
+2025-01-05 01:18:21 - INFO - Después de SMOTETomek: target
+2    41038
+0    41012
+1    40962
+Name: count, dtype: int64
+2025-01-05 01:19:14 - INFO - Después de SMOTETomek: target
+2    41036
+0    41012
+1    40957
+Name: count, dtype: int64
+2025-01-05 01:20:05 - INFO - Después de SMOTETomek: target
+2    41038
+0    41008
+1    40961
+Name: count, dtype: int64
+2025-01-05 01:20:56 - INFO - Después de SMOTETomek: target
+2    41030
+0    41014
+1    40955
+Name: count, dtype: int64
+2025-01-05 01:21:46 - INFO - Después de SMOTETomek: target
+2    41035
+0    41007
+1    40953
+Name: count, dtype: int64
+2025-01-05 01:22:11 - INFO - Mejor valor de F1-macro: 0.4370
+2025-01-05 01:22:11 - INFO - Mejores parámetros: {'max_depth': 10, 'learning_rate': 0.002591742234986441, 'n_estimators': 114, 'subsample': 0.9737738168503505, 'colsample_bytree': 0.8077644617286653, 'gamma': 0.7365396959385883, 'reg_alpha': 0.04293033694752135, 'reg_lambda': 0.7026927745072375}
+2025-01-05 01:22:11 - INFO - === Entrenando Pipeline Final con TODO el training (F1-macro) ===
+2025-01-05 01:22:11 - INFO - Columnas presentes en el DataFrame: ['open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'RSI', 'MACD', 'MACDh', 'MACDs', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP', 'BBL', 'BBM', 'BBU', 'BBB', 'BBP', 'ATR', 'STOCHk', 'STOCHd', 'CCI', 'OBV', 'future_close', 'change_pct', 'target']
+2025-01-05 01:22:11 - INFO - Columnas eliminadas durante la preparación: ['close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'BBB', 'BBP', 'future_close', 'change_pct']
+2025-01-05 01:22:11 - INFO - Conjunto de datos preparado con 176313 filas y 22 características.
+2025-01-05 01:29:44 - INFO - Después de SMOTETomek: target
+2    173489
+0    173441
+1    173388
+Name: count, dtype: int64
+2025-01-05 01:30:09 - INFO - Pipeline final entrenado con todos los datos de entrenamiento (F1-macro).
+2025-01-05 01:30:09 - INFO - Pipeline completo guardado en: ./results/XGBoost_Multiclas_trained_pipeline.joblib
+2025-01-05 01:30:09 - INFO - Parámetros guardados en: ./results/XGBoost_Multiclas_model_params.txt
+2025-01-05 01:30:09 - INFO - Lista de features guardada en: ./results/XGBoost_Multiclas_feature_cols.txt
+2025-01-05 01:30:09 - INFO - Columnas de indicadores técnicos existentes eliminadas: ['RSI', 'MACD', 'MACDs', 'MACDh', 'VWAP', 'OBV', 'BBL', 'BBM', 'BBU', 'ATR', 'STOCHk', 'STOCHd', 'CCI']
+2025-01-05 01:30:09 - INFO - Indicadores técnicos agregados al DataFrame. Filas antes: 75563, después: 75514
+2025-01-05 01:30:09 - INFO - Columnas después de agregar indicadores técnicos: ['open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'BBB', 'BBP', 'future_close', 'change_pct', 'target', 'RSI_14', 'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9', 'VWAP_D', 'OBV', 'BBL_20_2.0', 'BBM_20_2.0', 'BBU_20_2.0', 'BBB_20_2.0', 'BBP_20_2.0', 'ATRr_14', 'STOCHk_14_3_3', 'STOCHd_14_3_3', 'CCI_14_0.015']
+2025-01-05 01:30:09 - INFO - Columnas renombradas: {'RSI_14': 'RSI', 'MACD_12_26_9': 'MACD', 'MACDs_12_26_9': 'MACDs', 'MACDh_12_26_9': 'MACDh', 'VWAP': 'VWAP', 'VWAP_D': 'VWAP', 'BBL_20_2.0': 'BBL', 'BBM_20_2.0': 'BBM', 'BBU_20_2.0': 'BBU', 'ATRr_14': 'ATR', 'STOCHk_14_3_3': 'STOCHk', 'STOCHd_14_3_3': 'STOCHd', 'CCI_14_0.015': 'CCI', 'BBB_20_2.0': 'BBB', 'BBP_20_2.0': 'BBP'}
+2025-01-05 01:30:10 - INFO - Target multiclase con look_ahead=4, min_change=0.03, max_change=0.14
+2025-01-05 01:30:10 - INFO - Distribución de clases (0: Vender, 1: Mantener, 2: Comprar):
+target
+1    75297
+0      125
+2       88
+Name: count, dtype: int64
+2025-01-05 01:30:10 - INFO - Muestra de datos con target:
+                        close  future_close  change_pct  target
+open_time                                                      
+2024-05-15 03:30:00  61915.99      61902.62   -0.000216       1
+2023-02-12 22:15:00  21791.05      21750.77   -0.001848       1
+2023-06-16 16:30:00  25787.81      26198.89    0.015941       1
+2023-08-02 03:00:00  29772.01      29591.20   -0.006073       1
+2023-05-23 05:45:00  27387.49      27292.49   -0.003469       1
+2023-08-17 05:00:00  28649.99      28658.24    0.000288       1
+2023-06-19 11:00:00  26396.01      26432.23    0.001372       1
+2022-11-20 13:45:00  16584.48      16549.84   -0.002089       1
+2023-06-03 09:45:00  27151.51      27140.00   -0.000424       1
+2024-09-28 11:00:00  65728.88      65699.99   -0.000440       1
+2025-01-05 01:30:10 - INFO - Columnas presentes en el DataFrame: ['open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'BBB', 'BBP', 'future_close', 'change_pct', 'target', 'RSI', 'MACD', 'MACDh', 'MACDs', 'VWAP', 'OBV', 'BBL', 'BBM', 'BBU', 'BBB', 'BBP', 'ATR', 'STOCHk', 'STOCHd', 'CCI']
+2025-01-05 01:30:10 - INFO - Columnas eliminadas durante la preparación: ['close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'BBB', 'BBP', 'future_close', 'change_pct', 'BBB', 'BBP']
+2025-01-05 01:30:10 - INFO - Conjunto de datos preparado con 75510 filas y 22 características.
+2025-01-05 01:30:10 - INFO - Características en X_test_final: ['open', 'high', 'low', 'close', 'volume', 'RSI', 'MACD', 'MACDs', 'MACDh', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP', 'OBV', 'BBL', 'BBM', 'BBU', 'ATR', 'STOCHk', 'STOCHd', 'CCI']
+2025-01-05 01:30:10 - INFO - Las características del test coinciden perfectamente con las del entrenamiento.
+2025-01-05 01:30:10 - INFO - === Evaluación en Test (F1-macro) ===
+2025-01-05 01:30:10 - INFO - Matriz de confusión [0: Vender, 1: Mantener, 2: Comprar]:
+[[    7   105    13]
+ [ 1000 73297  1000]
+ [    4    72    12]]
+2025-01-05 01:30:10 - INFO - Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+      Vender       0.01      0.06      0.01       125
+    Mantener       1.00      0.97      0.99     75297
+     Comprar       0.01      0.14      0.02        88
+
+    accuracy                           0.97     75510
+   macro avg       0.34      0.39      0.34     75510
+weighted avg       0.99      0.97      0.98     75510
+
+2025-01-05 01:30:10 - INFO - F1-macro: 0.3398
+2025-01-05 01:30:10 - INFO - Precisión (macro): 0.3387
+2025-01-05 01:30:10 - INFO - Recall (macro): 0.3886
+2025-01-05 01:30:10 - INFO - Balanced Accuracy: 0.3886
+2025-01-05 01:30:10 - INFO - Matthews Correlation Coefficient: 0.0356
+2025-01-05 01:30:10 - INFO - AUC Scores por Clase: {0: 0.6009118524905486, 1: 0.6722660891975757, 2: 0.7156564970191963}
+2025-01-05 01:30:13 - ERROR - Error al generar curvas Precision-Recall: name 'precision_recall_curve' is not defined
+2025-01-05 01:30:13 - INFO - F1-macro final en Test: 0.3398
+2025-01-05 01:30:13 - INFO - Tabla de importancia de características guardada en ./results/feature_importances_multiclass.csv.
+2025-01-05 01:30:14 - INFO - Gráfico de importancia de características guardado.
+2025-01-05 01:30:14 - INFO - Señales generadas con umbrales high=0.66, low=0.25
+2025-01-05 01:30:14 - INFO - Señales guardadas en: ./results/signals_multiclass.csv
+2025-01-05 01:30:14 - INFO - === Proceso Completado con Éxito ===

@@ -1,26 +1,2 @@
-# Archivos de configuración de entornos virtuales
-venv/
-.env
 
-# Archivos de caché de Python
-__pycache__/
-*.py[cod]
-
-# Archivos de configuración de IDEs (como VSCode o PyCharm)
-.vscode/
-.idea/
-
-# Archivos de logs
-*.log
-
-# Archivos binarios o compilados
-*.so
-*.exe
-*.dll
-
-# Archivos de base de datos locales
-*.sqlite3
-
-# Archivos de dependencias
-*.egg-info/
-*.lock
+.codegpt

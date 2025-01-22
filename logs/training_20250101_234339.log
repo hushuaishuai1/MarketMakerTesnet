@@ -1,0 +1,21 @@
+2025-01-01 23:43:44 - INFO - Datos cargados desde /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251797
+2025-01-01 23:43:45 - INFO - Indicadores técnicos agregados al DataFrame.
+2025-01-01 23:43:45 - INFO - feature_columns.pkl actualizado con nuevas características.
+2025-01-01 23:43:45 - INFO - Target binario con look_ahead=6, min_change=0.005
+2025-01-01 23:43:45 - INFO - Distribución de clases (0/1):
+target
+0    206229
+1     45513
+Name: count, dtype: int64
+2025-01-01 23:43:45 - INFO - División de datos en train y test completada.
+2025-01-01 23:43:45 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2025-01-01 23:43:45 - INFO - Características cargadas desde: /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/feature_columns.pkl
+2025-01-01 23:49:29 - INFO - Mejor valor de F1: 0.4045
+2025-01-01 23:49:29 - INFO - Mejores parámetros: {'max_depth': 5, 'learning_rate': 0.0016627686000483214, 'n_estimators': 156, 'subsample': 0.6717018320465447, 'colsample_bytree': 0.7488418547797696, 'gamma': 0.029683508300400334, 'reg_alpha': 0.006762223765945163, 'reg_lambda': 0.0032974924792252215}
+2025-01-01 23:49:29 - INFO - === Entrenando Pipeline Final con TODO el training ===
+2025-01-01 23:49:36 - INFO - Pipeline final entrenado con todos los datos de entrenamiento (binario).
+2025-01-01 23:49:36 - INFO - Modelo guardado en: /Users/oscarr/Desarrollo/Python0/ApiBinance/results/XGBoost_Binario_trained_pipeline.joblib
+2025-01-01 23:49:36 - INFO - Parámetros guardados en: /Users/oscarr/Desarrollo/Python0/ApiBinance/results/XGBoost_Binario_model_params.txt
+2025-01-01 23:49:36 - INFO - Lista de features guardada en: /Users/oscarr/Desarrollo/Python0/ApiBinance/results/XGBoost_Binario_feature_cols.txt
+2025-01-01 23:49:36 - INFO - === Preparando Test ===
+2025-01-01 23:49:37 - ERROR - El índice debe ser de tipo DatetimeIndex.

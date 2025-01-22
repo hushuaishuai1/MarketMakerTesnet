@@ -1,0 +1,12 @@
+2025-01-02 22:45:29 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251947
+2025-01-02 22:45:30 - INFO - Indicadores técnicos agregados al DataFrame. Filas antes: 251947, después: 251898
+2025-01-02 22:45:30 - INFO - Target binario mejorado con look_ahead=14, min_change=0.004, max_change=0.08
+2025-01-02 22:45:30 - INFO - Distribución de clases (0/1):
+target
+0    177804
+1     73289
+Name: count, dtype: int64
+2025-01-02 22:45:30 - INFO - División de datos en train y test completada.
+2025-01-02 22:45:30 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2025-01-02 22:45:30 - INFO - Características utilizadas: ['open', 'high', 'low', 'close', 'volume', 'hour_of_day', 'day_of_week', 'is_weekend', 'RSI_14', 'MACD', 'MACDs', 'MACDh', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP', 'OBV', 'BBL_20_2.0', 'BBM_20_2.0', 'BBU_20_2.0', 'ATR_14', 'STOCHk_14_3_3', 'STOCHd_14_3_3', 'CCI_14']
+2025-01-02 22:45:30 - ERROR - Faltan las siguientes características en df_train_sample: ['MACD', 'MACDs', 'MACDh', 'VWAP', 'ATR_14', 'CCI_14']

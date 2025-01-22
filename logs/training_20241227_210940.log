@@ -1,0 +1,27 @@
+2024-12-27 21:09:44 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 245845
+2024-12-27 21:09:44 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2024-12-27 21:09:44 - INFO - Target con look_ahead=3, lower=6, upper=86
+2024-12-27 21:09:44 - INFO - Umbral inferior=-0.859461, superior=3.518475
+2024-12-27 21:09:44 - INFO - Distribución de clases:
+target
+0    38348
+2     6711
+1     2877
+Name: count, dtype: int64
+2024-12-27 21:09:44 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 21:09:45 - INFO - Columnas a eliminar por correlación > 0.8: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'STDDEV_14', 'max_14', 'STDDEV_59', 'SMA_90', 'STDDEV_90']
+2024-12-27 21:09:50 - INFO - Columnas a eliminar por correlación > 0.8: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'STDDEV_14', 'max_14', 'STDDEV_59', 'STDDEV_90']
+2024-12-27 21:09:57 - INFO - Columnas a eliminar por correlación > 0.8: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'STDDEV_14', 'max_14', 'STDDEV_59', 'SMA_90', 'STDDEV_90']
+2024-12-27 21:10:03 - INFO - Columnas a eliminar por correlación > 0.8: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'STDDEV_14', 'max_14', 'STDDEV_59', 'STDDEV_90']
+2024-12-27 21:10:09 - INFO - Columnas a eliminar por correlación > 0.8: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'STDDEV_14', 'max_14', 'STDDEV_59', 'SMA_90', 'STDDEV_90']
+2024-12-27 21:10:16 - INFO - Target con look_ahead=2, lower=11, upper=86
+2024-12-27 21:10:16 - INFO - Umbral inferior=-0.812042, superior=3.547210
+2024-12-27 21:10:16 - INFO - Distribución de clases:
+target
+0    35952
+2     6712
+1     5273
+Name: count, dtype: int64
+2024-12-27 21:10:16 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 21:10:17 - INFO - Columnas a eliminar por correlación > 0.8: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'STDDEV_12', 'max_12', 'STDDEV_46', 'STDDEV_78']
+2024-12-27 21:10:23 - INFO - Columnas a eliminar por correlación > 0.8: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'STDDEV_12', 'max_12', 'STDDEV_46', 'STDDEV_78']

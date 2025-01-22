@@ -1,0 +1,142 @@
+2024-12-30 21:32:26,639 - INFO - No existe CSV procesado previo para BTCUSDT. Iniciando desde 2017-01-01
+2024-12-30 21:32:26,650 - INFO - Obteniendo datos para BTCUSDT desde 2017-01-01 00:15:00 hasta 2024-10-30
+2024-12-30 21:34:51,683 - INFO - Calculando indicadores técnicos...
+2024-12-30 21:37:42,491 - INFO - No existe CSV procesado previo para BTCUSDT. Iniciando desde 2017-01-01
+2024-12-30 21:37:42,500 - INFO - Obteniendo datos para BTCUSDT desde 2017-01-01 00:15:00 hasta 2024-10-30
+2024-12-30 21:40:00,868 - INFO - Calculando indicadores técnicos...
+2024-12-30 21:40:02,286 - INFO - Filas iniciales: 251996, tras dropna: 251797 (descartadas: 199)
+2024-12-30 21:40:19,641 - INFO - Archivo procesado creado: /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv
+2024-12-30 21:40:19,723 - INFO - Proceso finalizado. Datos procesados y almacenados.
+2024-12-30 22:44:43,226 - INFO - Último timestamp procesado para BTCUSDT: 2024-10-30 00:00:00+00:00
+2024-12-30 22:44:43,257 - INFO - Obteniendo datos para BTCUSDT desde 2024-10-30 00:15:00 hasta 2024-10-30
+2024-12-30 22:44:43,296 - WARNING - No se obtuvieron datos para BTCUSDT en ese rango.
+2024-12-30 22:44:43,298 - INFO - Sin nuevos datos para BTCUSDT.
+2024-12-30 22:44:43,304 - INFO - Lista de características guardada en: /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/feature_columns.pkl
+2024-12-30 22:44:43,305 - INFO - Proceso finalizado. Datos procesados y almacenados.
+2024-12-30 22:45:08,060 - INFO - No existe CSV procesado previo para BTCUSDT. Iniciando desde 2017-01-01
+2024-12-30 22:45:08,068 - INFO - Obteniendo datos para BTCUSDT desde 2017-01-01 00:15:00 hasta 2024-10-30
+2024-12-30 22:47:29,034 - INFO - Calculando indicadores técnicos...
+2024-12-30 22:47:30,368 - INFO - Filas iniciales: 251996, tras dropna: 251797 (descartadas: 199)
+2024-12-30 22:47:47,788 - INFO - Archivo procesado creado: /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv
+2024-12-30 22:47:47,810 - INFO - Lista de características guardada en: /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/feature_columns.pkl
+2024-12-30 22:47:47,915 - INFO - Proceso finalizado. Datos procesados y almacenados.
+2025-01-02 01:21:55,345 - INFO - No existe CSV procesado previo para BTCUSDT. Iniciando desde 2017-01-01
+2025-01-02 01:21:55,358 - INFO - Obteniendo datos para BTCUSDT desde 2017-01-01 00:15:00 hasta 2024-12-30
+2025-01-02 01:24:55,017 - INFO - Calculando indicadores técnicos...
+2025-01-02 01:26:07,166 - INFO - No existe CSV procesado previo para BTCUSDT. Iniciando desde 2017-01-01
+2025-01-02 01:26:07,185 - INFO - Obteniendo datos para BTCUSDT desde 2017-01-01 00:15:00 hasta 2024-10-30
+2025-01-02 01:28:58,937 - INFO - Calculando indicadores técnicos...
+2025-01-02 01:28:58,949 - ERROR - El índice del DataFrame no es de tipo DatetimeIndex.
+2025-01-02 01:31:05,862 - INFO - No existe CSV procesado previo para BTCUSDT. Iniciando desde 2017-01-01
+2025-01-02 01:31:05,868 - INFO - Obteniendo datos para BTCUSDT desde 2017-01-01 00:15:00 hasta 2024-10-30
+2025-01-02 01:33:55,126 - INFO - Calculando indicadores técnicos...
+2025-01-02 01:33:56,132 - INFO - Filas iniciales: 251996, tras dropna: 251947 (descartadas: 49)
+2025-01-02 01:34:07,257 - INFO - Archivo procesado creado: /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv
+2025-01-02 01:34:07,258 - INFO - Proceso finalizado. Datos procesados y almacenados.
+2025-01-02 01:34:07,268 - INFO - Proceso finalizado. Datos procesados y almacenados.
+2025-01-02 22:06:14,952 - INFO - No existe CSV procesado previo para BTCUSDT. Iniciando desde 2017-01-01
+2025-01-02 22:06:14,958 - INFO - Obteniendo datos para BTCUSDT desde 2017-01-01 00:15:00 hasta 2024-10-30
+2025-01-02 22:09:02,265 - INFO - Calculando indicadores técnicos...
+2025-01-02 22:09:03,367 - INFO - Filas iniciales: 251996, tras dropna: 251947 (descartadas: 49)
+2025-01-02 22:09:15,590 - INFO - Archivo procesado creado: /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv
+2025-01-02 22:09:15,591 - INFO - Proceso finalizado. Datos procesados y almacenados.
+2025-01-02 22:09:15,606 - INFO - Proceso finalizado. Datos procesados y almacenados.
+2025-01-02 22:16:20,080 - INFO - Último timestamp procesado para BTCUSDT: 2024-10-30 00:00:00+00:00
+2025-01-02 22:16:20,115 - INFO - Obteniendo datos para BTCUSDT desde 2024-10-30 00:15:00 hasta 2024-10-30
+2025-01-02 22:16:20,137 - WARNING - No se obtuvieron datos para BTCUSDT en ese rango.
+2025-01-02 22:16:20,138 - INFO - Sin nuevos datos para BTCUSDT.
+2025-01-02 22:16:20,138 - INFO - Proceso finalizado. Datos procesados y almacenados.
+2025-01-02 22:16:20,138 - INFO - Proceso finalizado. Datos procesados y almacenados.
+2025-01-02 22:33:54,366 - INFO - Último timestamp procesado para BTCUSDT: 2024-10-30 00:00:00+00:00
+2025-01-02 22:33:54,376 - INFO - Obteniendo datos para BTCUSDT desde 2024-10-30 00:15:00 hasta 2024-10-30
+2025-01-02 22:33:54,383 - WARNING - No se obtuvieron datos para BTCUSDT en ese rango.
+2025-01-02 22:33:54,384 - INFO - Sin nuevos datos para BTCUSDT.
+2025-01-02 22:33:54,384 - INFO - Proceso finalizado. Datos procesados y almacenados.
+2025-01-02 22:33:54,384 - INFO - Proceso finalizado. Datos procesados y almacenados.
+2025-01-09 21:37:24,787 - INFO - No existe CSV procesado previo para BTCUSDT. Iniciando desde 2016-01-01
+2025-01-09 21:37:24,792 - INFO - Obteniendo datos para BTCUSDT desde 2016-01-01 00:15:00 hasta 2024-11-30
+2025-01-09 21:39:40,587 - INFO - Calculando indicadores técnicos...
+2025-01-09 21:39:41,606 - INFO - Filas iniciales: 254972, tras dropna: 254773 (descartadas: 199)
+2025-01-09 21:39:52,841 - INFO - Archivo procesado creado: /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv
+2025-01-09 21:39:52,842 - INFO - Proceso finalizado. Datos procesados y almacenados.
+2025-01-09 21:39:52,851 - INFO - Proceso finalizado. Datos procesados y almacenados.
+2025-01-09 21:51:27,322 - INFO - No existe CSV procesado previo para BTCUSDT. Iniciando desde 2016-01-02
+2025-01-09 21:51:27,330 - INFO - Obteniendo datos para BTCUSDT desde 2016-01-02 00:00:00.001000 hasta 2024-11-30
+2025-01-09 21:53:41,109 - INFO - Calculando indicadores técnicos...
+2025-01-09 21:53:41,525 - WARNING - 'ATR_14' no se calculó correctamente, calculando manualmente.
+2025-01-09 21:53:41,744 - INFO - ATR calculado manualmente.
+2025-01-09 21:53:41,744 - WARNING - 'CCI_14' no se calculó correctamente, calculando manualmente.
+2025-01-09 21:53:41,762 - INFO - CCI calculado manualmente.
+2025-01-09 21:53:42,329 - INFO - Indicadores técnicos agregados. Filas antes: 254972, después: 254773 (descartadas: 199)
+2025-01-09 21:53:42,330 - INFO - Columnas renombradas: {'RSI_14': 'RSI', 'MACD_12_26_9': 'MACD', 'MACDs_12_26_9': 'MACDs', 'MACDh_12_26_9': 'MACDh', 'VWAP': 'VWAP', 'BBL_20_2.0': 'BBL', 'BBM_20_2.0': 'BBM', 'BBU_20_2.0': 'BBU', 'ATR': 'ATR', 'STOCHk_14_3_3': 'STOCHk', 'STOCHd_14_3_3': 'STOCHd', 'CCI': 'CCI', 'SMA_10': 'SMA_10', 'SMA_50': 'SMA_50', 'SMA_200': 'SMA_200', 'EMA_10': 'EMA_10', 'EMA_50': 'EMA_50'}
+2025-01-09 21:53:54,568 - INFO - Datos procesados guardados en data/processed/BTCUSDT_15m_processed.csv
+2025-01-09 21:54:06,532 - INFO - No existe CSV procesado previo para BTCUSDT. Iniciando desde 2016-01-02
+2025-01-09 21:54:06,538 - INFO - Obteniendo datos para BTCUSDT desde 2016-01-02 00:00:00.001000 hasta 2024-11-30
+2025-01-09 22:01:15,832 - INFO - No existe CSV procesado previo para BTCUSDT. Iniciando desde 2016-01-02
+2025-01-09 22:01:15,838 - INFO - Obteniendo datos para BTCUSDT desde 2016-01-02 00:00:00.001000 hasta 2024-11-30
+2025-01-09 22:02:52,583 - INFO - No existe CSV procesado previo para BTCUSDT. Iniciando desde 2016-01-02
+2025-01-09 22:02:52,591 - INFO - Obteniendo datos para BTCUSDT desde 2016-01-02 00:00:00.001000 hasta 2024-11-30
+2025-01-09 22:05:04,814 - INFO - Calculando indicadores técnicos...
+2025-01-09 22:05:05,168 - WARNING - 'ATR_14' no se calculó correctamente, calculando manualmente.
+2025-01-09 22:05:05,393 - INFO - ATR calculado manualmente.
+2025-01-09 22:05:05,393 - WARNING - 'CCI_14' no se calculó correctamente, calculando manualmente.
+2025-01-09 22:05:05,413 - INFO - CCI calculado manualmente.
+2025-01-09 22:05:05,951 - INFO - Indicadores técnicos agregados. Filas antes: 254972, después: 254773 (descartadas: 199)
+2025-01-09 22:05:05,952 - INFO - Columnas renombradas: {'RSI_14': 'RSI', 'MACD_12_26_9': 'MACD', 'MACDs_12_26_9': 'MACDs', 'MACDh_12_26_9': 'MACDh', 'VWAP': 'VWAP', 'BBL_20_2.0': 'BBL', 'BBM_20_2.0': 'BBM', 'BBU_20_2.0': 'BBU', 'ATR': 'ATR', 'STOCHk_14_3_3': 'STOCHk', 'STOCHd_14_3_3': 'STOCHd', 'CCI': 'CCI', 'SMA_10': 'SMA_10', 'SMA_50': 'SMA_50', 'SMA_200': 'SMA_200', 'EMA_10': 'EMA_10', 'EMA_50': 'EMA_50'}
+2025-01-09 22:05:19,304 - INFO - Datos procesados guardados en ML/data/processed/BTCUSDT_15m_processed.csv
+2025-01-09 22:33:49,133 - ERROR - Error en el preprocesamiento: name 'get_last_saved_timestamp' is not defined
+2025-01-09 22:36:05,880 - ERROR - Error en el preprocesamiento: name 'get_last_saved_timestamp' is not defined
+2025-01-09 22:47:48,766 - INFO - Obteniendo datos para BTCUSDT desde 2024-11-30 00:00:00 hasta 2024-10-30
+2025-01-09 22:47:48,776 - WARNING - No se obtuvieron datos para BTCUSDT en ese rango.
+2025-01-09 22:47:48,777 - WARNING - No se descargaron nuevos datos para BTCUSDT.
+2025-01-09 22:49:45,023 - INFO - Obteniendo datos para BTCUSDT desde 2024-11-30 00:00:00 hasta 2024-10-30
+2025-01-09 22:49:45,027 - WARNING - No se obtuvieron datos para BTCUSDT en ese rango.
+2025-01-09 22:49:45,028 - WARNING - No se descargaron nuevos datos para BTCUSDT.
+2025-01-09 22:50:19,825 - INFO - Obteniendo datos para BTCUSDT desde 2017-01-01 00:00:00 hasta 2024-10-30
+2025-01-09 22:52:31,720 - INFO - Calculando indicadores técnicos...
+2025-01-09 22:52:32,410 - INFO - Indicadores técnicos agregados. Filas antes: 251996, después: 251947 (descartadas: 49).
+2025-01-09 22:52:32,412 - INFO - Columnas renombradas: {'RSI_14': 'RSI', 'MACD_12_26_9': 'MACD', 'MACDs_12_26_9': 'MACDs', 'MACDh_12_26_9': 'MACDh', 'BBL_20_2.0': 'BBL', 'BBM_20_2.0': 'BBM', 'BBU_20_2.0': 'BBU', 'SMA_10': 'SMA_10', 'SMA_50': 'SMA_50', 'EMA_10': 'EMA_10', 'EMA_50': 'EMA_50'}
+2025-01-09 22:52:39,443 - INFO - Datos procesados guardados en ML/data/processed/BTCUSDT_15m_processed.csv
+2025-01-09 23:46:04,692 - INFO - Obteniendo datos para BTCUSDT desde 2016-01-05 00:00:00 hasta 2024-11-30
+2025-01-09 23:48:21,267 - INFO - Calculando indicadores técnicos...
+2025-01-09 23:48:21,933 - INFO - Indicadores técnicos agregados. Filas antes: 254972, después: 254923 (descartadas: 49).
+2025-01-09 23:48:21,935 - INFO - Columnas renombradas: {'RSI_14': 'RSI', 'MACD_12_26_9': 'MACD', 'MACDs_12_26_9': 'MACDs', 'MACDh_12_26_9': 'MACDh', 'BBL_20_2.0': 'BBL', 'BBM_20_2.0': 'BBM', 'BBU_20_2.0': 'BBU', 'SMA_10': 'SMA_10', 'SMA_50': 'SMA_50', 'EMA_10': 'EMA_10', 'EMA_50': 'EMA_50'}
+2025-01-09 23:48:29,275 - INFO - Datos procesados guardados en ML/data/processed/BTCUSDT_15m_processed.csv
+2025-01-10 00:18:09,696 - INFO - Obteniendo datos para XRPUSDT desde 2016-01-05 00:00:00 hasta 2024-11-30
+2025-01-10 00:20:12,709 - INFO - Calculando indicadores técnicos...
+2025-01-10 00:20:13,337 - INFO - Indicadores técnicos agregados. Filas antes: 230172, después: 230123 (descartadas: 49).
+2025-01-10 00:20:13,339 - INFO - Columnas renombradas: {'RSI_14': 'RSI', 'MACD_12_26_9': 'MACD', 'MACDs_12_26_9': 'MACDs', 'MACDh_12_26_9': 'MACDh', 'BBL_20_2.0': 'BBL', 'BBM_20_2.0': 'BBM', 'BBU_20_2.0': 'BBU', 'SMA_10': 'SMA_10', 'SMA_50': 'SMA_50', 'EMA_10': 'EMA_10', 'EMA_50': 'EMA_50'}
+2025-01-10 00:20:19,949 - INFO - Datos procesados guardados en ML/data/processed/XRPUSDT_15m_processed.csv
+2025-01-11 17:24:48,704 - INFO - Obteniendo datos para XRPUSDT desde 2024-11-30 00:00:00 hasta 2024-11-30
+2025-01-11 17:24:48,747 - WARNING - No se obtuvieron datos para XRPUSDT en ese rango.
+2025-01-11 17:24:48,748 - WARNING - No se descargaron nuevos datos para XRPUSDT.
+2025-01-11 17:25:11,170 - INFO - Obteniendo datos para XRPUSDT desde 2024-11-30 00:00:00 hasta 2024-11-30
+2025-01-11 17:25:11,175 - WARNING - No se obtuvieron datos para XRPUSDT en ese rango.
+2025-01-11 17:25:11,176 - WARNING - No se descargaron nuevos datos para XRPUSDT.
+2025-01-20 22:07:31,570 - INFO - Obteniendo datos para BTCUSDT desde 2016-01-05 00:00:00 hasta 2025-01-05
+2025-01-20 22:09:35,530 - INFO - Indicadores técnicos agregados. Filas antes: 258428, después: 258379 (descartadas: 49)
+2025-01-20 22:09:35,549 - WARNING - La columna 'VWAP' no se generó, se rellena con NaN.
+2025-01-20 22:09:35,550 - WARNING - La columna 'ATR' no se generó, se rellena con NaN.
+2025-01-20 22:09:44,587 - INFO - Datos procesados (con VWAP y ATR) guardados en ML/data/processed/BTCUSDT_15m_processed.csv
+2025-01-20 22:14:56,821 - INFO - Obteniendo datos para BTCUSDT desde 2025-01-05 00:00:00 hasta 2025-01-05
+2025-01-20 22:14:56,844 - WARNING - No se obtuvieron datos para BTCUSDT en ese rango.
+2025-01-20 22:14:56,845 - WARNING - No se descargaron nuevos datos para BTCUSDT.
+2025-01-20 22:15:12,576 - INFO - Obteniendo datos para BTCUSDT desde 2016-01-05 00:00:00 hasta 2025-01-05
+2025-01-20 22:17:15,547 - WARNING - No se generó 'ATR_14'. Se rellena con NaN.
+2025-01-20 22:17:15,549 - WARNING - No se generó 'VWAP'. Se rellena con NaN.
+2025-01-20 22:17:15,651 - INFO - Datos procesados (con VWAP y ATR) guardados en ML/data/processed/BTCUSDT_15m_processed.csv
+2025-01-20 22:20:29,978 - ERROR - Error en el preprocesamiento: unsupported operand type(s) for +: 'float' and 'datetime.timedelta'
+2025-01-20 22:21:13,763 - ERROR - Error en el preprocesamiento: unsupported operand type(s) for +: 'float' and 'datetime.timedelta'
+2025-01-20 22:23:03,521 - ERROR - Error en el preprocesamiento: NaTType does not support strftime
+2025-01-20 22:25:59,003 - ERROR - Error en el preprocesamiento: NaTType does not support strftime
+2025-01-20 22:26:54,927 - INFO - Obteniendo datos para BTCUSDT desde 2017-01-01 00:00:00 hasta 2025-01-05
+2025-01-20 22:29:06,277 - INFO - Datos procesados (sin VWAP ni ATR) guardados en ML/data/processed/BTCUSDT_15m_processed.csv
+2025-01-20 22:29:55,486 - INFO - Obteniendo datos para BTCUSDT desde 2025-01-05 00:00:00 hasta 2025-01-05
+2025-01-20 22:29:55,493 - WARNING - No se obtuvieron datos para BTCUSDT en ese rango.
+2025-01-20 22:29:55,494 - WARNING - No se descargaron nuevos datos para BTCUSDT.
+2025-01-20 22:30:09,311 - INFO - Obteniendo datos para BTCUSDT desde 2017-01-01 00:00:00 hasta 2025-01-05
+2025-01-20 22:32:19,068 - INFO - Datos procesados (sin VWAP/ATR) guardados en ML/data/processed/BTCUSDT_15m_processed.csv
+2025-01-20 23:02:41,821 - INFO - Obteniendo datos para BTCUSDT desde 2017-01-07 00:00:00 hasta 2024-12-29
+2025-01-20 23:04:55,777 - INFO - Datos procesados (sin VWAP/ATR) guardados en ML/data/processed/BTCUSDT_15m_processed.csv
+2025-01-21 20:28:17,319 - INFO - Obteniendo datos para BTCUSDT desde 2016-06-07 00:00:00 hasta 2025-01-10
+2025-01-21 20:30:50,629 - INFO - Datos procesados (sin VWAP/ATR) guardados en ML/data/processed/BTCUSDT_15m_processed.csv

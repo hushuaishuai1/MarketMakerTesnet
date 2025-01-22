@@ -1,0 +1,96 @@
+2024-12-30 21:18:35 - INFO - Datos cargados desde /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv, filas: 245845
+2024-12-30 21:18:40 - INFO - Target con look_ahead=3, lower=24, upper=78, min_change=0.0078
+2024-12-30 21:18:40 - INFO - Umbral inferior=-0.002373, superior=0.002854
+2024-12-30 21:18:40 - INFO - Distribución de clases:
+target
+0    212582
+2     16820
+1     16440
+Name: count, dtype: int64
+2024-12-30 21:18:42 - INFO - Eliminados 199 registros con NaNs.
+2024-12-30 21:18:43 - INFO - División de datos en train y test completada.
+2024-12-30 21:18:43 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2024-12-30 21:18:48 - INFO - Target con look_ahead=3, lower=24, upper=78, min_change=0.0078
+2024-12-30 21:18:48 - INFO - Target con look_ahead=3, lower=24, upper=78, min_change=0.0078
+2024-12-30 21:18:48 - INFO - Umbral inferior=-0.608177, superior=1.769202
+2024-12-30 21:18:48 - INFO - Target con look_ahead=3, lower=24, upper=78, min_change=0.0078
+2024-12-30 21:18:48 - INFO - Umbral inferior=-0.608177, superior=1.769202
+2024-12-30 21:18:48 - INFO - Distribución de clases:
+target
+0    28650
+1    12733
+2    11672
+Name: count, dtype: int64
+2024-12-30 21:18:48 - INFO - Umbral inferior=-0.608177, superior=1.769202
+2024-12-30 21:18:48 - INFO - Distribución de clases:
+target
+0    28650
+1    12733
+2    11672
+Name: count, dtype: int64
+2024-12-30 21:18:48 - INFO - Distribución de clases:
+target
+0    28650
+1    12733
+2    11672
+Name: count, dtype: int64
+2024-12-30 21:18:48 - INFO - Eliminados 199 registros con NaNs.
+2024-12-30 21:18:48 - INFO - Eliminados 199 registros con NaNs.
+2024-12-30 21:18:48 - INFO - Eliminados 199 registros con NaNs.
+2024-12-30 21:18:48 - INFO - Columnas a eliminar por correlación > 0.82: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:18:48 - INFO - Columnas a eliminar por correlación > 0.82: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:18:48 - INFO - Columnas a eliminar por correlación > 0.82: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:18:48 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:18:48 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:18:48 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:19:08 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:19:08 - INFO - Columnas a eliminar por correlación > 0.82: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:19:08 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:19:24 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:19:24 - INFO - Columnas a eliminar por correlación > 0.82: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:19:24 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:19:28 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:19:29 - INFO - Columnas a eliminar por correlación > 0.82: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:19:29 - INFO - Eliminando columnas durante transform: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:19:32 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:19:33 - INFO - Columnas a eliminar por correlación > 0.82: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:19:33 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:20:05 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:20:06 - INFO - Columnas a eliminar por correlación > 0.82: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:20:06 - INFO - Eliminando columnas durante transform: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:20:11 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:20:11 - INFO - Columnas a eliminar por correlación > 0.82: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:20:11 - INFO - Eliminando columnas durante transform: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:20:15 - INFO - Eliminando columnas durante transform: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:20:16 - INFO - Columnas a eliminar por correlación > 0.82: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:20:16 - INFO - Eliminando columnas durante transform: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:20:51 - INFO - Eliminando columnas durante transform: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:20:51 - INFO - Columnas a eliminar por correlación > 0.82: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:20:51 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:20:53 - INFO - Eliminando columnas durante transform: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:20:54 - INFO - Columnas a eliminar por correlación > 0.82: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:20:54 - INFO - Eliminando columnas durante transform: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:21:02 - INFO - Eliminando columnas durante transform: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:21:03 - INFO - Columnas a eliminar por correlación > 0.82: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:21:03 - INFO - Eliminando columnas durante transform: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:21:04 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:21:05 - INFO - Target con look_ahead=3, lower=24, upper=78, min_change=0.0078
+2024-12-30 21:21:05 - INFO - Umbral inferior=-0.608177, superior=1.769202
+2024-12-30 21:21:05 - INFO - Distribución de clases:
+target
+0    28650
+1    12733
+2    11672
+Name: count, dtype: int64
+2024-12-30 21:21:05 - INFO - Eliminados 199 registros con NaNs.
+2024-12-30 21:21:05 - INFO - Columnas a eliminar por correlación > 0.82: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:21:05 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:21:20 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:21:20 - INFO - Columnas a eliminar por correlación > 0.82: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:21:20 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:21:39 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:21:39 - INFO - Columnas a eliminar por correlación > 0.82: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:21:39 - INFO - Eliminando columnas durante transform: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:21:48 - INFO - Eliminando columnas durante transform: ['RSI_14', 'ATR_ratio', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:21:49 - INFO - Columnas a eliminar por correlación > 0.82: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']
+2024-12-30 21:21:49 - INFO - Eliminando columnas durante transform: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_65', 'STDDEV_65', 'min_65', 'max_65']

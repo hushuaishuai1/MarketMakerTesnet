@@ -1,0 +1,14 @@
+2025-01-01 15:25:46 - INFO - Datos cargados desde /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251797
+2025-01-01 15:25:48 - INFO - Indicadores técnicos agregados al DataFrame.
+2025-01-01 15:25:48 - INFO - feature_columns.pkl actualizado con nuevas características.
+2025-01-01 15:25:54 - INFO - Target con look_ahead=28, lower=9, upper=91, min_change=0.008
+2025-01-01 15:25:54 - INFO - Umbral inferior=-0.020243, superior=0.021888
+2025-01-01 15:25:54 - INFO - Distribución de clases:
+target
+0    206410
+2     22655
+1     22655
+Name: count, dtype: int64
+2025-01-01 15:25:54 - INFO - División de datos en train y test completada.
+2025-01-01 15:25:54 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2025-01-01 15:25:54 - INFO - Características cargadas desde: /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/feature_columns.pkl

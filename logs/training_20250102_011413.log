@@ -1,0 +1,29 @@
+2025-01-02 01:14:18 - INFO - Datos cargados desde /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251797
+2025-01-02 01:14:19 - INFO - Indicadores técnicos agregados al DataFrame.
+2025-01-02 01:14:19 - INFO - feature_columns.pkl actualizado con nuevas características.
+2025-01-02 01:14:20 - INFO - Target binario con look_ahead=8, min_change=0.005
+2025-01-02 01:14:20 - INFO - Distribución de clases (0/1):
+target
+0    200095
+1     51645
+Name: count, dtype: int64
+2025-01-02 01:14:20 - INFO - División de datos en train y test completada.
+2025-01-02 01:14:20 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2025-01-02 01:14:20 - INFO - Características cargadas desde: /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/feature_columns.pkl
+2025-01-02 01:14:20 - INFO - No se han identificado características categóricas.
+2025-01-02 01:17:39 - INFO - Mejor valor de F1: 0.3917
+2025-01-02 01:17:39 - INFO - Mejores parámetros: {'max_depth': 10, 'learning_rate': 0.003638931957646768, 'n_estimators': 95, 'subsample': 0.648496722748267, 'colsample_bytree': 0.7238767743514833, 'gamma': 0.00372073849753085, 'reg_alpha': 0.001175804318510299, 'reg_lambda': 0.07690428981508474}
+2025-01-02 01:17:39 - INFO - === Entrenando Pipeline Final con TODO el training ===
+2025-01-02 01:17:49 - INFO - Balance de clases aplicado mediante SMOTE.
+2025-01-02 01:18:04 - INFO - Pipeline final entrenado con todos los datos de entrenamiento (binario).
+2025-01-02 01:18:04 - INFO - Modelo guardado en: /Users/oscarr/Desarrollo/Python0/ApiBinance/results/XGBoost_Binario_trained_pipeline.joblib
+2025-01-02 01:18:04 - INFO - Parámetros guardados en: /Users/oscarr/Desarrollo/Python0/ApiBinance/results/XGBoost_Binario_model_params.txt
+2025-01-02 01:18:04 - INFO - Lista de features guardada en: /Users/oscarr/Desarrollo/Python0/ApiBinance/results/XGBoost_Binario_feature_cols.txt
+2025-01-02 01:18:05 - INFO - Indicadores técnicos agregados al DataFrame.
+2025-01-02 01:18:05 - INFO - Target binario con look_ahead=8, min_change=0.005
+2025-01-02 01:18:05 - INFO - Distribución de clases (0/1):
+target
+0    43060
+1     7231
+Name: count, dtype: int64
+2025-01-02 01:18:05 - ERROR - Inconsistencia en el número de características: se esperan 67, pero se obtienen 77

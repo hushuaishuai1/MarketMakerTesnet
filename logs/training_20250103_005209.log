@@ -1,0 +1,41 @@
+2025-01-03 00:52:09 - WARNING - === Cargando Datos ===
+2025-01-03 00:52:12 - WARNING - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251947
+2025-01-03 00:52:12 - WARNING - === Agregando Indicadores Técnicos ===
+2025-01-03 00:52:13 - WARNING - Indicadores técnicos agregados al DataFrame. Filas antes: 251947, después: 251933
+2025-01-03 00:52:13 - WARNING - Columnas después de agregar indicadores técnicos: ['open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'RSI_14', 'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP_D', 'OBV', 'BBL_20_2.0', 'BBM_20_2.0', 'BBU_20_2.0', 'BBB_20_2.0', 'BBP_20_2.0', 'ATRr_14', 'STOCHk_14_3_3', 'STOCHd_14_3_3', 'CCI_14_0.015', 'hour_of_day', 'day_of_week', 'is_weekend', 'RSI', 'volume_ratio']
+2025-01-03 00:52:13 - WARNING - === Generando Target Binario Mejorado ===
+2025-01-03 00:52:13 - WARNING - Target binario mejorado con look_ahead=46, min_change=0.03, max_change=0.26
+2025-01-03 00:52:13 - WARNING - Distribución de clases (0/1):
+target
+0    230244
+1     21623
+Name: count, dtype: int64
+2025-01-03 00:52:13 - WARNING - === Dividiendo Datos en Train y Test ===
+2025-01-03 00:52:13 - WARNING - División de datos en train y test completada.
+2025-01-03 00:52:13 - WARNING - === Configurando Validación Cruzada ===
+2025-01-03 00:52:13 - WARNING - === Buscando Hiperparámetros (Optuna) en una Muestra del Training ===
+2025-01-03 00:52:13 - WARNING - === Configurando Características ===
+2025-01-03 00:52:13 - WARNING - Características utilizadas: ['open', 'high', 'low', 'close', 'volume', 'hour_of_day', 'day_of_week', 'is_weekend', 'RSI', 'volume_ratio']
+2025-01-03 00:52:13 - WARNING - === Preparando Datos de Entrenamiento para Optuna ===
+2025-01-03 00:52:13 - WARNING - Columnas presentes en el DataFrame: ['open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'RSI_14', 'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP_D', 'OBV', 'BBL_20_2.0', 'BBM_20_2.0', 'BBU_20_2.0', 'BBB_20_2.0', 'BBP_20_2.0', 'ATRr_14', 'STOCHk_14_3_3', 'STOCHd_14_3_3', 'CCI_14_0.015', 'hour_of_day', 'day_of_week', 'is_weekend', 'RSI', 'volume_ratio', 'future_close', 'change_pct', 'target']
+2025-01-03 00:52:13 - WARNING - Columnas eliminadas durante la preparación: ['close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'RSI_14', 'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP_D', 'OBV', 'BBL_20_2.0', 'BBM_20_2.0', 'BBU_20_2.0', 'BBB_20_2.0', 'BBP_20_2.0', 'ATRr_14', 'STOCHk_14_3_3', 'STOCHd_14_3_3', 'CCI_14_0.015', 'future_close', 'change_pct']
+2025-01-03 00:52:13 - WARNING - Columnas después de añadir faltantes: ['open', 'high', 'low', 'close', 'volume', 'hour_of_day', 'day_of_week', 'is_weekend', 'RSI', 'volume_ratio', 'target']
+2025-01-03 00:52:13 - WARNING - Conjunto de datos preparado con 44076 filas y 10 características.
+2025-01-03 00:52:13 - WARNING - Tipo de y_train_sample: <class 'pandas.core.series.Series'>
+2025-01-03 00:52:13 - WARNING - Shape de y_train_sample: (44076,)
+2025-01-03 00:52:13 - WARNING - === Entrenando Modelo con Optuna ===
+2025-01-03 00:53:35 - WARNING - Mejor valor de F1: 0.2031
+2025-01-03 00:53:35 - WARNING - Mejores parámetros: {'max_depth': 4, 'learning_rate': 0.0026737166583566904, 'n_estimators': 346, 'subsample': 0.620963588668611, 'colsample_bytree': 0.9284174963737069, 'gamma': 0.7702666536381944, 'reg_alpha': 0.8318943356091347, 'reg_lambda': 0.2011691521433755}
+2025-01-03 00:53:35 - WARNING - === Entrenando Pipeline Final con Todo el Training ===
+2025-01-03 00:53:35 - WARNING - Columnas presentes en el DataFrame: ['open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'RSI_14', 'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP_D', 'OBV', 'BBL_20_2.0', 'BBM_20_2.0', 'BBU_20_2.0', 'BBB_20_2.0', 'BBP_20_2.0', 'ATRr_14', 'STOCHk_14_3_3', 'STOCHd_14_3_3', 'CCI_14_0.015', 'hour_of_day', 'day_of_week', 'is_weekend', 'RSI', 'volume_ratio', 'future_close', 'change_pct', 'target']
+2025-01-03 00:53:35 - WARNING - Columnas eliminadas durante la preparación: ['close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'RSI_14', 'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP_D', 'OBV', 'BBL_20_2.0', 'BBM_20_2.0', 'BBU_20_2.0', 'BBB_20_2.0', 'BBP_20_2.0', 'ATRr_14', 'STOCHk_14_3_3', 'STOCHd_14_3_3', 'CCI_14_0.015', 'future_close', 'change_pct']
+2025-01-03 00:53:35 - WARNING - Columnas después de añadir faltantes: ['open', 'high', 'low', 'close', 'volume', 'hour_of_day', 'day_of_week', 'is_weekend', 'RSI', 'volume_ratio', 'target']
+2025-01-03 00:53:35 - WARNING - Conjunto de datos preparado con 176306 filas y 10 características.
+2025-01-03 00:53:35 - WARNING - Tipo de y_train_full: <class 'pandas.core.series.Series'>
+2025-01-03 00:53:35 - WARNING - Shape de y_train_full: (176306,)
+2025-01-03 00:53:35 - WARNING - === Aplicando SMOTE para Balancear Clases ===
+2025-01-03 00:53:36 - WARNING - Después de SMOTE: 0    158207
+1    158207
+Name: count, dtype: int64
+2025-01-03 00:53:36 - WARNING - Balance de clases aplicado mediante SMOTE.
+2025-01-03 00:53:36 - ERROR - Error en la ejecución principal: name 'USE_PCA' is not defined

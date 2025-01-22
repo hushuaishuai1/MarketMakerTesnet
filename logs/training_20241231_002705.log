@@ -1,0 +1,22 @@
+2024-12-31 00:27:09 - INFO - Datos cargados desde /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251797
+2024-12-31 00:27:10 - INFO - Indicadores técnicos agregados al DataFrame.
+2024-12-31 00:27:10 - INFO - feature_columns.pkl actualizado con nuevas características.
+2024-12-31 00:27:14 - INFO - Target con look_ahead=6, lower=28, upper=75, min_change=0.006
+2024-12-31 00:27:14 - INFO - Umbral inferior=-0.002520, superior=0.003374
+2024-12-31 00:27:14 - INFO - Distribución de clases:
+target
+0    178302
+2     37920
+1     35520
+Name: count, dtype: int64
+2024-12-31 00:27:14 - INFO - División de datos en train y test completada.
+2024-12-31 00:27:14 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2024-12-31 00:27:14 - INFO - Características cargadas desde: /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/feature_columns.pkl
+2024-12-31 00:27:14 - INFO - Balance de clases en muestra de entrenamiento:
+target
+0    16865
+2     8563
+1     7801
+Name: count, dtype: int64
+2024-12-31 00:27:14 - WARNING - early_stopping_rounds no soportado o error en entrenamiento. Entrenando sin early stopping.
+2024-12-31 00:27:14 - ERROR - Error en la ejecución principal: With over-sampling methods, the number of samples in a class should be greater or equal to the original number of samples. Originally, there is 2535 samples and 2106 samples are asked.

@@ -1,0 +1,11 @@
+2025-01-09 21:57:41 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m.csv, filas: 209970
+2025-01-09 21:57:41 - WARNING - 'ATR_14' no se calculó correctamente, calculando manualmente.
+2025-01-09 21:57:41 - INFO - ATR calculado manualmente.
+2025-01-09 21:57:41 - WARNING - 'CCI_14' no se calculó correctamente, calculando manualmente.
+2025-01-09 21:57:41 - INFO - CCI calculado manualmente.
+2025-01-09 21:57:41 - INFO - Indicadores técnicos agregados. Filas antes: 209970, después: 0 (descartadas: 209970)
+2025-01-09 21:57:41 - INFO - Columnas renombradas: {'RSI_14': 'RSI', 'MACD_12_26_9': 'MACD', 'MACDs_12_26_9': 'MACDs', 'MACDh_12_26_9': 'MACDh', 'VWAP': 'VWAP', 'BBL_20_2.0': 'BBL', 'BBM_20_2.0': 'BBM', 'BBU_20_2.0': 'BBU', 'ATR': 'ATR', 'STOCHk_14_3_3': 'STOCHk', 'STOCHd_14_3_3': 'STOCHd', 'CCI': 'CCI', 'SMA_10': 'SMA_10', 'SMA_50': 'SMA_50', 'SMA_200': 'SMA_200', 'EMA_10': 'EMA_10', 'EMA_50': 'EMA_50'}
+2025-01-09 21:57:41 - INFO - Target binario con look_ahead=4, min_change=0.015
+2025-01-09 21:57:41 - INFO - Distribución de clases (0=Vender, 1=Comprar):
+Series([], Name: count, dtype: int64)
+2025-01-09 21:57:41 - ERROR - Error en main(): a must be greater than 0 unless no samples are taken

@@ -1,0 +1,24 @@
+2024-12-31 17:54:14 - INFO - Datos cargados desde /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251797
+2024-12-31 17:54:15 - INFO - Indicadores técnicos agregados al DataFrame.
+2024-12-31 17:54:15 - INFO - feature_columns.pkl actualizado con nuevas características.
+2024-12-31 17:54:15 - INFO - Unique 'change_pct_8': 251617
+2024-12-31 17:54:15 - INFO - Non-NaN 'change_pct_8': 251740 out of 251748
+2024-12-31 17:54:15 - INFO - Umbral inferior para 8 velas=-0.001855, superior=0.002540
+2024-12-31 17:54:15 - INFO - Descripción 'change_pct_8':
+count    251740.000000
+mean          0.000156
+std           0.011372
+min          -0.218759
+25%          -0.003476
+50%           0.000154
+75%           0.003871
+max           0.290599
+Name: change_pct_8, dtype: float64
+2024-12-31 17:54:18 - INFO - Distribución de clases para 8 velas:
+target_8
+0    87916
+1    83275
+2    80557
+Name: count, dtype: int64
+2024-12-31 17:54:20 - INFO - Gráfico de distribución de 'change_pct_8' guardado.
+2024-12-31 17:54:20 - ERROR - Error en la ejecución principal: 'open_time'

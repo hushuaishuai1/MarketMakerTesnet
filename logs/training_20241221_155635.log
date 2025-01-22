@@ -1,0 +1,81 @@
+2024-12-21 15:56:39 - INFO - Datos cargados correctamente desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 245845
+2024-12-21 15:56:39 - INFO - Eliminados 199 registros con valores faltantes.
+2024-12-21 15:56:39 - INFO - Indicadores calculados y filas NaN eliminadas.
+2024-12-21 15:56:42 - INFO - Variable objetivo generada con look_ahead: 1, lower_percentile: 20, upper_percentile: 80
+2024-12-21 15:56:42 - INFO - Umbrales calculados - lower: -0.001838, upper: 0.001900
+2024-12-21 15:56:42 - INFO - Distribución de clases:
+target
+0    147387
+2     49129
+1     49129
+Name: count, dtype: int64
+2024-12-21 15:56:42 - INFO - No se eliminaron columnas por correlación > 0.85
+2024-12-21 15:56:42 - INFO - Distribución de clases en todo el conjunto: 
+target
+0    147387
+2     49129
+1     49129
+Name: count, dtype: int64
+2024-12-21 15:56:42 - INFO - Tamaño train: (157212, 12), valid: (39304, 12), test: (49129, 12)
+2024-12-21 15:56:42 - INFO - Distribución de clases en train: 
+target
+0    85432
+2    35994
+1    35786
+Name: count, dtype: int64
+2024-12-21 15:56:42 - INFO - Distribución de clases en validación: 
+target
+0    25999
+1     6744
+2     6561
+Name: count, dtype: int64
+2024-12-21 15:56:42 - INFO - Distribución de clases en test: 
+target
+0    35956
+1     6599
+2     6574
+Name: count, dtype: int64
+2024-12-21 15:56:42 - INFO - Pesos de clases: {0: 0.6134001310984174, 1: 1.4643715419437768, 2: 1.4559093182197034}
+2024-12-21 15:56:48 - INFO - Después de SMOTE, distribución de clases en train: 
+target
+0    85432
+2    85432
+1    85432
+Name: count, dtype: int64
+2024-12-21 15:56:48 - INFO - === Entrenando XGBoost ===
+2024-12-21 16:08:25 - INFO - XGBoost - Mejores parámetros: {'subsample': 0.7, 'reg_lambda': 0, 'reg_alpha': 1, 'n_estimators': 200, 'max_depth': 8, 'learning_rate': 0.25, 'gamma': 0, 'colsample_bytree': 0.9}
+2024-12-21 16:08:25 - INFO - XGBoost - F1-score en validación: 0.3251
+2024-12-21 16:08:25 - INFO - XGBoost - Distribución de clases en validación:
+2    18806
+1    11303
+0     9195
+Name: count, dtype: int64
+2024-12-21 16:08:25 - INFO - Modelo XGBoost guardado en: results/XGBoost_trained_model.joblib
+2024-12-21 16:08:25 - INFO - Pipeline guardado en: results/XGBoost_pipeline.joblib
+2024-12-21 16:08:25 - INFO - Parámetros del modelo XGBoost guardados en: results/XGBoost_model_params.txt
+2024-12-21 16:08:25 - INFO - Columnas de características XGBoost guardadas en: results/XGBoost_feature_cols.txt
+2024-12-21 16:08:25 - INFO - Columnas eliminadas XGBoost guardadas en: results/XGBoost_drop_cols.txt
+2024-12-21 16:08:25 - INFO - === Evaluación de XGBoost en Test ===
+2024-12-21 16:08:26 - INFO - Matriz de Confusión (clases [2,1,0]):
+[[ 2786  1658  2130]
+ [ 2653  1720  2226]
+ [11406  5986 18564]]
+2024-12-21 16:08:26 - INFO - Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           2       0.17      0.42      0.24      6574
+           1       0.18      0.26      0.22      6599
+           0       0.81      0.52      0.63     35956
+
+    accuracy                           0.47     49129
+   macro avg       0.39      0.40      0.36     49129
+weighted avg       0.64      0.47      0.52     49129
+
+2024-12-21 16:08:26 - INFO - F1-score macro en test: 0.3613
+2024-12-21 16:08:27 - INFO - === Iniciando Backtest con XGBoost ===
+2024-12-21 16:10:02 - INFO - === Resultados de la Simulación de Trading ===
+2024-12-21 16:10:02 - INFO - Retorno Total: 77928053134771586258116327802960748001211510146509832192.0000
+2024-12-21 16:10:02 - INFO - Sharpe Ratio: 0.9774
+2024-12-21 16:10:02 - INFO - Máximo Drawdown: -0.0178
+2024-12-21 16:10:02 - INFO - Número de Operaciones: 529
+2024-12-21 16:10:03 - INFO - Proceso completado exitosamente.

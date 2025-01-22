@@ -1,0 +1,39 @@
+2025-01-02 00:03:32 - INFO - Datos cargados desde /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251797
+2025-01-02 00:03:33 - INFO - Indicadores técnicos agregados al DataFrame.
+2025-01-02 00:03:33 - INFO - feature_columns.pkl actualizado con nuevas características.
+2025-01-02 00:03:33 - INFO - Target binario con look_ahead=4, min_change=0.005
+2025-01-02 00:03:33 - INFO - Distribución de clases (0/1):
+target
+0    214865
+1     36879
+Name: count, dtype: int64
+2025-01-02 00:03:33 - INFO - División de datos en train y test completada.
+2025-01-02 00:03:33 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2025-01-02 00:03:33 - INFO - Características cargadas desde: /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/feature_columns.pkl
+2025-01-02 00:08:26 - INFO - Mejor valor de F1: 0.3729
+2025-01-02 00:08:26 - INFO - Mejores parámetros: {'max_depth': 3, 'learning_rate': 0.0057749295634100615, 'n_estimators': 54, 'subsample': 0.8938231492006222, 'colsample_bytree': 0.5133833897359925, 'gamma': 0.9469890708719532, 'reg_alpha': 0.003936771650449476, 'reg_lambda': 0.015372712442807935}
+2025-01-02 00:08:26 - INFO - === Entrenando Pipeline Final con TODO el training ===
+2025-01-02 00:08:29 - INFO - Pipeline final entrenado con todos los datos de entrenamiento (binario).
+2025-01-02 00:08:29 - INFO - Modelo guardado en: /Users/oscarr/Desarrollo/Python0/ApiBinance/results/XGBoost_Binario_trained_pipeline.joblib
+2025-01-02 00:08:29 - INFO - Parámetros guardados en: /Users/oscarr/Desarrollo/Python0/ApiBinance/results/XGBoost_Binario_model_params.txt
+2025-01-02 00:08:29 - INFO - Lista de features guardada en: /Users/oscarr/Desarrollo/Python0/ApiBinance/results/XGBoost_Binario_feature_cols.txt
+2025-01-02 00:08:29 - INFO - Indicadores técnicos agregados al DataFrame.
+2025-01-02 00:08:29 - INFO - feature_columns.pkl actualizado con nuevas características.
+2025-01-02 00:08:30 - INFO - Target binario con look_ahead=4, min_change=0.005
+2025-01-02 00:08:30 - INFO - Distribución de clases (0/1):
+target
+0    45817
+1     4479
+Name: count, dtype: int64
+2025-01-02 00:08:30 - INFO - === Evaluación en Test ===
+2025-01-02 00:08:30 - ERROR - Error en la predicción: The feature names should match those that were passed during fit.
+Feature names must be in the same order as they were in fit.
+
+2025-01-02 00:08:30 - INFO - F1 final en Test (Binario): 0.0000
+2025-01-02 00:08:30 - INFO - === Analizando importancia de características ===
+2025-01-02 00:08:30 - INFO - Tabla de importancia de características guardada en /Users/oscarr/Desarrollo/Python0/ApiBinance/results/feature_importances_binario.csv.
+2025-01-02 00:08:33 - INFO - Gráfico de importancia de características guardado.
+2025-01-02 00:08:33 - INFO - === Ejecutando Backtest Básico ===
+2025-01-02 00:08:33 - ERROR - Error en la ejecución principal: The feature names should match those that were passed during fit.
+Feature names must be in the same order as they were in fit.
+

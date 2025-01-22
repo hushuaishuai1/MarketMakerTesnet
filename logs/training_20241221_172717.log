@@ -1,0 +1,46 @@
+2024-12-21 17:27:23 - INFO - Datos cargados correctamente desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 245845
+2024-12-21 17:27:23 - INFO - Eliminados 199 registros con valores faltantes.
+2024-12-21 17:27:23 - INFO - Indicadores calculados y filas NaN eliminadas.
+2024-12-21 17:27:26 - INFO - Variable objetivo generada con look_ahead: 1, lower_percentile: 10, upper_percentile: 90
+2024-12-21 17:27:26 - INFO - Umbrales calculados - lower: -0.003408, upper: 0.003481
+2024-12-21 17:27:26 - INFO - Distribución de clases:
+target
+0    196515
+2     24565
+1     24565
+Name: count, dtype: int64
+2024-12-21 17:27:26 - INFO - No se eliminaron columnas por correlación > 0.85
+2024-12-21 17:27:26 - INFO - Distribución de clases en todo el conjunto: 
+target
+0    196515
+2     24565
+1     24565
+Name: count, dtype: int64
+2024-12-21 17:27:26 - INFO - Tamaño train: (157212, 12), valid: (39304, 12), test: (49129, 12)
+2024-12-21 17:27:26 - INFO - Distribución de clases en train: 
+target
+0    118996
+2     19184
+1     19032
+Name: count, dtype: int64
+2024-12-21 17:27:26 - INFO - Distribución de clases en validación: 
+target
+0    33304
+1     3065
+2     2935
+Name: count, dtype: int64
+2024-12-21 17:27:26 - INFO - Distribución de clases en test: 
+target
+0    44215
+1     2468
+2     2446
+Name: count, dtype: int64
+2024-12-21 17:27:26 - INFO - Pesos de clases: {np.int64(0): np.float64(0.44038455074120136), np.int64(1): np.float64(2.753467843631778), np.int64(2): np.float64(2.731651376146789)}
+2024-12-21 17:28:14 - INFO - Después de SMOTEENN, distribución de clases en train: 
+target
+2    112699
+1    112526
+0     54415
+Name: count, dtype: int64
+2024-12-21 17:28:14 - INFO - === Entrenando XGBoost Optimizado ===
+2024-12-21 17:28:42 - ERROR - Error durante el ajuste de RandomizedSearchCV: Classification metrics can't handle a mix of binary and multilabel-indicator targets

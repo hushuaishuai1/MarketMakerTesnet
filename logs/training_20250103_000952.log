@@ -1,0 +1,294 @@
+2025-01-03 00:09:54 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251947
+2025-01-03 00:09:55 - INFO - Columnas de indicadores técnicos existentes eliminadas: ['OBV']
+2025-01-03 00:09:55 - INFO - Indicadores técnicos agregados al DataFrame. Filas antes: 251947, después: 251898
+2025-01-03 00:09:55 - INFO - Columnas después de agregar indicadores técnicos: ['open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'RSI_14', 'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP_D', 'BBL_20_2.0', 'BBM_20_2.0', 'BBU_20_2.0', 'BBB_20_2.0', 'BBP_20_2.0', 'ATRr_14', 'STOCHk_14_3_3', 'STOCHd_14_3_3', 'CCI_14_0.015', 'hour_of_day', 'day_of_week', 'is_weekend', 'RSI_14_', 'MACD_12_26_9_', 'MACDh_12_26_9_', 'MACDs_12_26_9_', 'SMA_10_', 'SMA_50_', 'EMA_10_', 'EMA_50_', 'VWAP_D_', 'OBV_', 'BBL_20_2.0_', 'BBM_20_2.0_', 'BBU_20_2.0_', 'BBB_20_2.0_', 'BBP_20_2.0_', 'ATRr_14_', 'STOCHk_14_3_3_', 'STOCHd_14_3_3_', 'CCI_14_0.015_']
+2025-01-03 00:09:55 - INFO - Columnas renombradas: {'RSI_14': 'RSI', 'RSI_14_': 'RSI_', 'MACD_12_26_9': 'MACD', 'MACD_12_26_9_': 'MACD_', 'MACDh_12_26_9': 'MACDh', 'MACDh_12_26_9_': 'MACDh_', 'MACDs_12_26_9': 'MACDs', 'MACDs_12_26_9_': 'MACDs_', 'VWAP_D': 'VWAP', 'VWAP_D_': 'VWAP_', 'BBL_20_2.0': 'BBL', 'BBL_20_2.0_': 'BBL_', 'BBM_20_2.0': 'BBM', 'BBM_20_2.0_': 'BBM_', 'BBU_20_2.0': 'BBU', 'BBU_20_2.0_': 'BBU_', 'ATRr_14': 'ATR', 'ATRr_14_': 'ATR_', 'STOCHk_14_3_3': 'STOCHk', 'STOCHk_14_3_3_': 'STOCHk_', 'STOCHd_14_3_3': 'STOCHd', 'STOCHd_14_3_3_': 'STOCHd_', 'CCI_14_0.015': 'CCI', 'CCI_14_0.015_': 'CCI_'}
+2025-01-03 00:09:55 - INFO - Columnas duplicadas eliminadas: ['RSI_', 'MACD_', 'MACDh_', 'MACDs_', 'SMA_10_', 'SMA_50_', 'EMA_10_', 'EMA_50_', 'VWAP_', 'OBV_', 'BBL_', 'BBM_', 'BBU_', 'BBB_20_2.0_', 'BBP_20_2.0_', 'ATR_', 'STOCHk_', 'STOCHd_', 'CCI_']
+2025-01-03 00:09:55 - WARNING - La columna 'OBV' no está presente después de agregar indicadores. Añadiendo 'OBV' con valor 0.
+2025-01-03 00:09:56 - INFO - Target binario mejorado con look_ahead=28, min_change=0.008, max_change=0.1
+2025-01-03 00:09:56 - INFO - Distribución de clases (0/1):
+target
+0    189782
+1     61217
+Name: count, dtype: int64
+2025-01-03 00:09:56 - INFO - División de datos en train y test completada.
+2025-01-03 00:09:56 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2025-01-03 00:09:56 - INFO - Características utilizadas: ['open', 'high', 'low', 'close', 'volume', 'hour_of_day', 'day_of_week', 'is_weekend', 'RSI', 'MACD', 'MACDs', 'MACDh', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP', 'OBV', 'BBL', 'BBM', 'BBU', 'ATR', 'STOCHk', 'STOCHd', 'CCI']
+2025-01-03 00:09:56 - INFO - No se han identificado características categóricas.
+2025-01-03 00:09:56 - INFO - Columnas presentes en el DataFrame: ['open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'RSI', 'MACD', 'MACDh', 'MACDs', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP', 'BBL', 'BBM', 'BBU', 'BBB_20_2.0', 'BBP_20_2.0', 'ATR', 'STOCHk', 'STOCHd', 'CCI', 'hour_of_day', 'day_of_week', 'is_weekend', 'OBV', 'future_close', 'change_pct', 'target']
+2025-01-03 00:09:56 - INFO - Columnas eliminadas durante la preparación: ['close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'BBB_20_2.0', 'BBP_20_2.0', 'future_close', 'change_pct']
+2025-01-03 00:09:56 - INFO - Conjunto de datos preparado con 84712 filas y 25 características.
+2025-01-03 00:09:56 - INFO - Tipo de y_train_sample: <class 'pandas.core.series.Series'>
+2025-01-03 00:09:56 - INFO - Shape de y_train_sample: (84712,)
+2025-01-03 00:09:56 - INFO - Después de SMOTE: target
+1    8172
+0    8172
+Name: count, dtype: int64
+2025-01-03 00:09:56 - INFO - Después de SMOTE: target
+1    8172
+0    8172
+Name: count, dtype: int64
+2025-01-03 00:09:57 - INFO - Después de SMOTE: target
+1    17612
+0    17612
+Name: count, dtype: int64
+2025-01-03 00:09:57 - INFO - Después de SMOTE: target
+1    17612
+0    17612
+Name: count, dtype: int64
+2025-01-03 00:09:59 - INFO - Después de SMOTE: target
+1    29234
+0    29234
+Name: count, dtype: int64
+2025-01-03 00:09:59 - INFO - Después de SMOTE: target
+1    29234
+0    29234
+Name: count, dtype: int64
+2025-01-03 00:10:01 - INFO - Después de SMOTE: target
+1    41014
+0    41014
+Name: count, dtype: int64
+2025-01-03 00:10:01 - INFO - Después de SMOTE: target
+1    41014
+0    41014
+Name: count, dtype: int64
+2025-01-03 00:10:04 - INFO - Después de SMOTE: target
+1    50835
+0    50835
+Name: count, dtype: int64
+2025-01-03 00:10:05 - INFO - Después de SMOTE: target
+1    50835
+0    50835
+Name: count, dtype: int64
+2025-01-03 00:10:06 - INFO - Después de SMOTE: target
+1    8172
+0    8172
+Name: count, dtype: int64
+2025-01-03 00:10:07 - INFO - Después de SMOTE: target
+1    8172
+0    8172
+Name: count, dtype: int64
+2025-01-03 00:10:08 - INFO - Después de SMOTE: target
+1    17612
+0    17612
+Name: count, dtype: int64
+2025-01-03 00:10:09 - INFO - Después de SMOTE: target
+1    17612
+0    17612
+Name: count, dtype: int64
+2025-01-03 00:10:09 - INFO - Después de SMOTE: target
+1    29234
+0    29234
+Name: count, dtype: int64
+2025-01-03 00:10:11 - INFO - Después de SMOTE: target
+1    41014
+0    41014
+Name: count, dtype: int64
+2025-01-03 00:10:13 - INFO - Después de SMOTE: target
+1    29234
+0    29234
+Name: count, dtype: int64
+2025-01-03 00:10:14 - INFO - Después de SMOTE: target
+1    50835
+0    50835
+Name: count, dtype: int64
+2025-01-03 00:10:15 - INFO - Después de SMOTE: target
+1    8172
+0    8172
+Name: count, dtype: int64
+2025-01-03 00:10:17 - INFO - Después de SMOTE: target
+1    17612
+0    17612
+Name: count, dtype: int64
+2025-01-03 00:10:18 - INFO - Después de SMOTE: target
+1    41014
+0    41014
+Name: count, dtype: int64
+2025-01-03 00:10:19 - INFO - Después de SMOTE: target
+1    29234
+0    29234
+Name: count, dtype: int64
+2025-01-03 00:10:22 - INFO - Después de SMOTE: target
+1    41014
+0    41014
+Name: count, dtype: int64
+2025-01-03 00:10:25 - INFO - Después de SMOTE: target
+1    50835
+0    50835
+Name: count, dtype: int64
+2025-01-03 00:10:27 - INFO - Después de SMOTE: target
+1    50835
+0    50835
+Name: count, dtype: int64
+2025-01-03 00:10:30 - INFO - Después de SMOTE: target
+1    8172
+0    8172
+Name: count, dtype: int64
+2025-01-03 00:10:32 - INFO - Después de SMOTE: target
+1    8172
+0    8172
+Name: count, dtype: int64
+2025-01-03 00:10:33 - INFO - Después de SMOTE: target
+1    17612
+0    17612
+Name: count, dtype: int64
+2025-01-03 00:10:34 - INFO - Después de SMOTE: target
+1    17612
+0    17612
+Name: count, dtype: int64
+2025-01-03 00:10:34 - INFO - Después de SMOTE: target
+1    29234
+0    29234
+Name: count, dtype: int64
+2025-01-03 00:10:36 - INFO - Después de SMOTE: target
+1    41014
+0    41014
+Name: count, dtype: int64
+2025-01-03 00:10:39 - INFO - Después de SMOTE: target
+1    50835
+0    50835
+Name: count, dtype: int64
+2025-01-03 00:10:41 - INFO - Después de SMOTE: target
+1    29234
+0    29234
+Name: count, dtype: int64
+2025-01-03 00:10:43 - INFO - Después de SMOTE: target
+1    8172
+0    8172
+Name: count, dtype: int64
+2025-01-03 00:10:45 - INFO - Después de SMOTE: target
+1    17612
+0    17612
+Name: count, dtype: int64
+2025-01-03 00:10:47 - INFO - Después de SMOTE: target
+1    41014
+0    41014
+Name: count, dtype: int64
+2025-01-03 00:10:48 - INFO - Después de SMOTE: target
+1    29234
+0    29234
+Name: count, dtype: int64
+2025-01-03 00:10:51 - INFO - Después de SMOTE: target
+1    41014
+0    41014
+Name: count, dtype: int64
+2025-01-03 00:10:54 - INFO - Después de SMOTE: target
+1    50835
+0    50835
+Name: count, dtype: int64
+2025-01-03 00:10:57 - INFO - Después de SMOTE: target
+1    50835
+0    50835
+Name: count, dtype: int64
+2025-01-03 00:11:03 - INFO - Después de SMOTE: target
+1    8172
+0    8172
+Name: count, dtype: int64
+2025-01-03 00:11:04 - INFO - Después de SMOTE: target
+1    8172
+0    8172
+Name: count, dtype: int64
+2025-01-03 00:11:05 - INFO - Después de SMOTE: target
+1    17612
+0    17612
+Name: count, dtype: int64
+2025-01-03 00:11:06 - INFO - Después de SMOTE: target
+1    17612
+0    17612
+Name: count, dtype: int64
+2025-01-03 00:11:07 - INFO - Después de SMOTE: target
+1    29234
+0    29234
+Name: count, dtype: int64
+2025-01-03 00:11:09 - INFO - Después de SMOTE: target
+1    29234
+0    29234
+Name: count, dtype: int64
+2025-01-03 00:11:10 - INFO - Después de SMOTE: target
+1    41014
+0    41014
+Name: count, dtype: int64
+2025-01-03 00:11:13 - INFO - Después de SMOTE: target
+1    41014
+0    41014
+Name: count, dtype: int64
+2025-01-03 00:11:16 - INFO - Después de SMOTE: target
+1    50835
+0    50835
+Name: count, dtype: int64
+2025-01-03 00:11:19 - INFO - Después de SMOTE: target
+1    50835
+0    50835
+Name: count, dtype: int64
+2025-01-03 00:11:21 - INFO - Después de SMOTE: target
+1    8172
+0    8172
+Name: count, dtype: int64
+2025-01-03 00:11:22 - INFO - Después de SMOTE: target
+1    8172
+0    8172
+Name: count, dtype: int64
+2025-01-03 00:11:25 - INFO - Después de SMOTE: target
+1    17612
+0    17612
+Name: count, dtype: int64
+2025-01-03 00:11:25 - INFO - Después de SMOTE: target
+1    17612
+0    17612
+Name: count, dtype: int64
+2025-01-03 00:11:28 - INFO - Después de SMOTE: target
+1    29234
+0    29234
+Name: count, dtype: int64
+2025-01-03 00:11:30 - INFO - Después de SMOTE: target
+1    29234
+0    29234
+Name: count, dtype: int64
+2025-01-03 00:11:33 - INFO - Después de SMOTE: target
+1    41014
+0    41014
+Name: count, dtype: int64
+2025-01-03 00:11:38 - INFO - Después de SMOTE: target
+1    41014
+0    41014
+Name: count, dtype: int64
+2025-01-03 00:11:40 - INFO - Después de SMOTE: target
+1    50835
+0    50835
+Name: count, dtype: int64
+2025-01-03 00:11:45 - INFO - Después de SMOTE: target
+1    8172
+0    8172
+Name: count, dtype: int64
+2025-01-03 00:11:47 - INFO - Después de SMOTE: target
+1    50835
+0    50835
+Name: count, dtype: int64
+2025-01-03 00:11:48 - INFO - Después de SMOTE: target
+1    17612
+0    17612
+Name: count, dtype: int64
+2025-01-03 00:11:50 - INFO - Después de SMOTE: target
+1    29234
+0    29234
+Name: count, dtype: int64
+2025-01-03 00:11:53 - INFO - Después de SMOTE: target
+1    41014
+0    41014
+Name: count, dtype: int64
+2025-01-03 00:11:54 - INFO - Después de SMOTE: target
+1    8172
+0    8172
+Name: count, dtype: int64
+2025-01-03 00:11:57 - INFO - Después de SMOTE: target
+1    50835
+0    50835
+Name: count, dtype: int64
+2025-01-03 00:11:58 - INFO - Después de SMOTE: target
+1    17612
+0    17612
+Name: count, dtype: int64
+2025-01-03 00:12:00 - INFO - Después de SMOTE: target
+1    8172
+0    8172
+Name: count, dtype: int64

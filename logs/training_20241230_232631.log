@@ -1,0 +1,69 @@
+2024-12-30 23:26:36 - INFO - Datos cargados desde /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251797
+2024-12-30 23:26:40 - INFO - Target con look_ahead=6, lower=28, upper=75, min_change=0.006
+2024-12-30 23:26:40 - INFO - Umbral inferior=-0.002520, superior=0.003374
+2024-12-30 23:26:40 - INFO - Distribución de clases:
+target
+0    178322
+2     37937
+1     35532
+Name: count, dtype: int64
+2024-12-30 23:26:40 - INFO - División de datos en train y test completada.
+2024-12-30 23:26:40 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2024-12-30 23:26:40 - INFO - Características cargadas desde: /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/feature_columns.pkl
+2024-12-30 23:26:40 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:26:48 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:26:57 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:27:08 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:27:24 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:27:44 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:27:52 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:28:01 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:28:12 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:28:24 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:28:35 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:28:44 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:28:53 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:29:04 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:29:17 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:29:42 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:29:54 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:30:04 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:30:14 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:30:24 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:30:36 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:30:46 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:30:58 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:31:11 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:31:24 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:31:38 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:31:41 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:31:43 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:31:47 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:31:50 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:31:54 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:32:19 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:32:46 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:33:23 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:34:07 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:34:51 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:34:53 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:34:57 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:35:00 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:35:05 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:35:09 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:35:14 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:35:19 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:35:25 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:35:31 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:35:37 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:35:49 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:35:59 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:36:09 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:36:20 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:36:33 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:36:47 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:37:05 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:37:37 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:38:09 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:38:36 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.
+2024-12-30 23:38:57 - WARNING - early_stopping_rounds no soportado. Entrenando sin early stopping.

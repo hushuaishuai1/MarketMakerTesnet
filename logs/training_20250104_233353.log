@@ -1,0 +1,45 @@
+2025-01-04 23:33:56 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251947
+2025-01-04 23:33:56 - INFO - Columnas de indicadores técnicos existentes eliminadas: ['OBV']
+2025-01-04 23:33:57 - INFO - Indicadores técnicos agregados al DataFrame. Filas antes: 251947, después: 251898
+2025-01-04 23:33:57 - INFO - Columnas después de agregar indicadores técnicos: ['open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'RSI_14', 'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP_D', 'BBL_20_2.0', 'BBM_20_2.0', 'BBU_20_2.0', 'BBB_20_2.0', 'BBP_20_2.0', 'ATRr_14', 'STOCHk_14_3_3', 'STOCHd_14_3_3', 'CCI_14_0.015', 'RSI_14_', 'MACD_12_26_9_', 'MACDh_12_26_9_', 'MACDs_12_26_9_', 'SMA_10_', 'SMA_50_', 'EMA_10_', 'EMA_50_', 'VWAP_D_', 'OBV_', 'BBL_20_2.0_', 'BBM_20_2.0_', 'BBU_20_2.0_', 'BBB_20_2.0_', 'BBP_20_2.0_', 'ATRr_14_', 'STOCHk_14_3_3_', 'STOCHd_14_3_3_', 'CCI_14_0.015_']
+2025-01-04 23:33:57 - INFO - Columnas renombradas: {'RSI_14': 'RSI', 'RSI_14_': 'RSI_', 'MACD_12_26_9': 'MACD', 'MACD_12_26_9_': 'MACD_', 'MACDh_12_26_9': 'MACDh', 'MACDh_12_26_9_': 'MACDh_', 'MACDs_12_26_9': 'MACDs', 'MACDs_12_26_9_': 'MACDs_', 'VWAP_D': 'VWAP', 'VWAP_D_': 'VWAP_', 'BBL_20_2.0': 'BBL', 'BBL_20_2.0_': 'BBL_', 'BBM_20_2.0': 'BBM', 'BBM_20_2.0_': 'BBM_', 'BBU_20_2.0': 'BBU', 'BBU_20_2.0_': 'BBU_', 'ATRr_14': 'ATR', 'ATRr_14_': 'ATR_', 'STOCHk_14_3_3': 'STOCHk', 'STOCHk_14_3_3_': 'STOCHk_', 'STOCHd_14_3_3': 'STOCHd', 'STOCHd_14_3_3_': 'STOCHd_', 'CCI_14_0.015': 'CCI', 'CCI_14_0.015_': 'CCI_'}
+2025-01-04 23:33:57 - INFO - Columnas duplicadas eliminadas: ['RSI_', 'MACD_', 'MACDh_', 'MACDs_', 'SMA_10_', 'SMA_50_', 'EMA_10_', 'EMA_50_', 'VWAP_', 'OBV_', 'BBL_', 'BBM_', 'BBU_', 'BBB_20_2.0_', 'BBP_20_2.0_', 'ATR_', 'STOCHk_', 'STOCHd_', 'CCI_']
+2025-01-04 23:33:57 - WARNING - La columna 'OBV' no está presente. Añadiendo 'OBV' con valor 0.
+2025-01-04 23:33:57 - INFO - Target multiclase con look_ahead=12, min_change=0.03, max_change=0.13
+2025-01-04 23:33:57 - INFO - Distribución de clases (1, 0, -1):
+target
+ 0    240901
+ 1      5529
+-1      5385
+Name: count, dtype: int64
+2025-01-04 23:33:57 - INFO - Muestra de datos con target:
+                        close  future_close  change_pct  target
+open_time                                                      
+2018-03-31 09:30:00   6939.88       7185.00    0.035320       1
+2024-03-22 02:45:00  65644.00      66430.01    0.011974       0
+2022-03-09 13:30:00  41812.05      42285.01    0.011312       0
+2020-11-26 01:00:00  18860.01      18012.70   -0.044926      -1
+2018-04-20 08:30:00   8315.00       8510.91    0.023561       0
+2022-05-05 05:45:00  39602.65      39482.98   -0.003022       0
+2019-02-19 11:15:00   3896.14       3956.53    0.015500       0
+2020-01-13 00:45:00   8152.73       8105.77   -0.005760       0
+2022-10-29 09:30:00  20917.58      20742.56   -0.008367       0
+2018-12-25 20:15:00   3762.95       3712.78   -0.013333       0
+2025-01-04 23:33:57 - INFO - División de datos en train y test completada.
+2025-01-04 23:33:57 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2025-01-04 23:33:57 - INFO - Características utilizadas: ['open', 'high', 'low', 'close', 'volume', 'RSI', 'MACD', 'MACDs', 'MACDh', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP', 'OBV', 'BBL', 'BBM', 'BBU', 'ATR', 'STOCHk', 'STOCHd', 'CCI']
+2025-01-04 23:33:57 - INFO - No se han identificado características categóricas.
+2025-01-04 23:33:57 - INFO - Columnas presentes en el DataFrame: ['open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'RSI', 'MACD', 'MACDh', 'MACDs', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP', 'BBL', 'BBM', 'BBU', 'BBB_20_2.0', 'BBP_20_2.0', 'ATR', 'STOCHk', 'STOCHd', 'CCI', 'OBV', 'future_close', 'change_pct', 'target']
+2025-01-04 23:33:57 - INFO - Columnas eliminadas durante la preparación: ['close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'BBB_20_2.0', 'BBP_20_2.0', 'future_close', 'change_pct']
+2025-01-04 23:33:57 - INFO - Conjunto de datos preparado con 120871 filas y 22 características.
+2025-01-04 23:33:57 - INFO - Después de SMOTE: target
+ 0    16854
+-1    16854
+ 1    16854
+Name: count, dtype: int64
+2025-01-04 23:33:57 - INFO - Después de SMOTE: target
+ 0    16854
+-1    16854
+ 1    16854
+Name: count, dtype: int64
+2025-01-04 23:33:57 - ERROR - Error en la ejecución principal: Invalid classes inferred from unique values of `y`.  Expected: [0 1 2], got [-1  0  1]

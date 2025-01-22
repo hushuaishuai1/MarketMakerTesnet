@@ -1,0 +1,5 @@
+2025-01-03 00:39:19 - INFO - === Cargando Datos ===
+2025-01-03 00:39:23 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251947
+2025-01-03 00:39:23 - INFO - === Agregando Indicadores Técnicos ===
+2025-01-03 00:39:23 - INFO - Columnas de indicadores técnicos existentes eliminadas: ['OBV']
+2025-01-03 00:39:23 - ERROR - Error al calcular 'BB_width': 'BBU'

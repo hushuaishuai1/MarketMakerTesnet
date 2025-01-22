@@ -1,0 +1,76 @@
+2025-01-11 18:33:40 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 254923
+2025-01-11 18:33:40 - INFO - Columnas de indicadores existentes eliminadas: ['RSI', 'MACD', 'MACDs', 'MACDh', 'OBV', 'BBL', 'BBM', 'BBU', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50']
+2025-01-11 18:33:41 - INFO - Indicadores técnicos agregados. Filas antes: 254923, después: 254724 (descartadas: 199)
+2025-01-11 18:33:41 - INFO - Columnas renombradas: {'RSI_14': 'RSI', 'MACD_12_26_9': 'MACD', 'MACDs_12_26_9': 'MACDs', 'MACDh_12_26_9': 'MACDh', 'VWAP': 'VWAP', 'BBL_20_2.0': 'BBL', 'BBM_20_2.0': 'BBM', 'BBU_20_2.0': 'BBU', 'ATR_14': 'ATR', 'STOCHk_14_3_3': 'STOCHk', 'STOCHd_14_3_3': 'STOCHd', 'CCI_14_0.015': 'CCI', 'SMA_10': 'SMA_10', 'SMA_50': 'SMA_50', 'SMA_200': 'SMA_200', 'EMA_10': 'EMA_10', 'EMA_50': 'EMA_50'}
+2025-01-11 18:33:41 - WARNING - Columna faltante 'VWAP' añadida con NaN.
+2025-01-11 18:33:41 - WARNING - Columna faltante 'ATR' añadida con NaN.
+2025-01-11 18:33:41 - INFO - Target binario con look_ahead=4, min_change=0.031
+2025-01-11 18:33:41 - INFO - Distribución de clases (0=Vender, 1=Comprar):
+target
+0.0    1460
+1.0    1283
+Name: count, dtype: int64
+2025-01-11 18:33:41 - INFO - Muestra de datos con target:
+                        close  future_close  change_pct  target
+open_time                                                      
+2021-01-06 03:30:00  33732.59      35190.98    0.043234     1.0
+2022-09-21 18:45:00  19636.01      19001.03   -0.032338     0.0
+2019-07-17 11:30:00   9143.48       9448.08    0.033313     1.0
+2022-06-30 23:30:00  19070.98      20412.41    0.070339     1.0
+2017-08-22 05:15:00   3690.00       3827.22    0.037187     1.0
+2020-03-12 22:30:00   5807.11       4760.46   -0.180236     0.0
+2018-01-30 12:45:00  11004.99      10620.76   -0.034914     0.0
+2017-11-12 04:30:00   5960.00       5638.23   -0.053988     0.0
+2017-11-02 10:30:00   7095.00       6800.01   -0.041577     0.0
+2017-12-22 06:15:00  13820.00      12621.82   -0.086699     0.0
+2025-01-11 18:33:41 - INFO - División de datos en Train/Test completada.
+2025-01-11 18:33:41 - INFO - === Búsqueda de hiperparámetros (Optuna) en muestra de Training ===
+2025-01-11 18:33:41 - INFO - No se han identificado características categóricas.
+2025-01-11 18:33:41 - INFO - Columnas extra eliminadas: ['future_close', 'change_pct']
+2025-01-11 18:33:41 - WARNING - Estas columnas están 100% NaN y se eliminarán antes de imputar: ['VWAP', 'ATR']
+2025-01-11 18:33:41 - INFO - Dataset preparado: 1603 filas, 21 features (después de imputación).
+2025-01-11 18:33:41 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    647
+1.0    647
+Name: count, dtype: int64
+2025-01-11 18:33:41 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    647
+1.0    647
+Name: count, dtype: int64
+2025-01-11 18:33:42 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    651
+1.0    651
+Name: count, dtype: int64
+2025-01-11 18:33:42 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    651
+1.0    651
+Name: count, dtype: int64
+2025-01-11 18:33:43 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    661
+1.0    661
+Name: count, dtype: int64
+2025-01-11 18:33:44 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    661
+1.0    661
+Name: count, dtype: int64
+2025-01-11 18:33:44 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    658
+1.0    658
+Name: count, dtype: int64
+2025-01-11 18:33:45 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    658
+1.0    658
+Name: count, dtype: int64
+2025-01-11 18:33:45 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    660
+1.0    660
+Name: count, dtype: int64

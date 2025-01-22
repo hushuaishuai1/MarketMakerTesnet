@@ -1,0 +1,6 @@
+2024-12-21 14:02:31 - INFO - Datos cargados correctamente desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 245845
+2024-12-21 14:02:31 - INFO - Indicadores calculados y filas NaN eliminadas.
+2024-12-21 14:02:35 - INFO - Variable objetivo generada con look_ahead: 1, atr_factor: 0.5
+2024-12-21 14:02:36 - INFO - Columnas eliminadas por correlación > 0.9: ['EMA_5', 'EMA_20', 'EMA_50', 'EMA_200', 'MACD_signal', 'BB_upper', 'BB_middle', 'BB_lower', 'close_lag_1', 'close_lag_2', 'close_lag_3', 'RSI_14_lag_1', 'RSI_14_lag_2', 'RSI_14_lag_3', 'SMA_20', 'min_20', 'max_20', 'EMA_diff_5_20', 'MACD_RSI']
+2024-12-21 14:02:36 - INFO - Tamaño train: (157212, 16), valid: (39304, 16), test: (49129, 16)
+2024-12-21 14:02:36 - INFO - Pesos de clases: {-1: 1.0}

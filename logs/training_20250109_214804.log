@@ -1,0 +1,9 @@
+2025-01-09 21:48:07 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 254773
+2025-01-09 21:48:07 - INFO - Columnas de indicadores existentes eliminadas: ['OBV', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'SMA_200']
+2025-01-09 21:48:08 - INFO - Indicadores técnicos agregados. Filas antes: 254773, después: 254724 (descartadas: 49)
+2025-01-09 21:48:08 - INFO - Columnas renombradas: {'RSI_14': 'RSI', 'MACD_12_26_9': 'MACD', 'MACDs_12_26_9': 'MACDs', 'MACDh_12_26_9': 'MACDh', 'VWAP': 'VWAP', 'BBL_20_2.0': 'BBL', 'BBM_20_2.0': 'BBM', 'BBU_20_2.0': 'BBU', 'ATR_14': 'ATR', 'STOCHk_14_3_3': 'STOCHk', 'STOCHd_14_3_3': 'STOCHd', 'CCI_14': 'CCI', 'SMA_10': 'SMA_10', 'SMA_50': 'SMA_50', 'SMA_200': 'SMA_200', 'EMA_10': 'EMA_10', 'EMA_50': 'EMA_50'}
+2025-01-09 21:48:08 - WARNING - Columna faltante 'VWAP' añadida con NaN.
+2025-01-09 21:48:08 - WARNING - Columna faltante 'ATR' añadida con NaN.
+2025-01-09 21:48:08 - WARNING - Columna faltante 'CCI' añadida con NaN.
+2025-01-09 21:48:08 - WARNING - Columna faltante 'SMA_200' añadida con NaN.
+2025-01-09 21:48:08 - ERROR - Algunos valores de 'VWAP' son NaN después del cálculo.

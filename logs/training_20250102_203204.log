@@ -1,0 +1,279 @@
+2025-01-02 20:32:07 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251947
+2025-01-02 20:32:07 - INFO - Indicadores técnicos agregados al DataFrame. Filas antes: 251947, después: 251898
+2025-01-02 20:32:07 - INFO - feature_columns.pkl actualizado con nuevas características.
+2025-01-02 20:32:07 - INFO - Target binario mejorado con look_ahead=14, min_change=0.004, max_change=0.07
+2025-01-02 20:32:07 - INFO - Distribución de clases (0/1):
+target
+0    177615
+1     73084
+Name: count, dtype: int64
+2025-01-02 20:32:08 - INFO - División de datos en train y test completada.
+2025-01-02 20:32:08 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2025-01-02 20:32:08 - INFO - Características cargadas desde: ML/data/processed/feature_columns.pkl
+2025-01-02 20:32:08 - INFO - Cantidad de características antes de quitar problemáticas: 33
+2025-01-02 20:32:08 - INFO - Cantidad de características después de quitar problemáticas: 33
+2025-01-02 20:32:08 - INFO - Se eliminó 'close_time' de las características.
+2025-01-02 20:32:08 - INFO - No se han identificado características categóricas.
+2025-01-02 20:32:08 - INFO - Tipo de y_train_sample: <class 'pandas.core.series.Series'>
+2025-01-02 20:32:08 - INFO - Shape de y_train_sample: (52646,)
+2025-01-02 20:32:08 - INFO - Después de undersampling: target
+1    3750
+0    3750
+Name: count, dtype: int64
+2025-01-02 20:32:08 - INFO - Después de undersampling: target
+1    3750
+0    3750
+Name: count, dtype: int64
+2025-01-02 20:32:09 - INFO - Después de undersampling: target
+1    7789
+0    7789
+Name: count, dtype: int64
+2025-01-02 20:32:10 - INFO - Después de undersampling: target
+1    10989
+0    10989
+Name: count, dtype: int64
+2025-01-02 20:32:11 - INFO - Después de undersampling: target
+1    13417
+0    13417
+Name: count, dtype: int64
+2025-01-02 20:32:12 - INFO - Después de undersampling: target
+1    7789
+0    7789
+Name: count, dtype: int64
+2025-01-02 20:32:13 - INFO - Después de undersampling: target
+1    15064
+0    15064
+Name: count, dtype: int64
+2025-01-02 20:32:14 - INFO - Después de undersampling: target
+1    3750
+0    3750
+Name: count, dtype: int64
+2025-01-02 20:32:15 - INFO - Después de undersampling: target
+1    7789
+0    7789
+Name: count, dtype: int64
+2025-01-02 20:32:15 - INFO - Después de undersampling: target
+1    10989
+0    10989
+Name: count, dtype: int64
+2025-01-02 20:32:16 - INFO - Después de undersampling: target
+1    13417
+0    13417
+Name: count, dtype: int64
+2025-01-02 20:32:16 - INFO - Después de undersampling: target
+1    15064
+0    15064
+Name: count, dtype: int64
+2025-01-02 20:32:17 - INFO - Después de undersampling: target
+1    3750
+0    3750
+Name: count, dtype: int64
+2025-01-02 20:32:18 - INFO - Después de undersampling: target
+1    10989
+0    10989
+Name: count, dtype: int64
+2025-01-02 20:32:19 - INFO - Después de undersampling: target
+1    7789
+0    7789
+Name: count, dtype: int64
+2025-01-02 20:32:22 - INFO - Después de undersampling: target
+1    10989
+0    10989
+Name: count, dtype: int64
+2025-01-02 20:32:25 - INFO - Después de undersampling: target
+1    13417
+0    13417
+Name: count, dtype: int64
+2025-01-02 20:32:26 - INFO - Después de undersampling: target
+1    13417
+0    13417
+Name: count, dtype: int64
+2025-01-02 20:32:28 - INFO - Después de undersampling: target
+1    15064
+0    15064
+Name: count, dtype: int64
+2025-01-02 20:32:32 - INFO - Después de undersampling: target
+1    3750
+0    3750
+Name: count, dtype: int64
+2025-01-02 20:32:33 - INFO - Después de undersampling: target
+1    15064
+0    15064
+Name: count, dtype: int64
+2025-01-02 20:32:34 - INFO - Después de undersampling: target
+1    7789
+0    7789
+Name: count, dtype: int64
+2025-01-02 20:32:37 - INFO - Después de undersampling: target
+1    10989
+0    10989
+Name: count, dtype: int64
+2025-01-02 20:32:41 - INFO - Después de undersampling: target
+1    3750
+0    3750
+Name: count, dtype: int64
+2025-01-02 20:32:41 - INFO - Después de undersampling: target
+1    13417
+0    13417
+Name: count, dtype: int64
+2025-01-02 20:32:43 - INFO - Después de undersampling: target
+1    7789
+0    7789
+Name: count, dtype: int64
+2025-01-02 20:32:44 - INFO - Después de undersampling: target
+1    15064
+0    15064
+Name: count, dtype: int64
+2025-01-02 20:32:45 - INFO - Después de undersampling: target
+1    10989
+0    10989
+Name: count, dtype: int64
+2025-01-02 20:32:48 - INFO - Después de undersampling: target
+1    13417
+0    13417
+Name: count, dtype: int64
+2025-01-02 20:32:48 - INFO - Después de undersampling: target
+1    3750
+0    3750
+Name: count, dtype: int64
+2025-01-02 20:32:49 - INFO - Después de undersampling: target
+1    7789
+0    7789
+Name: count, dtype: int64
+2025-01-02 20:32:50 - INFO - Después de undersampling: target
+1    15064
+0    15064
+Name: count, dtype: int64
+2025-01-02 20:32:51 - INFO - Después de undersampling: target
+1    10989
+0    10989
+Name: count, dtype: int64
+2025-01-02 20:32:52 - INFO - Después de undersampling: target
+1    13417
+0    13417
+Name: count, dtype: int64
+2025-01-02 20:32:53 - INFO - Después de undersampling: target
+1    3750
+0    3750
+Name: count, dtype: int64
+2025-01-02 20:32:54 - INFO - Después de undersampling: target
+1    15064
+0    15064
+Name: count, dtype: int64
+2025-01-02 20:32:54 - INFO - Después de undersampling: target
+1    7789
+0    7789
+Name: count, dtype: int64
+2025-01-02 20:32:56 - INFO - Después de undersampling: target
+1    10989
+0    10989
+Name: count, dtype: int64
+2025-01-02 20:32:56 - INFO - Después de undersampling: target
+1    3750
+0    3750
+Name: count, dtype: int64
+2025-01-02 20:32:57 - INFO - Después de undersampling: target
+1    7789
+0    7789
+Name: count, dtype: int64
+2025-01-02 20:32:57 - INFO - Después de undersampling: target
+1    13417
+0    13417
+Name: count, dtype: int64
+2025-01-02 20:32:58 - INFO - Después de undersampling: target
+1    10989
+0    10989
+Name: count, dtype: int64
+2025-01-02 20:32:58 - INFO - Después de undersampling: target
+1    15064
+0    15064
+Name: count, dtype: int64
+2025-01-02 20:33:00 - INFO - Después de undersampling: target
+1    3750
+0    3750
+Name: count, dtype: int64
+2025-01-02 20:33:00 - INFO - Después de undersampling: target
+1    13417
+0    13417
+Name: count, dtype: int64
+2025-01-02 20:33:00 - INFO - Después de undersampling: target
+1    7789
+0    7789
+Name: count, dtype: int64
+2025-01-02 20:33:01 - INFO - Después de undersampling: target
+1    10989
+0    10989
+Name: count, dtype: int64
+2025-01-02 20:33:01 - INFO - Después de undersampling: target
+1    15064
+0    15064
+Name: count, dtype: int64
+2025-01-02 20:33:02 - INFO - Después de undersampling: target
+1    13417
+0    13417
+Name: count, dtype: int64
+2025-01-02 20:33:02 - INFO - Después de undersampling: target
+1    15064
+0    15064
+Name: count, dtype: int64
+2025-01-02 20:33:03 - INFO - Mejor valor de F1: 0.4635
+2025-01-02 20:33:03 - INFO - Mejores parámetros: {'max_depth': 5, 'learning_rate': 0.0020992528612710656, 'n_estimators': 249, 'subsample': 0.5757607672195176, 'colsample_bytree': 0.5168059206586009, 'gamma': 0.10860385789837221, 'reg_alpha': 0.0027594134330553395, 'reg_lambda': 0.018642535099020432}
+2025-01-02 20:33:03 - INFO - === Entrenando Pipeline Final con TODO el training ===
+2025-01-02 20:33:03 - INFO - Tipo de y_train_full: <class 'pandas.core.series.Series'>
+2025-01-02 20:33:03 - INFO - Shape de y_train_full: (175489,)
+2025-01-02 20:33:04 - INFO - Después de undersampling: target
+1    55564
+0    55564
+Name: count, dtype: int64
+2025-01-02 20:33:04 - INFO - Balance de clases aplicado mediante undersampling.
+2025-01-02 20:33:06 - INFO - Pipeline final entrenado con todos los datos de entrenamiento (binario).
+2025-01-02 20:33:06 - INFO - Modelo guardado en: ./results/XGBoost_Binario_trained_pipeline.joblib
+2025-01-02 20:33:06 - INFO - Parámetros guardados en: ./results/XGBoost_Binario_model_params.txt
+2025-01-02 20:33:06 - INFO - Lista de features guardada en: ./results/XGBoost_Binario_feature_cols.txt
+2025-01-02 20:33:06 - INFO - Indicadores técnicos agregados al DataFrame. Filas antes: 75210, después: 75161
+2025-01-02 20:33:07 - INFO - Target binario mejorado con look_ahead=14, min_change=0.004, max_change=0.07
+2025-01-02 20:33:07 - INFO - Distribución de clases (0/1):
+target
+0    57607
+1    17495
+Name: count, dtype: int64
+2025-01-02 20:33:07 - INFO - Tipo de y_test_final: <class 'pandas.core.series.Series'>
+2025-01-02 20:33:07 - INFO - Shape de y_test_final: (75102,)
+2025-01-02 20:33:07 - INFO - === Evaluación en Test ===
+2025-01-02 20:33:07 - INFO - Matriz de confusión [1,0]:
+[[17495     0]
+ [57607     0]]
+2025-01-02 20:33:07 - INFO - Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           1       0.23      1.00      0.38     17495
+           0       0.00      0.00      0.00     57607
+
+    accuracy                           0.23     75102
+   macro avg       0.12      0.50      0.19     75102
+weighted avg       0.05      0.23      0.09     75102
+
+2025-01-02 20:33:07 - INFO - F1-score: 0.3779
+2025-01-02 20:33:07 - INFO - Precisión: 0.2329
+2025-01-02 20:33:07 - INFO - Recall: 1.0000
+2025-01-02 20:33:07 - INFO - AUC Score: 0.5874
+2025-01-02 20:33:09 - INFO - F1 final en Test (Binario): 0.3779
+2025-01-02 20:33:09 - INFO - === Analizando importancia de características ===
+2025-01-02 20:33:09 - INFO - Tabla de importancia de características guardada en ./results/feature_importances_binario.csv.
+2025-01-02 20:33:09 - INFO - Gráfico de importancia de características guardado.
+2025-01-02 20:33:09 - INFO - Características seleccionadas por importancia (> 0.02): ['number_of_trades', 'BBL_20_2.0', 'EMA_10', 'VWAP_D', 'low', 'EMA_50', 'SMA_50', 'BBU_20_2.0', 'SMA_10', 'BBM_20_2.0', 'OBV', 'ATRr_14']
+2025-01-02 20:33:09 - INFO - Después de undersampling: target
+1    55564
+0    55564
+Name: count, dtype: int64
+2025-01-02 20:33:09 - INFO - Balance de clases aplicado mediante undersampling después de selección de características.
+2025-01-02 20:33:11 - INFO - Pipeline final entrenado con todos los datos de entrenamiento (binario).
+2025-01-02 20:33:11 - ERROR - Error en la ejecución principal: The feature names should match those that were passed during fit.
+Feature names unseen at fit time:
+- BBB_20_2.0
+- BBP_20_2.0
+- CCI_14_0.015
+- MACD_12_26_9
+- MACDh_12_26_9
+- ...
+

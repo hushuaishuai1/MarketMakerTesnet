@@ -1,0 +1,13 @@
+2025-01-02 01:35:05 - INFO - Datos cargados desde /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251947
+2025-01-02 01:35:06 - INFO - Indicadores técnicos agregados al DataFrame.
+2025-01-02 01:35:06 - INFO - feature_columns.pkl actualizado con nuevas características.
+2025-01-02 01:35:06 - INFO - Target binario con look_ahead=8, min_change=0.005
+2025-01-02 01:35:06 - INFO - Distribución de clases (0/1):
+target
+0    200196
+1     51694
+Name: count, dtype: int64
+2025-01-02 01:35:06 - INFO - División de datos en train y test completada.
+2025-01-02 01:35:06 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2025-01-02 01:35:06 - INFO - Características cargadas desde: /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/feature_columns.pkl
+2025-01-02 01:35:06 - ERROR - Error en la ejecución principal: 'DataFrame' object has no attribute 'dtype'

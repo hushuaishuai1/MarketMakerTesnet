@@ -1,0 +1,33 @@
+2025-01-02 00:39:59 - INFO - Datos cargados desde /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251797
+2025-01-02 00:40:00 - INFO - Indicadores técnicos agregados al DataFrame.
+2025-01-02 00:40:00 - INFO - feature_columns.pkl actualizado con nuevas características.
+2025-01-02 00:40:00 - INFO - Target binario con look_ahead=4, min_change=0.004
+2025-01-02 00:40:00 - INFO - Distribución de clases (0/1):
+target
+0    205426
+1     46318
+Name: count, dtype: int64
+2025-01-02 00:40:00 - INFO - División de datos en train y test completada.
+2025-01-02 00:40:00 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2025-01-02 00:40:00 - INFO - Características cargadas desde: /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/feature_columns.pkl
+2025-01-02 00:42:34 - INFO - Mejor valor de F1: 0.3553
+2025-01-02 00:42:34 - INFO - Mejores parámetros: {'max_depth': 6, 'learning_rate': 0.013015314927412211, 'n_estimators': 60, 'subsample': 0.5153212740869448, 'colsample_bytree': 0.557002290929904, 'gamma': 0.09107046319715961, 'reg_alpha': 0.0624851544447086, 'reg_lambda': 0.012333272779762885}
+2025-01-02 00:42:34 - INFO - === Entrenando Pipeline Final con TODO el training ===
+2025-01-02 00:42:38 - INFO - Pipeline final entrenado con todos los datos de entrenamiento (binario).
+2025-01-02 00:42:38 - INFO - Modelo guardado en: /Users/oscarr/Desarrollo/Python0/ApiBinance/results/XGBoost_Binario_trained_pipeline.joblib
+2025-01-02 00:42:38 - INFO - Parámetros guardados en: /Users/oscarr/Desarrollo/Python0/ApiBinance/results/XGBoost_Binario_model_params.txt
+2025-01-02 00:42:38 - INFO - Lista de features guardada en: /Users/oscarr/Desarrollo/Python0/ApiBinance/results/XGBoost_Binario_feature_cols.txt
+2025-01-02 00:42:39 - INFO - Indicadores técnicos agregados al DataFrame.
+2025-01-02 00:42:39 - INFO - Target binario con look_ahead=4, min_change=0.004
+2025-01-02 00:42:39 - INFO - Distribución de clases (0/1):
+target
+0    64347
+1     8606
+Name: count, dtype: int64
+2025-01-02 00:42:39 - INFO - === Evaluación en Test ===
+2025-01-02 00:42:39 - ERROR - Error en la predicción: Length mismatch: Expected axis has 73 elements, new values have 65 elements
+2025-01-02 00:42:39 - INFO - F1 final en Test (Binario): 0.0000
+2025-01-02 00:42:39 - INFO - === Analizando importancia de características ===
+2025-01-02 00:42:39 - INFO - Tabla de importancia de características guardada en /Users/oscarr/Desarrollo/Python0/ApiBinance/results/feature_importances_binario.csv.
+2025-01-02 00:42:42 - INFO - Gráfico de importancia de características guardado.
+2025-01-02 00:42:42 - ERROR - Error en la ejecución principal: Length mismatch: Expected axis has 73 elements, new values have 65 elements

@@ -17,7 +17,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 async def fetch_data(symbol: str):
-    url = f"https://api.binance.com/api/v3/trades?symbol={symbol}&limit=5000"
+    url = f"https://api.binance.com/api/v3/trades?symbol={symbol}&limit=2000"
     async with aiohttp.ClientSession() as session:
         try:
             async with session.get(url) as response:
@@ -57,7 +57,8 @@ async def insert_data():
     """
     try:
         await init()  # Inicializa la base de datos
-        trades = await fetch_data('BTCUSDT')  # Obtener datos de trades
+        trades = await fetch_data('BTCUSDT', limit=5000)
+             # Obtener datos de trades
 
         if not trades:
             logger.warning("No se obtuvieron datos para insertar.")

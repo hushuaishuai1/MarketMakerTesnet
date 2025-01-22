@@ -1,0 +1,178 @@
+2024-12-27 20:30:31 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 245845
+2024-12-27 20:30:31 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2024-12-27 20:30:32 - INFO - Target con look_ahead=3, lower=6, upper=86
+2024-12-27 20:30:32 - INFO - Umbral inferior=-0.859461, superior=3.518475
+2024-12-27 20:30:32 - INFO - Distribución de clases:
+target
+0    38348
+2     6711
+1     2877
+Name: count, dtype: int64
+2024-12-27 20:30:32 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:30:32 - INFO - Se eliminan por correlación > 0.83: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'max_14', 'STDDEV_59', 'STDDEV_90']
+2024-12-27 20:31:09 - INFO - Target con look_ahead=2, lower=11, upper=86
+2024-12-27 20:31:09 - INFO - Umbral inferior=-0.812042, superior=3.547210
+2024-12-27 20:31:09 - INFO - Distribución de clases:
+target
+0    35952
+2     6712
+1     5273
+Name: count, dtype: int64
+2024-12-27 20:31:09 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:31:09 - INFO - Se eliminan por correlación > 0.83: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'max_12', 'STDDEV_46', 'STDDEV_78']
+2024-12-27 20:31:45 - INFO - Target con look_ahead=5, lower=8, upper=86
+2024-12-27 20:31:45 - INFO - Umbral inferior=-0.840360, superior=3.555998
+2024-12-27 20:31:45 - INFO - Distribución de clases:
+target
+0    37388
+2     6711
+1     3835
+Name: count, dtype: int64
+2024-12-27 20:31:45 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:31:45 - INFO - Se eliminan por correlación > 0.83: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_6', 'max_6', 'STDDEV_59', 'STDDEV_99']
+2024-12-27 20:33:03 - INFO - Target con look_ahead=4, lower=15, upper=94
+2024-12-27 20:33:03 - INFO - Umbral inferior=-0.767853, superior=6.186915
+2024-12-27 20:33:03 - INFO - Distribución de clases:
+target
+0    37867
+1     7191
+2     2877
+Name: count, dtype: int64
+2024-12-27 20:33:04 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:33:04 - INFO - Se eliminan por correlación > 0.83: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'STDDEV_19', 'STDDEV_36', 'STDDEV_99']
+2024-12-27 20:33:19 - INFO - Target con look_ahead=5, lower=5, upper=95
+2024-12-27 20:33:19 - INFO - Umbral inferior=-0.869338, superior=6.725254
+2024-12-27 20:33:19 - INFO - Distribución de clases:
+target
+0    43140
+1     2397
+2     2397
+Name: count, dtype: int64
+2024-12-27 20:33:19 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:33:19 - INFO - Se eliminan por correlación > 0.83: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'max_12', 'STDDEV_47', 'SMA_66', 'STDDEV_66']
+2024-12-27 20:35:21 - INFO - Target con look_ahead=1, lower=8, upper=88
+2024-12-27 20:35:21 - INFO - Umbral inferior=-0.839688, superior=4.063261
+2024-12-27 20:35:21 - INFO - Distribución de clases:
+target
+0    38350
+2     5753
+1     3835
+Name: count, dtype: int64
+2024-12-27 20:35:21 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:35:21 - INFO - Se eliminan por correlación > 0.83: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'STDDEV_27', 'STDDEV_49', 'STDDEV_74']
+2024-12-27 20:38:10 - INFO - Target con look_ahead=1, lower=5, upper=92
+2024-12-27 20:38:10 - INFO - Umbral inferior=-0.870284, superior=5.249297
+2024-12-27 20:38:10 - INFO - Distribución de clases:
+target
+0    41706
+2     3835
+1     2397
+Name: count, dtype: int64
+2024-12-27 20:38:10 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:38:10 - INFO - Se eliminan por correlación > 0.83: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'STDDEV_18', 'STDDEV_43', 'SMA_62', 'STDDEV_62']
+2024-12-27 20:42:30 - INFO - Target con look_ahead=5, lower=13, upper=87
+2024-12-27 20:42:30 - INFO - Umbral inferior=-0.791303, superior=3.809554
+2024-12-27 20:42:30 - INFO - Distribución de clases:
+target
+0    35470
+1     6232
+2     6232
+Name: count, dtype: int64
+2024-12-27 20:42:30 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:42:30 - INFO - Se eliminan por correlación > 0.83: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'STDDEV_29', 'STDDEV_55', 'STDDEV_86']
+2024-12-27 20:44:32 - INFO - Target con look_ahead=2, lower=6, upper=88
+2024-12-27 20:44:32 - INFO - Umbral inferior=-0.859436, superior=4.057123
+2024-12-27 20:44:32 - INFO - Distribución de clases:
+target
+0    39307
+2     5753
+1     2877
+Name: count, dtype: int64
+2024-12-27 20:44:32 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:44:32 - INFO - Se eliminan por correlación > 0.83: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'SMA_5', 'max_5', 'STDDEV_46', 'STDDEV_77']
+2024-12-27 20:46:35 - INFO - Target con look_ahead=3, lower=5, upper=88
+2024-12-27 20:46:35 - INFO - Umbral inferior=-0.870376, superior=4.057257
+2024-12-27 20:46:35 - INFO - Distribución de clases:
+target
+0    39786
+2     5753
+1     2397
+Name: count, dtype: int64
+2024-12-27 20:46:35 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:46:35 - INFO - Se eliminan por correlación > 0.83: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'max_12', 'STDDEV_32', 'STDDEV_85']
+2024-12-27 20:48:36 - INFO - Target con look_ahead=2, lower=11, upper=91
+2024-12-27 20:48:36 - INFO - Umbral inferior=-0.812042, superior=4.933055
+2024-12-27 20:48:36 - INFO - Distribución de clases:
+target
+0    38349
+1     5273
+2     4315
+Name: count, dtype: int64
+2024-12-27 20:48:36 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:48:36 - INFO - Se eliminan por correlación > 0.83: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'STDDEV_24', 'STDDEV_41', 'STDDEV_71']
+2024-12-27 20:49:02 - INFO - Target con look_ahead=2, lower=11, upper=91
+2024-12-27 20:49:02 - INFO - Umbral inferior=-0.812042, superior=4.933055
+2024-12-27 20:49:02 - INFO - Distribución de clases:
+target
+0    38349
+1     5273
+2     4315
+Name: count, dtype: int64
+2024-12-27 20:49:02 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:49:02 - INFO - Se eliminan por correlación > 0.83: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'STDDEV_23', 'STDDEV_42', 'STDDEV_71']
+2024-12-27 20:49:25 - INFO - Target con look_ahead=2, lower=11, upper=90
+2024-12-27 20:49:25 - INFO - Umbral inferior=-0.812042, superior=4.617093
+2024-12-27 20:49:25 - INFO - Distribución de clases:
+target
+0    37870
+1     5273
+2     4794
+Name: count, dtype: int64
+2024-12-27 20:49:25 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:49:25 - INFO - Se eliminan por correlación > 0.83: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'STDDEV_24', 'STDDEV_39', 'STDDEV_69']
+2024-12-27 20:49:48 - INFO - Target con look_ahead=3, lower=13, upper=90
+2024-12-27 20:49:48 - INFO - Umbral inferior=-0.790898, superior=4.623050
+2024-12-27 20:49:48 - INFO - Distribución de clases:
+target
+0    36910
+1     6232
+2     4794
+Name: count, dtype: int64
+2024-12-27 20:49:48 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:49:49 - INFO - Se eliminan por correlación > 0.83: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'STDDEV_22', 'STDDEV_51', 'STDDEV_78']
+2024-12-27 20:52:45 - INFO - Target con look_ahead=4, lower=14, upper=90
+2024-12-27 20:52:45 - INFO - Umbral inferior=-0.781812, superior=4.651098
+2024-12-27 20:52:45 - INFO - Distribución de clases:
+target
+0    36430
+1     6711
+2     4794
+Name: count, dtype: int64
+2024-12-27 20:52:45 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:52:45 - INFO - Se eliminan por correlación > 0.83: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'STDDEV_22', 'STDDEV_52', 'STDDEV_82']
+2024-12-27 20:54:52 - INFO - Mejores parámetros encontrados (SAMPLE): {'sma_period1': 22, 'sma_period2': 52, 'sma_period3': 82, 'look_ahead': 4, 'lower_percentile': 14, 'upper_percentile': 90, 'balancing_method': 'ADASYN', 'model__max_depth': 11, 'model__learning_rate': 0.03912109785223119, 'model__n_estimators': 521, 'model__subsample': 0.6826954789362362, 'model__colsample_bytree': 0.5083841699970697, 'model__gamma': 0.306392974121492, 'model__reg_alpha': 4.005876003864564e-08, 'model__reg_lambda': 1.0218289139830272e-05}
+2024-12-27 20:54:52 - INFO - === Entrenando Pipeline Final con TODO el training ===
+2024-12-27 20:54:55 - INFO - Target con look_ahead=4, lower=14, upper=90
+2024-12-27 20:54:55 - INFO - Umbral inferior=-0.005796, superior=0.008034
+2024-12-27 20:54:55 - INFO - Distribución de clases:
+target
+0    121443
+1     22372
+2     15980
+Name: count, dtype: int64
+2024-12-27 20:54:55 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:54:56 - INFO - Se eliminan por correlación > 0.83: ['EMA_diff_5_20', 'SMA_22', 'STDDEV_22', 'min_22', 'max_22', 'SMA_52', 'STDDEV_52', 'min_52', 'max_52', 'SMA_82', 'STDDEV_82', 'min_82', 'max_82']
+2024-12-27 20:56:26 - INFO - Modelo guardado en: results/XGBoost_trained_pipeline.joblib
+2024-12-27 20:56:26 - INFO - Parámetros guardados en: results/XGBoost_model_params.txt
+2024-12-27 20:56:26 - INFO - Lista de features guardadas en: results/XGBoost_feature_cols.txt
+2024-12-27 20:56:26 - INFO - Columnas eliminadas guardadas en: results/XGBoost_drop_cols.txt
+2024-12-27 20:56:28 - INFO - Target con look_ahead=4, lower=14, upper=90
+2024-12-27 20:56:28 - INFO - Umbral inferior=-0.003716, superior=0.004941
+2024-12-27 20:56:28 - INFO - Distribución de clases:
+target
+0    65391
+1    12046
+2     8605
+Name: count, dtype: int64
+2024-12-27 20:56:28 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:56:28 - INFO - === Evaluación en Test ===

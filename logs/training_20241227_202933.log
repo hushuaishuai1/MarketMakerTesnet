@@ -1,0 +1,22 @@
+2024-12-27 20:29:36 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 245845
+2024-12-27 20:29:36 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2024-12-27 20:29:37 - INFO - Target con look_ahead=3, lower=6, upper=86
+2024-12-27 20:29:37 - INFO - Umbral inferior=-0.859263, superior=3.507404
+2024-12-27 20:29:37 - INFO - Distribución de clases:
+target
+0    51132
+2     8949
+1     3835
+Name: count, dtype: int64
+2024-12-27 20:29:37 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:29:37 - INFO - Se eliminan por correlación > 0.83: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'max_14', 'STDDEV_59', 'STDDEV_90']
+2024-12-27 20:30:19 - INFO - Target con look_ahead=2, lower=11, upper=86
+2024-12-27 20:30:19 - INFO - Umbral inferior=-0.811325, superior=3.520976
+2024-12-27 20:30:19 - INFO - Distribución de clases:
+target
+0    47937
+2     8949
+1     7031
+Name: count, dtype: int64
+2024-12-27 20:30:19 - INFO - Eliminados 199 registros con NaNs.
+2024-12-27 20:30:19 - INFO - Se eliminan por correlación > 0.83: ['RSI_14', 'CCI_14', 'price_momentum_volatility', 'EMA_diff_5_20', 'max_12', 'STDDEV_46', 'STDDEV_78']

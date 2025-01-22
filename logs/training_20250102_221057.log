@@ -1,0 +1,389 @@
+2025-01-02 22:11:00 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251947
+2025-01-02 22:11:01 - INFO - Indicadores técnicos agregados al DataFrame. Filas antes: 251947, después: 251898
+2025-01-02 22:11:01 - INFO - feature_columns.pkl actualizado con nuevas características.
+2025-01-02 22:11:01 - INFO - Target binario mejorado con look_ahead=46, min_change=0.004, max_change=0.06
+2025-01-02 22:11:01 - INFO - Distribución de clases (0/1):
+target
+0    149433
+1     92154
+Name: count, dtype: int64
+2025-01-02 22:11:01 - INFO - División de datos en train y test completada.
+2025-01-02 22:11:01 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2025-01-02 22:11:01 - INFO - Características cargadas desde: ML/data/processed/feature_columns.pkl
+2025-01-02 22:11:01 - INFO - Cantidad de características antes de quitar problemáticas: 33
+2025-01-02 22:11:01 - INFO - Cantidad de características después de quitar problemáticas: 33
+2025-01-02 22:11:01 - INFO - Se eliminó 'close_time' de las características.
+2025-01-02 22:11:01 - INFO - No se han identificado características categóricas.
+2025-01-02 22:11:01 - INFO - Columnas eliminadas durante la preparación: ['close_time', 'future_close', 'change_pct']
+2025-01-02 22:11:01 - INFO - Conjunto de datos preparado con 42519 filas y 32 características.
+2025-01-02 22:11:01 - INFO - Tipo de y_train_sample: <class 'pandas.core.series.Series'>
+2025-01-02 22:11:01 - INFO - Shape de y_train_sample: (42519,)
+2025-01-02 22:11:01 - INFO - Después de SMOTE: target
+0    3592
+1    3592
+Name: count, dtype: int64
+2025-01-02 22:11:01 - INFO - Después de SMOTE: target
+0    3592
+1    3592
+Name: count, dtype: int64
+2025-01-02 22:11:02 - INFO - Después de SMOTE: target
+0    7141
+1    7141
+Name: count, dtype: int64
+2025-01-02 22:11:02 - INFO - Después de SMOTE: target
+0    7141
+1    7141
+Name: count, dtype: int64
+2025-01-02 22:11:03 - INFO - Después de SMOTE: target
+0    10710
+1    10710
+Name: count, dtype: int64
+2025-01-02 22:11:03 - INFO - Después de SMOTE: target
+0    10710
+1    10710
+Name: count, dtype: int64
+2025-01-02 22:11:04 - INFO - Después de SMOTE: target
+0    15401
+1    15401
+Name: count, dtype: int64
+2025-01-02 22:11:05 - INFO - Después de SMOTE: target
+0    15401
+1    15401
+Name: count, dtype: int64
+2025-01-02 22:11:06 - INFO - Después de SMOTE: target
+0    19530
+1    19530
+Name: count, dtype: int64
+2025-01-02 22:11:06 - INFO - Después de SMOTE: target
+0    19530
+1    19530
+Name: count, dtype: int64
+2025-01-02 22:11:07 - INFO - Después de SMOTE: target
+0    3592
+1    3592
+Name: count, dtype: int64
+2025-01-02 22:11:08 - INFO - Después de SMOTE: target
+0    3592
+1    3592
+Name: count, dtype: int64
+2025-01-02 22:11:08 - INFO - Después de SMOTE: target
+0    7141
+1    7141
+Name: count, dtype: int64
+2025-01-02 22:11:09 - INFO - Después de SMOTE: target
+0    7141
+1    7141
+Name: count, dtype: int64
+2025-01-02 22:11:10 - INFO - Después de SMOTE: target
+0    10710
+1    10710
+Name: count, dtype: int64
+2025-01-02 22:11:11 - INFO - Después de SMOTE: target
+0    10710
+1    10710
+Name: count, dtype: int64
+2025-01-02 22:11:12 - INFO - Después de SMOTE: target
+0    15401
+1    15401
+Name: count, dtype: int64
+2025-01-02 22:11:12 - INFO - Después de SMOTE: target
+0    15401
+1    15401
+Name: count, dtype: int64
+2025-01-02 22:11:15 - INFO - Después de SMOTE: target
+0    19530
+1    19530
+Name: count, dtype: int64
+2025-01-02 22:11:15 - INFO - Después de SMOTE: target
+0    19530
+1    19530
+Name: count, dtype: int64
+2025-01-02 22:11:16 - INFO - Después de SMOTE: target
+0    3592
+1    3592
+Name: count, dtype: int64
+2025-01-02 22:11:17 - INFO - Después de SMOTE: target
+0    3592
+1    3592
+Name: count, dtype: int64
+2025-01-02 22:11:17 - INFO - Después de SMOTE: target
+0    7141
+1    7141
+Name: count, dtype: int64
+2025-01-02 22:11:18 - INFO - Después de SMOTE: target
+0    10710
+1    10710
+Name: count, dtype: int64
+2025-01-02 22:11:19 - INFO - Después de SMOTE: target
+0    7141
+1    7141
+Name: count, dtype: int64
+2025-01-02 22:11:20 - INFO - Después de SMOTE: target
+0    15401
+1    15401
+Name: count, dtype: int64
+2025-01-02 22:11:20 - INFO - Después de SMOTE: target
+0    10710
+1    10710
+Name: count, dtype: int64
+2025-01-02 22:11:22 - INFO - Después de SMOTE: target
+0    19530
+1    19530
+Name: count, dtype: int64
+2025-01-02 22:11:22 - INFO - Después de SMOTE: target
+0    15401
+1    15401
+Name: count, dtype: int64
+2025-01-02 22:11:23 - INFO - Después de SMOTE: target
+0    3592
+1    3592
+Name: count, dtype: int64
+2025-01-02 22:11:24 - INFO - Después de SMOTE: target
+0    7141
+1    7141
+Name: count, dtype: int64
+2025-01-02 22:11:25 - INFO - Después de SMOTE: target
+0    10710
+1    10710
+Name: count, dtype: int64
+2025-01-02 22:11:25 - INFO - Después de SMOTE: target
+0    19530
+1    19530
+Name: count, dtype: int64
+2025-01-02 22:11:26 - INFO - Después de SMOTE: target
+0    15401
+1    15401
+Name: count, dtype: int64
+2025-01-02 22:11:27 - INFO - Después de SMOTE: target
+0    19530
+1    19530
+Name: count, dtype: int64
+2025-01-02 22:11:27 - INFO - Después de SMOTE: target
+0    3592
+1    3592
+Name: count, dtype: int64
+2025-01-02 22:11:28 - INFO - Después de SMOTE: target
+0    3592
+1    3592
+Name: count, dtype: int64
+2025-01-02 22:11:28 - INFO - Después de SMOTE: target
+0    7141
+1    7141
+Name: count, dtype: int64
+2025-01-02 22:11:29 - INFO - Después de SMOTE: target
+0    7141
+1    7141
+Name: count, dtype: int64
+2025-01-02 22:11:30 - INFO - Después de SMOTE: target
+0    10710
+1    10710
+Name: count, dtype: int64
+2025-01-02 22:11:31 - INFO - Después de SMOTE: target
+0    10710
+1    10710
+Name: count, dtype: int64
+2025-01-02 22:11:33 - INFO - Después de SMOTE: target
+0    15401
+1    15401
+Name: count, dtype: int64
+2025-01-02 22:11:34 - INFO - Después de SMOTE: target
+0    15401
+1    15401
+Name: count, dtype: int64
+2025-01-02 22:11:35 - INFO - Después de SMOTE: target
+0    19530
+1    19530
+Name: count, dtype: int64
+2025-01-02 22:11:37 - INFO - Después de SMOTE: target
+0    3592
+1    3592
+Name: count, dtype: int64
+2025-01-02 22:11:37 - INFO - Después de SMOTE: target
+0    19530
+1    19530
+Name: count, dtype: int64
+2025-01-02 22:11:38 - INFO - Después de SMOTE: target
+0    7141
+1    7141
+Name: count, dtype: int64
+2025-01-02 22:11:39 - INFO - Después de SMOTE: target
+0    10710
+1    10710
+Name: count, dtype: int64
+2025-01-02 22:11:39 - INFO - Después de SMOTE: target
+0    3592
+1    3592
+Name: count, dtype: int64
+2025-01-02 22:11:40 - INFO - Después de SMOTE: target
+0    15401
+1    15401
+Name: count, dtype: int64
+2025-01-02 22:11:40 - INFO - Después de SMOTE: target
+0    7141
+1    7141
+Name: count, dtype: int64
+2025-01-02 22:11:41 - INFO - Después de SMOTE: target
+0    10710
+1    10710
+Name: count, dtype: int64
+2025-01-02 22:11:41 - INFO - Después de SMOTE: target
+0    19530
+1    19530
+Name: count, dtype: int64
+2025-01-02 22:11:42 - INFO - Después de SMOTE: target
+0    15401
+1    15401
+Name: count, dtype: int64
+2025-01-02 22:11:42 - INFO - Después de SMOTE: target
+0    3592
+1    3592
+Name: count, dtype: int64
+2025-01-02 22:11:43 - INFO - Después de SMOTE: target
+0    19530
+1    19530
+Name: count, dtype: int64
+2025-01-02 22:11:44 - INFO - Después de SMOTE: target
+0    3592
+1    3592
+Name: count, dtype: int64
+2025-01-02 22:11:45 - INFO - Después de SMOTE: target
+0    7141
+1    7141
+Name: count, dtype: int64
+2025-01-02 22:11:46 - INFO - Después de SMOTE: target
+0    7141
+1    7141
+Name: count, dtype: int64
+2025-01-02 22:11:49 - INFO - Después de SMOTE: target
+0    10710
+1    10710
+Name: count, dtype: int64
+2025-01-02 22:11:49 - INFO - Después de SMOTE: target
+0    10710
+1    10710
+Name: count, dtype: int64
+2025-01-02 22:11:52 - INFO - Después de SMOTE: target
+0    15401
+1    15401
+Name: count, dtype: int64
+2025-01-02 22:11:53 - INFO - Después de SMOTE: target
+0    15401
+1    15401
+Name: count, dtype: int64
+2025-01-02 22:11:55 - INFO - Después de SMOTE: target
+0    19530
+1    19530
+Name: count, dtype: int64
+2025-01-02 22:11:58 - INFO - Después de SMOTE: target
+0    3592
+1    3592
+Name: count, dtype: int64
+2025-01-02 22:11:59 - INFO - Después de SMOTE: target
+0    19530
+1    19530
+Name: count, dtype: int64
+2025-01-02 22:12:02 - INFO - Después de SMOTE: target
+0    7141
+1    7141
+Name: count, dtype: int64
+2025-01-02 22:12:04 - INFO - Después de SMOTE: target
+0    3592
+1    3592
+Name: count, dtype: int64
+2025-01-02 22:12:05 - INFO - Después de SMOTE: target
+0    10710
+1    10710
+Name: count, dtype: int64
+2025-01-02 22:12:06 - INFO - Después de SMOTE: target
+0    7141
+1    7141
+Name: count, dtype: int64
+2025-01-02 22:12:08 - INFO - Después de SMOTE: target
+0    10710
+1    10710
+Name: count, dtype: int64
+2025-01-02 22:12:09 - INFO - Después de SMOTE: target
+0    15401
+1    15401
+Name: count, dtype: int64
+2025-01-02 22:12:11 - INFO - Después de SMOTE: target
+0    15401
+1    15401
+Name: count, dtype: int64
+2025-01-02 22:12:14 - INFO - Después de SMOTE: target
+0    19530
+1    19530
+Name: count, dtype: int64
+2025-01-02 22:12:14 - INFO - Después de SMOTE: target
+0    19530
+1    19530
+Name: count, dtype: int64
+2025-01-02 22:12:19 - INFO - Mejor valor de F1: 0.5397
+2025-01-02 22:12:19 - INFO - Mejores parámetros: {'max_depth': 6, 'learning_rate': 0.0014412184846792706, 'n_estimators': 170, 'subsample': 0.758831903118968, 'colsample_bytree': 0.6023395560572955, 'gamma': 0.04356569876778932, 'reg_alpha': 0.0007292013300860101, 'reg_lambda': 0.04936642912538411}
+2025-01-02 22:12:19 - INFO - === Entrenando Pipeline Final con TODO el training ===
+2025-01-02 22:12:19 - INFO - Columnas eliminadas durante la preparación: ['close_time', 'future_close', 'change_pct']
+2025-01-02 22:12:19 - INFO - Conjunto de datos preparado con 193269 filas y 32 características.
+2025-01-02 22:12:19 - INFO - Tipo de y_train_full: <class 'pandas.core.series.Series'>
+2025-01-02 22:12:19 - INFO - Shape de y_train_full: (193269,)
+2025-01-02 22:12:30 - INFO - Después de SMOTE: target
+0    118084
+1    118084
+Name: count, dtype: int64
+2025-01-02 22:12:30 - INFO - Balance de clases aplicado mediante SMOTE.
+2025-01-02 22:12:34 - INFO - Pipeline final entrenado con todos los datos de entrenamiento (binario).
+2025-01-02 22:12:34 - INFO - Modelo guardado en: ./results/XGBoost_Binario_trained_pipeline.joblib
+2025-01-02 22:12:34 - INFO - Parámetros guardados en: ./results/XGBoost_Binario_model_params.txt
+2025-01-02 22:12:34 - INFO - Lista de features guardada en: ./results/XGBoost_Binario_feature_cols.txt
+2025-01-02 22:12:34 - INFO - Indicadores técnicos agregados al DataFrame. Filas antes: 48318, después: 48269
+2025-01-02 22:12:34 - INFO - Target binario mejorado con look_ahead=46, min_change=0.004, max_change=0.06
+2025-01-02 22:12:34 - INFO - Distribución de clases (0/1):
+target
+0    31058
+1    16796
+Name: count, dtype: int64
+2025-01-02 22:12:34 - INFO - Columnas eliminadas durante la preparación: ['close_time', 'future_close', 'change_pct']
+2025-01-02 22:12:34 - INFO - Conjunto de datos preparado con 47854 filas y 32 características.
+2025-01-02 22:12:34 - INFO - Características en X_test_final: ['open', 'high', 'low', 'close', 'volume', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'RSI_14', 'MACD_12_26_9', 'MACDh_12_26_9', 'MACDs_12_26_9', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50', 'VWAP_D', 'OBV', 'BBL_20_2.0', 'BBM_20_2.0', 'BBU_20_2.0', 'BBB_20_2.0', 'BBP_20_2.0', 'ATRr_14', 'STOCHk_14_3_3', 'STOCHd_14_3_3', 'CCI_14_0.015', 'hour_of_day', 'day_of_week', 'is_weekend']
+2025-01-02 22:12:34 - INFO - Tipo de y_test_final: <class 'pandas.core.series.Series'>
+2025-01-02 22:12:34 - INFO - Shape de y_test_final: (47854,)
+2025-01-02 22:12:34 - INFO - === Evaluación en Test ===
+2025-01-02 22:12:34 - INFO - Matriz de confusión [1,0]:
+[[ 5577 11219]
+ [ 8217 22841]]
+2025-01-02 22:12:34 - INFO - Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           1       0.40      0.33      0.36     16796
+           0       0.67      0.74      0.70     31058
+
+    accuracy                           0.59     47854
+   macro avg       0.54      0.53      0.53     47854
+weighted avg       0.58      0.59      0.58     47854
+
+2025-01-02 22:12:34 - INFO - F1-score: 0.3646
+2025-01-02 22:12:34 - INFO - Precisión: 0.4043
+2025-01-02 22:12:34 - INFO - Recall: 0.3320
+2025-01-02 22:12:34 - INFO - AUC Score: 0.5551
+2025-01-02 22:12:36 - INFO - F1 final en Test (Binario): 0.3646
+2025-01-02 22:12:36 - INFO - === Analizando importancia de características ===
+2025-01-02 22:12:36 - INFO - Tabla de importancia de características guardada en ./results/feature_importances_binario.csv.
+2025-01-02 22:12:37 - INFO - Gráfico de importancia de características guardado.
+2025-01-02 22:12:37 - INFO - Características seleccionadas por importancia (> 0.02): ['is_weekend', 'BBB_20_2.0', 'day_of_week', 'hour_of_day', 'OBV', 'MACD_12_26_9', 'BBU_20_2.0', 'high', 'STOCHk_14_3_3', 'ATRr_14', 'number_of_trades', 'VWAP_D', 'EMA_10', 'STOCHd_14_3_3', 'RSI_14', 'SMA_50', 'EMA_50', 'BBP_20_2.0']
+2025-01-02 22:12:37 - INFO - feature_columns.pkl actualizado con las características seleccionadas: ['is_weekend', 'BBB_20_2.0', 'day_of_week', 'hour_of_day', 'OBV', 'MACD_12_26_9', 'BBU_20_2.0', 'high', 'STOCHk_14_3_3', 'ATRr_14', 'number_of_trades', 'VWAP_D', 'EMA_10', 'STOCHd_14_3_3', 'RSI_14', 'SMA_50', 'EMA_50', 'BBP_20_2.0']
+2025-01-02 22:12:37 - INFO - Columnas eliminadas durante la preparación: ['open', 'low', 'close', 'volume', 'quote_asset_volume', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'MACDh_12_26_9', 'MACDs_12_26_9', 'SMA_10', 'BBL_20_2.0', 'BBM_20_2.0', 'CCI_14_0.015']
+2025-01-02 22:12:37 - INFO - Conjunto de datos preparado con 193269 filas y 18 características.
+2025-01-02 22:12:49 - INFO - Después de SMOTE: target
+0    118084
+1    118084
+Name: count, dtype: int64
+2025-01-02 22:12:49 - INFO - Balance de clases aplicado mediante SMOTE después de selección de características.
+2025-01-02 22:12:52 - INFO - Pipeline final entrenado con todos los datos de entrenamiento (binario).
+2025-01-02 22:12:52 - ERROR - Error en la ejecución principal: The feature names should match those that were passed during fit.
+Feature names unseen at fit time:
+- BBL_20_2.0
+- BBM_20_2.0
+- CCI_14_0.015
+- MACDh_12_26_9
+- MACDs_12_26_9
+- ...
+

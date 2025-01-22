@@ -4,6 +4,7 @@ import logging
 import numpy as np
 from api.binance_connector import get_historical_data
 from api.momentum_strategy import MomentumStrategy
+
 # Configuración del logging detallado
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -108,12 +109,12 @@ class MomentumStrategy(bt.Strategy):
             sharpe_ratio = 0.0
         self.log(f"Sharpe Ratio: {sharpe_ratio}")
 
-def run_backtesting(symbol: str, interval: str, limit: int = 1000):
+def run_backtesting(symbol: str, interval: str, limit: int = 1000, params: dict = None):
     try:
         # Obtener datos históricos
         df = get_historical_data(symbol, interval, limit)
         if df.empty:
-            raise ValueError("No se obtuvieron datos históricos.")
+            raise ValueError("No se obtuvieron datos históricos para el símbolo proporcionado.")
 
         # Limpiar datos
         df = df.dropna(subset=['close', 'open', 'high', 'low', 'volume'])
@@ -122,9 +123,12 @@ def run_backtesting(symbol: str, interval: str, limit: int = 1000):
 
         # Configurar Backtrader
         cerebro = bt.Cerebro()
-        cerebro.addstrategy(MomentumStrategy)
+        if params:
+            cerebro.addstrategy(MomentumStrategy, **params)
+        else:
+            cerebro.addstrategy(MomentumStrategy)
         cerebro.broker.set_cash(1000)  # Capital inicial
-        cerebro.broker.setcommission(commission=0.005)  # 0.05% comisión por trade
+        cerebro.broker.setcommission(commission=0.005)  # 0.5% comisión por trade
         cerebro.addsizer(bt.sizers.PercentSizer, percents=1)  # 1% del capital por operación
 
         data_feed = bt.feeds.PandasData(dataname=df, name=symbol)
@@ -134,9 +138,15 @@ def run_backtesting(symbol: str, interval: str, limit: int = 1000):
         cerebro.run()
 
         final_value = cerebro.broker.getvalue()
-        logging.info(f"Backtesting completed. Final portfolio value: {final_value}")
+        logging.info(f"Backtesting completado. Valor final del portafolio: {final_value}")
         return {"final_value": final_value}
 
+    except ValueError as ve:
+        logging.error(f"ValueError en run_backtesting: {ve}")
+        return {"detail": f"Error: {ve}"}
+    except ConnectionError as ce:
+        logging.error(f"ConnectionError en run_backtesting: {ce}")
+        return {"detail": f"Error de conexión: {ce}"}
     except Exception as e:
-        logging.error(f"Error running backtesting: {str(e)}", exc_info=True)
-        return {"detail": f"Error running backtesting: {e}"}
+        logging.error(f"Error inesperado en run_backtesting: {e}", exc_info=True)
+        return {"detail": f"Error inesperado: {e}"}

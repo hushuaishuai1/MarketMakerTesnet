@@ -1,0 +1,652 @@
+2025-01-20 21:09:13 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 254923
+2025-01-20 21:09:13 - INFO - Columnas de indicadores existentes eliminadas: ['RSI', 'MACD', 'MACDs', 'MACDh', 'OBV', 'BBL', 'BBM', 'BBU', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50']
+2025-01-20 21:09:14 - INFO - Indicadores técnicos agregados. Filas antes: 254923, después: 254724 (descartadas: 199)
+2025-01-20 21:09:14 - INFO - Columnas renombradas: {'RSI_14': 'RSI', 'MACD_12_26_9': 'MACD', 'MACDs_12_26_9': 'MACDs', 'MACDh_12_26_9': 'MACDh', 'VWAP': 'VWAP', 'BBL_20_2.0': 'BBL', 'BBM_20_2.0': 'BBM', 'BBU_20_2.0': 'BBU', 'ATR_14': 'ATR', 'STOCHk_14_3_3': 'STOCHk', 'STOCHd_14_3_3': 'STOCHd', 'CCI_14_0.015': 'CCI', 'SMA_10': 'SMA_10', 'SMA_50': 'SMA_50', 'SMA_200': 'SMA_200', 'EMA_10': 'EMA_10', 'EMA_50': 'EMA_50'}
+2025-01-20 21:09:14 - WARNING - Columna faltante 'VWAP' añadida con NaN.
+2025-01-20 21:09:14 - WARNING - Columna faltante 'ATR' añadida con NaN.
+2025-01-20 21:09:14 - INFO - Target binario con look_ahead=4, min_change=0.026
+2025-01-20 21:09:14 - INFO - Distribución de clases (0=Vender, 1=Comprar):
+target
+0.0    2229
+1.0    2079
+Name: count, dtype: int64
+2025-01-20 21:09:14 - INFO - Muestra de datos con target:
+                        close  future_close  change_pct  target
+open_time                                                      
+2021-05-19 14:15:00  35572.30      36790.17    0.034236     1.0
+2021-11-16 09:00:00  60781.18      58610.01   -0.035721     0.0
+2018-01-11 02:15:00  14382.04      13555.31   -0.057484     0.0
+2018-04-12 10:30:00   6907.99       7687.87    0.112895     1.0
+2017-11-30 12:30:00   9762.46       9260.00   -0.051469     0.0
+2021-05-19 00:30:00  42857.10      41180.01   -0.039132     0.0
+2017-11-08 18:00:00   7401.00       7139.99   -0.035267     0.0
+2020-03-12 09:45:00   7354.21       6014.90   -0.182115     0.0
+2020-02-11 15:00:00   9891.86      10209.85    0.032147     1.0
+2019-07-10 14:00:00  12837.28      12250.00   -0.045748     0.0
+2025-01-20 21:09:14 - INFO - División de datos en Train/Test completada.
+2025-01-20 21:09:14 - INFO - === Búsqueda de hiperparámetros (Optuna) en muestra de Training ===
+2025-01-20 21:09:14 - INFO - No se han identificado características categóricas.
+2025-01-20 21:09:14 - INFO - Columnas extra eliminadas: ['future_close', 'change_pct']
+2025-01-20 21:09:14 - WARNING - Estas columnas están 100% NaN y se eliminarán antes de imputar: ['VWAP', 'ATR']
+2025-01-20 21:09:14 - INFO - Dataset preparado: 2660 filas, 21 features (después de imputación).
+2025-01-20 21:09:14 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:09:14 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:09:15 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:09:15 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:09:15 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:09:15 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:09:16 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:09:16 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:09:17 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:09:17 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:09:18 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:09:18 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:09:18 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:09:18 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:09:19 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:09:19 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:09:20 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:09:20 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:09:20 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:09:21 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:09:21 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:09:21 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:09:22 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:09:22 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:09:23 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:09:23 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:09:23 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:09:24 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:09:24 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:09:25 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:09:26 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:09:27 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:09:28 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:09:28 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:09:29 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:09:30 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:09:30 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:09:31 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:09:32 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:09:33 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:09:34 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:09:35 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:09:35 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:09:37 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:09:38 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:09:39 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:09:41 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:09:43 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:09:43 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:09:44 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:09:45 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:09:45 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:09:46 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:09:46 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:09:47 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:09:48 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:09:48 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:09:49 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:09:50 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:09:50 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:09:51 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:09:52 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:09:53 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:09:53 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:09:53 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:09:54 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:09:54 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:09:55 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:09:56 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:09:56 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:09:57 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:09:57 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:09:58 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:09:59 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:09:59 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:10:00 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:10:00 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:10:01 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:10:02 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:10:02 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:10:03 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:10:04 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:10:07 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:10:08 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:10:10 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:10:11 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:10:12 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:10:13 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:10:15 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:10:16 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:10:18 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:10:18 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:10:21 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:10:21 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:10:23 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:10:24 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:10:26 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:10:26 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:10:29 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:10:29 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:10:32 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:10:33 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1058
+0.0    1058
+Name: count, dtype: int64
+2025-01-20 21:10:35 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:10:36 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1048
+1.0    1048
+Name: count, dtype: int64
+2025-01-20 21:10:38 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:10:40 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    1051
+0.0    1051
+Name: count, dtype: int64
+2025-01-20 21:10:42 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:10:44 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1052
+1.0    1052
+Name: count, dtype: int64
+2025-01-20 21:10:45 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:10:47 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1062
+1.0    1062
+Name: count, dtype: int64
+2025-01-20 21:10:50 - INFO - Mejor Precision: 0.7820
+2025-01-20 21:10:50 - INFO - Mejores parámetros: {'max_depth': 9, 'learning_rate': 0.02287723996217467, 'n_estimators': 471, 'subsample': 0.793161144141593, 'colsample_bytree': 0.9673273485608544, 'gamma': 0.2763081010549944, 'reg_alpha': 0.0027078196815703004, 'reg_lambda': 0.012116214892069377}
+2025-01-20 21:10:50 - INFO - === Entrenando Pipeline Final con TODO el Training ===
+2025-01-20 21:10:50 - INFO - Columnas extra eliminadas: ['future_close', 'change_pct']
+2025-01-20 21:10:50 - WARNING - Estas columnas están 100% NaN y se eliminarán antes de imputar: ['VWAP', 'ATR']
+2025-01-20 21:10:50 - INFO - Dataset preparado: 2800 filas, 21 features (después de imputación).
+2025-01-20 21:10:50 - INFO - Balance de clases tras SMOTETomek:
+target
+0.0    1382
+1.0    1382
+Name: count, dtype: int64
+2025-01-20 21:10:52 - INFO - Pipeline final entrenado con TODOS los datos de entrenamiento.
+2025-01-20 21:10:52 - INFO - Pipeline completo guardado en: ./results/XGBoost_Binario_trained_pipeline.joblib
+2025-01-20 21:10:52 - INFO - Parámetros guardados en: ./results/XGBoost_Binario_model_params.txt
+2025-01-20 21:10:52 - INFO - Lista de features guardada en: ./results/XGBoost_Binario_feature_cols.txt
+2025-01-20 21:10:52 - INFO - Columnas de indicadores existentes eliminadas: ['RSI', 'MACD', 'MACDs', 'MACDh', 'VWAP', 'OBV', 'BBL', 'BBM', 'BBU', 'ATR', 'STOCHk', 'STOCHd', 'CCI', 'SMA_10', 'SMA_50', 'SMA_200', 'EMA_10', 'EMA_50']
+2025-01-20 21:10:52 - INFO - Indicadores técnicos agregados. Filas antes: 1508, después: 1309 (descartadas: 199)
+2025-01-20 21:10:52 - INFO - Columnas renombradas: {'RSI_14': 'RSI', 'MACD_12_26_9': 'MACD', 'MACDs_12_26_9': 'MACDs', 'MACDh_12_26_9': 'MACDh', 'VWAP': 'VWAP', 'BBL_20_2.0': 'BBL', 'BBM_20_2.0': 'BBM', 'BBU_20_2.0': 'BBU', 'ATR_14': 'ATR', 'STOCHk_14_3_3': 'STOCHk', 'STOCHd_14_3_3': 'STOCHd', 'CCI_14_0.015': 'CCI', 'SMA_10': 'SMA_10', 'SMA_50': 'SMA_50', 'SMA_200': 'SMA_200', 'EMA_10': 'EMA_10', 'EMA_50': 'EMA_50'}
+2025-01-20 21:10:52 - WARNING - Columna faltante 'VWAP' añadida con NaN.
+2025-01-20 21:10:52 - WARNING - Columna faltante 'ATR' añadida con NaN.
+2025-01-20 21:10:52 - INFO - Target binario con look_ahead=4, min_change=0.026
+2025-01-20 21:10:52 - INFO - Distribución de clases (0=Vender, 1=Comprar):
+target
+0.0    481
+1.0    477
+Name: count, dtype: int64
+2025-01-20 21:10:53 - INFO - Muestra de datos con target:
+                        close  future_close  change_pct  target
+open_time                                                      
+2021-03-25 11:30:00  52499.99      59397.98    0.131390     1.0
+2022-08-15 05:45:00  24817.62      22740.85   -0.083681     0.0
+2024-03-06 04:15:00  63407.12      69510.79    0.096262     1.0
+2024-01-03 11:30:00  44498.77      47918.36    0.076847     1.0
+2021-03-04 23:45:00  48374.09      57418.90    0.186976     1.0
+2022-07-18 04:45:00  21300.29      22110.96    0.038059     1.0
+2021-12-31 07:45:00  47191.09      45903.12   -0.027293     0.0
+2021-03-18 15:00:00  58092.97      52934.24   -0.088801     0.0
+2021-01-13 18:00:00  34811.88      39565.33    0.136547     1.0
+2024-11-01 14:45:00  71271.17      89152.01    0.250885     1.0
+2025-01-20 21:10:53 - INFO - Columnas extra eliminadas: ['change_pct', 'future_close']
+2025-01-20 21:10:53 - WARNING - Estas columnas están 100% NaN y se eliminarán antes de imputar: ['VWAP', 'ATR']
+2025-01-20 21:10:53 - INFO - Dataset preparado: 958 filas, 21 features (después de imputación).
+2025-01-20 21:10:53 - INFO - === Evaluación en Test ===
+2025-01-20 21:10:53 - INFO - Matriz de confusión [0=Vender, 1=Comprar]:
+[[291 190]
+ [282 195]]
+2025-01-20 21:10:53 - INFO - Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+      Vender       0.51      0.60      0.55       481
+     Comprar       0.51      0.41      0.45       477
+
+    accuracy                           0.51       958
+   macro avg       0.51      0.51      0.50       958
+weighted avg       0.51      0.51      0.50       958
+
+2025-01-20 21:10:53 - INFO - Precision: 0.5065
+2025-01-20 21:10:53 - INFO - F1-score: 0.4524
+2025-01-20 21:10:53 - INFO - Recall: 0.4088
+2025-01-20 21:10:53 - INFO - Balanced Accuracy: 0.5069
+2025-01-20 21:10:53 - INFO - MCC: 0.0141
+2025-01-20 21:10:53 - INFO - AUC: 0.5022
+2025-01-20 21:10:55 - INFO - Precision final en Test: 0.5065
+2025-01-20 21:10:55 - INFO - Importancia de características guardada en ./results/feature_importances_binary.csv.
+2025-01-20 21:10:55 - INFO - Gráfico de importancia de características guardado.
+2025-01-20 21:10:56 - INFO - Calculando valores SHAP...
+2025-01-20 21:10:59 - INFO - SHAP analysis completado y guardado.
+2025-01-20 21:10:59 - INFO - Señales generadas con umbral=0.58
+2025-01-20 21:10:59 - INFO - Señales filtradas por tendencia.
+2025-01-20 21:10:59 - INFO - Señales guardadas en: ./results/signals_binary.csv
+2025-01-20 21:10:59 - INFO - === Proceso Completado con Éxito ===

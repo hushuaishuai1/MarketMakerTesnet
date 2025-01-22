@@ -1,0 +1,2 @@
+2024-12-31 17:57:23 - INFO - Datos cargados desde /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251797
+2024-12-31 17:57:23 - ERROR - Error en la ejecución principal: 'RangeIndex' object has no attribute 'to_period'

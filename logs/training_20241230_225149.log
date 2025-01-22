@@ -1,0 +1,66 @@
+2024-12-30 22:51:53 - INFO - Datos cargados desde /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251797
+2024-12-30 22:51:58 - INFO - Target con look_ahead=3, lower=24, upper=78, min_change=0.0078
+2024-12-30 22:51:58 - INFO - Umbral inferior=-0.002352, superior=0.002837
+2024-12-30 22:51:58 - INFO - Distribución de clases:
+target
+0    218246
+2     16977
+1     16571
+Name: count, dtype: int64
+2024-12-30 22:51:58 - INFO - División de datos en train y test completada.
+2024-12-30 22:51:58 - INFO - === Buscando hiperparámetros (Optuna) en una muestra del training ===
+2024-12-30 22:51:58 - INFO - Características cargadas desde: /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/feature_columns.pkl
+2024-12-30 22:51:58 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:58 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:58 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:51:59 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - ERROR - Error durante el entrenamiento: XGBClassifier.fit() got an unexpected keyword argument 'early_stopping_rounds'
+2024-12-30 22:52:00 - INFO - Mejor valor de F1 macro: 0.0
+2024-12-30 22:52:00 - INFO - Mejores parámetros: {'max_depth': 8, 'learning_rate': 0.0010650555931225121, 'n_estimators': 349, 'subsample': 0.5486538328288766, 'colsample_bytree': 0.7162925573035406, 'gamma': 0.01107964892206876, 'reg_alpha': 0.006623683809291709, 'reg_lambda': 1.0731411446182042e-05}
+2024-12-30 22:52:00 - INFO - === Entrenando Pipeline Final con TODO el training ===
+2024-12-30 22:52:02 - ERROR - Error al entrenar el pipeline final: float() argument must be a string or a real number, not 'Timestamp'
