@@ -24,7 +24,7 @@
 
 # git status
 # git add .
-# git commit -m "Implementación  de archivos ML para ontencion de datos, guardado en DB y PreProcesamiento"
+# git commit -m "Implementación  de  modelo para entrenamiento y backtetsing rubusto 15m"
 # git push origin main
 
 # python -m ML.data_insert

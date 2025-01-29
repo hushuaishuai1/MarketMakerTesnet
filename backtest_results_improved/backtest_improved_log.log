@@ -1,9 +1,9 @@
-2025-01-21 22:46:55,599 - INFO - === Iniciando Backtest Mejorado (con intrabar + mejoras) ===
-2025-01-21 22:46:57,701 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv (filas: 257756)
-2025-01-21 22:46:58,407 - INFO - Modelo cargado exitosamente.
-2025-01-21 22:47:21,058 - INFO - Métricas del Backtest con mejoras:
-{'Total Trades': 722, 'Wins': 520, 'Losses': 202, 'Win Rate': 0.72, 'Final Capital': 22293.4, 'Profit Factor': 1.084, 'Max Drawdown': -0.198}
-2025-01-21 22:47:32,107 - INFO - Resultados guardados en ./backtest_results_improved/backtest_intrabar_results.csv y ./backtest_results_improved/backtest_intrabar_trades.csv
-2025-01-21 22:47:34,033 - INFO - Curva de capital guardada en ./backtest_results_improved/equity_curve_intrabar.png
-2025-01-21 22:47:34,378 - INFO - Gráfica de Drawdown guardada en ./backtest_results_improved/drawdown_intrabar.png
-2025-01-21 22:47:34,378 - INFO - === Backtest Mejorado Finalizado con Éxito ===
+2025-01-24 16:44:52,143 - INFO - === Iniciando Backtest Mejorado (Filtro de Tendencia + Rearme) ===
+2025-01-24 16:44:54,247 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv (filas: 257756)
+2025-01-24 16:44:55,204 - INFO - Modelo cargado exitosamente.
+2025-01-24 16:53:06,919 - INFO - Métricas del Backtest:
+{'Total Trades': 1827, 'Wins': 789, 'Losses': 1038, 'Win Rate': 0.432, 'Final Capital': 3166.05, 'Gross Profit Factor': 1.105, 'Net Profit Factor': 0.528, 'Max Drawdown': -0.744}
+2025-01-24 16:53:17,744 - INFO - Resultados guardados en ./backtest_results_improved/backtest_intrabar_results.csv y ./backtest_results_improved/backtest_intrabar_trades.csv
+2025-01-24 16:53:18,571 - INFO - Curva de capital guardada en ./backtest_results_improved/equity_curve_intrabar.png
+2025-01-24 16:53:18,908 - INFO - Gráfica de Drawdown guardada en ./backtest_results_improved/drawdown_intrabar.png
+2025-01-24 16:53:18,909 - INFO - === Backtest Finalizado con Éxito ===

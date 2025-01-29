@@ -1,5 +1,0 @@
-2024-12-31 17:50:00 - INFO - Datos cargados desde /Users/oscarr/Desarrollo/Python0/ApiBinance/ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251797
-2024-12-31 17:50:01 - INFO - Indicadores técnicos agregados al DataFrame.
-2024-12-31 17:50:01 - INFO - feature_columns.pkl actualizado con nuevas características.
-2024-12-31 17:50:01 - ERROR - Umbrales calculados son NaN para 8 velas.
-2024-12-31 17:50:01 - ERROR - Error en la ejecución principal: Umbrales calculados son NaN para 8 velas.

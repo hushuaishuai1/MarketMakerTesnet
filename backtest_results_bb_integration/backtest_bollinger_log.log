@@ -1,0 +1,7 @@
+2025-01-26 18:39:22,956 - INFO - === Iniciando Backtest con Bollinger + Modelo Mejorado ===
+2025-01-26 18:39:24,957 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv (filas: 257756)
+2025-01-26 18:39:25,730 - INFO - Modelo cargado exitosamente.
+2025-01-26 18:39:25,731 - ERROR - Error en main(): The feature names should match those that were passed during fit.
+Feature names unseen at fit time:
+- EMA_200
+

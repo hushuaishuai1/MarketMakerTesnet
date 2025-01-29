@@ -42,15 +42,15 @@ RANDOM_SEED = 62
 SAMPLE_FRAC = 0.9
 
 # Cantidad de trials de Optuna
-N_TRIALS = 22
-N_JOBS_OPTUNA = 2
+N_TRIALS = 12
+N_JOBS_OPTUNA = 1
 
 # ¿Usar PCA?
 USE_PCA = False
 PCA_N_COMPONENTS = 8
 
 # Directorio para resultados
-RESULTS_PATH = "./results"
+RESULTS_PATH = ".ML/results"
 MODEL_NAME = "XGBoost_Binario"
 
 # Parámetros fijos del target binario
@@ -297,7 +297,7 @@ def objective_precision_class1(trial, X, y, cv, categorical_features):
 
 def train_models_optuna_precision(X, y, cv, categorical_features, n_trials=50, n_jobs=2):
     logger.info("Iniciando optimización en Optuna (precisión clase=1)...")
-    study = optuna.create_study(direction="maximize", sampler=optuna.samplers.TPESampler(seed=42))
+    study = optuna.create_study(direction="maximize", sampler=optuna.samplers.TPESampler(seed=48))
     func = lambda trial: objective_precision_class1(trial, X, y, cv, categorical_features)
     study.optimize(func, n_trials=n_trials, n_jobs=n_jobs)
     logger.info(f"Mejor Precisión (clase=1): {study.best_value:.4f}")
@@ -305,7 +305,7 @@ def train_models_optuna_precision(X, y, cv, categorical_features, n_trials=50, n
     return study.best_params
 
 # ============================ ENTRENAR PIPELINE FINAL ============================
-def train_final_pipeline_with_params(X, y, best_params, use_pca=False, pca_n_components=6, categorical_features=[], factor_pos_weight=1.7):
+def train_final_pipeline_with_params(X, y, best_params, use_pca=False, pca_n_components=7, categorical_features=[], factor_pos_weight=1.78):
     """
     Entrena el pipeline final con todos los datos,
     enfocándose en la precisión de la clase 1.

@@ -1,7 +1,0 @@
-2024-12-19 22:35:06,488 INFO Obteniendo datos para BTC-USD con periodo 3y y intervalo 15m
-2024-12-19 22:35:08,726 ERROR 
-1 Failed download:
-2024-12-19 22:35:08,727 ERROR ['BTC-USD']: YFPricesMissingError('$%ticker%: possibly delisted; no price data found  (period=3y) (Yahoo error = "15m data not available for startTime=1640061308 and endTime=1734669308. The requested range must be within the last 60 days.")')
-2024-12-19 22:35:08,752 ERROR No se obtuvieron datos. Verifica el símbolo, periodo e intervalo.
-2024-12-19 22:35:08,752 ERROR Error al obtener datos: Datos vacíos.
-2024-12-19 22:35:08,752 ERROR Ocurrió un error: Datos vacíos.

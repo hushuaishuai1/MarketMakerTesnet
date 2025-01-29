@@ -1,491 +1,538 @@
+# ====================================================================================
+# BACKTESTING WALK-FORWARD CON XGBOOST + ROBUST SCALER + INDICADORES MOMENTUM
+# ====================================================================================
+# Este script muestra un flujo completo para entrenar y backtestear un modelo ML
+# (XGBoost) con un pipeline que incluye RobustScaler. Añade lógica de:
+#   - Generación de un target binario basado en el cambio futuro de precio.
+#   - Indicadores técnicos, incluyendo momentum (ROC) y otros.
+#   - Stops basados en ATR (stop-loss, take-profit y trailing-stop).
+#   - Filtrado por tendencia (SMA_50 vs. SMA_200).
+#   - Walk-Forward Analysis para evaluar robustez en múltiples ventanas temporales.
+#
+# AJUSTA ESTOS PARÁMETROS A TU PROPIO CASO (features, horizonte, min_change, etc.).
+# Usa Optuna o la librería de tu preferencia para optimizar hiperparámetros.
+# ====================================================================================
+
 import os
 import sys
-import logging
 import numpy as np
 import pandas as pd
-import pandas_ta as ta
 import matplotlib.pyplot as plt
+import seaborn as sns
+import logging
 
-from datetime import datetime
-from sklearn.impute import SimpleImputer
-import joblib
+from sklearn.preprocessing import RobustScaler
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
 
-# ====================== CONFIGURACIÓN GENERAL ======================
-CSV_PATH = "ML/data/processed/BTCUSDT_15m_processed.csv"
-MODEL_FILE = "./results/XGBoost_Binario_trained_pipeline.joblib"
-RESULTS_PATH = "./backtest_results_improved"
-os.makedirs(RESULTS_PATH, exist_ok=True)
+# Para métricas avanzadas (Sharpe, Sortino, etc.) con quantstats:
+# pip install quantstats
+# import quantstats as qs
 
-LOG_FILE = os.path.join(RESULTS_PATH, "backtest_improved_log.log")
+# =============== CONFIGURACIÓN DE LOGGING ===============
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
+logger = logging.getLogger(__name__)
 
-# Parámetros de estrategia y riesgo
-ATR_PERIOD = 14
-ATR_STOP_MULT = 2.5
-ATR_TP_MULT = 3.5
-# Disminuimos el riesgo por trade a 1%:
-RISK_PER_TRADE = 0.015    # 1% del capital
-# Elevamos el umbral para filtrar señales de baja calidad:
-THRESHOLD_HIGH = 0.7      # En vez de 0.6
-INITIAL_CAPITAL = 10000.0
-COMMISSION_RATE = 0.001   # 0.1% en cada operación
+# =============== PARÁMETROS GLOBALES ===============
+TRAIN_SIZE_BARS   = 25280   # Aprox. 6 meses si el timeframe es 15 min
+TEST_SIZE_BARS    = 5880    # Aprox. 1 mes
+STEP_SIZE         = 1880    # Se avanza 1 mes en cada ciclo
+INITIAL_CAPITAL   = 1000.0
+COMMISSION_RATE   = 0.0003  # 0.03% por trade (ejemplo)
+RISK_PER_TRADE    = 0.01    # 1% del capital por operación
+MAX_BARS_IN_TRADE = 14    # Máx. velas manteniendo una posición
 
-# Parámetros extra para mejoras:
-MAX_DRAWDOWN_LIMIT = 0.3         # 30% de DD máximo; si se excede, no se opera más
-MAX_CONSECUTIVE_LOSSES = 5       # Si hay 5 pérdidas seguidas, paramos temporalmente
-PARTIAL_EXIT_RATIO = 0.3        # Salir de un 50% de la posición en la toma de ganancia parcial
-PARTIAL_EXIT_TRIGGER = 1.0       # Activar la salida parcial cuando el trade vaya +1.0 ATR a favor
-TRAILING_STOP_BUFFER = 1.0       # Ajustar el SL a (precio actual - 1.0 * ATR) tras la salida parcial
+# Parámetros ATR y stops
+ATR_PERIOD     = 14
+ATR_SL_MULT    = 0.2   # stop-loss = precio entrada - (ATR * 0.5)
+ATR_TP_MULT    = 0.6   # take-profit = precio entrada + (ATR * 1.0)
+TRAILING_MULT  = 0.2   # trailing-stop dinámico
 
-# Columnas que se usaron en el entrenamiento
-FIXED_FEATURES = [
-    'open', 'high', 'low', 'close', 'volume',
-    'RSI', 'MACD', 'MACDs', 'MACDh',
-    'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50',
-    'OBV', 'BBL', 'BBM', 'BBU',
-    'STOCHk', 'STOCHd', 'CCI', 'SMA_200'
-]
+# Filtrado de tendencia
+SHORT_MA_COL = "SMA_50"
+LONG_MA_COL  = "SMA_200"
 
-# ====================== CONFIGURACIÓN DE LOGGING ======================
-logger = logging.getLogger("backtest_improved_logger")
-logger.setLevel(logging.INFO)
-formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+# Umbral de probabilidad para señal de compra
+SIGNAL_THRESHOLD = 0.82
 
-file_handler = logging.FileHandler(LOG_FILE, mode="w", encoding="utf-8")
-file_handler.setFormatter(formatter)
-logger.addHandler(file_handler)
+# =============== FUNCIONES AUXILIARES ===============
 
-console_handler = logging.StreamHandler(sys.stdout)
-console_handler.setFormatter(formatter)
-logger.addHandler(console_handler)
-
-# ====================== FUNCIONES DE PREPROCESAMIENTO ======================
-def load_data(csv_path: str) -> pd.DataFrame:
-    """Carga el CSV, valida columnas y configura el índice como DatetimeIndex."""
-    required_columns = {"open_time", "open", "high", "low", "close", "volume"}
-    if not os.path.exists(csv_path):
-        logger.error(f"No se encontró el archivo: {csv_path}")
-        sys.exit(1)
-    df = pd.read_csv(csv_path, parse_dates=["open_time"])
-    missing_columns = required_columns - set(df.columns)
-    if missing_columns:
-        logger.error(f"Faltan columnas en el CSV: {missing_columns}")
-        sys.exit(1)
-        
-    df.drop_duplicates(subset=["open_time"], inplace=True)
-    df.sort_values(by="open_time", inplace=True)
-    df.set_index("open_time", inplace=True)
-    
-    if df.index.tz is not None:
-        df.index = df.index.tz_localize(None)
-    df.sort_index(inplace=True)
-    
-    logger.info(f"Datos cargados desde {csv_path} (filas: {len(df)})")
+def handle_missing_data(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Limpia NaN e infinitos, aplicando forward/backward fill.
+    """
+    df = df.copy()
+    df.replace([np.inf, -np.inf], np.nan, inplace=True)
+    df.ffill(inplace=True)
+    df.bfill(inplace=True)
+    df.dropna(inplace=True)
     return df
+
+def compute_sma(series: pd.Series, window: int) -> pd.Series:
+    """Media móvil simple."""
+    return series.rolling(window).mean()
+
+def compute_atr(df: pd.DataFrame, period: int = 14) -> pd.DataFrame:
+    """
+    Cálculo simple de ATR (Average True Range).
+    ATR = media del True Range en 'period' velas.
+    """
+    df = df.copy()
+    df["prev_close"] = df["close"].shift(1)
+    df["high_low"]   = df["high"] - df["low"]
+    df["high_close"] = (df["high"] - df["prev_close"]).abs()
+    df["low_close"]  = (df["low"]  - df["prev_close"]).abs()
+
+    df["TR"]  = df[["high_low","high_close","low_close"]].max(axis=1)
+    df["ATR"] = df["TR"].rolling(period).mean()
+
+    df.drop(columns=["prev_close","high_low","high_close","low_close","TR"], inplace=True)
+    df.dropna(subset=["ATR"], inplace=True)
+    return df
+
+def compute_roc(series: pd.Series, window: int = 14) -> pd.Series:
+    """
+    Rate Of Change (ROC) como ejemplo de indicador de momentum:
+      ROC = (precio_actual - precio_(n velas atrás)) / precio_(n velas atrás) * 100
+    """
+    shifted = series.shift(window)
+    roc = ((series - shifted) / shifted) * 100.0
+    return roc
 
 def add_technical_indicators(df: pd.DataFrame) -> pd.DataFrame:
-    """Calcula indicadores técnicos y ATR, y organiza el DataFrame según FIXED_FEATURES."""
-    if not isinstance(df.index, pd.DatetimeIndex):
-        logger.error("El índice debe ser DatetimeIndex para calcular indicadores.")
-        sys.exit(1)
+    """
+    Añade indicadores básicos: SMA_50, SMA_200, ATR, ROC (momentum).
+    Ajusta según tus necesidades de features.
+    """
     df = df.copy()
-    df.sort_index(inplace=True)
-
-    # Eliminar indicadores previos si existen
-    indicators_to_drop = [
-        'RSI', 'MACD', 'MACDs', 'MACDh', 'OBV', 'BBL', 'BBM', 'BBU',
-        'STOCHk', 'STOCHd', 'CCI', 'SMA_10', 'SMA_50', 'SMA_200',
-        'EMA_10', 'EMA_50', 'ATR'
-    ]
-    for col in indicators_to_drop:
-        if col in df.columns:
-            df.drop(columns=[col], inplace=True)
-
-    # Calcular indicadores técnicos usando pandas_ta
-    df.ta.rsi(length=14, append=True)
-    df.ta.macd(append=True)
-    df.ta.sma(length=10, append=True)
-    df.ta.sma(length=50, append=True)
-    df.ta.sma(length=200, append=True)
-    df.ta.ema(length=10, append=True)
-    df.ta.ema(length=50, append=True)
-    df.ta.obv(append=True)
-    df.ta.bbands(length=20, std=2, append=True)
-    df.ta.stoch(append=True)
-    df.ta.cci(length=14, append=True)
-    
-    # Convertir a numérico y eliminar filas sin datos esenciales
-    df = df.apply(pd.to_numeric, errors='coerce')
-    df.dropna(subset=["open", "high", "low", "close", "volume"], inplace=True)
-    
-    # Calcular ATR y llenar valores faltantes
-    df["ATR"] = ta.atr(high=df["high"], low=df["low"], close=df["close"], length=ATR_PERIOD)
-    df["ATR"] = df["ATR"].ffill().bfill()
-    if df["ATR"].isna().sum() > 0:
-        logger.error("Existen valores nulos en la columna ATR después del fill.")
-        sys.exit(1)
-
-    # Renombrar columnas para que coincidan con FIXED_FEATURES
-    rename_dict = {
-        "RSI_14": "RSI",
-        "MACD_12_26_9": "MACD",
-        "MACDs_12_26_9": "MACDs",
-        "MACDh_12_26_9": "MACDh",
-        "BBL_20_2.0": "BBL",
-        "BBM_20_2.0": "BBM",
-        "BBU_20_2.0": "BBU",
-        "STOCHk_14_3_3": "STOCHk",
-        "STOCHd_14_3_3": "STOCHd",
-        "CCI_14_0.015": "CCI",
-        "SMA_10": "SMA_10",
-        "SMA_50": "SMA_50",
-        "SMA_200": "SMA_200",
-        "EMA_10": "EMA_10",
-        "EMA_50": "EMA_50"
-    }
-    df.rename(columns=rename_dict, inplace=True)
-
-    # Mantener solo las columnas esenciales (más ATR)
-    final_columns = list(set(FIXED_FEATURES + ["open", "high", "low", "close", "volume", "ATR"]))
-    extra_cols = [col for col in df.columns if col not in final_columns]
-    if extra_cols:
-        df.drop(columns=extra_cols, inplace=True)
+    df["SMA_50"]  = compute_sma(df["close"], 50)
+    df["SMA_200"] = compute_sma(df["close"], 200)
+    df = compute_atr(df, ATR_PERIOD)
+    df["ROC_14"]  = compute_roc(df["close"], 14)  # momentum
     return df
 
-def prepare_dataset(df: pd.DataFrame, feature_cols: list) -> pd.DataFrame:
-    """Prepara el DataFrame para predicción, dejando solo las columnas requeridas y aplicando imputación."""
+def generate_target_binary(df: pd.DataFrame, look_ahead: int = 3, min_change: float = 0.03) -> pd.DataFrame:
+    """
+    Genera un target binario basado en cambio futuro:
+      1 => si el precio sube al menos min_change% en 'look_ahead' velas,
+      0 => si cae al menos min_change% en 'look_ahead' velas.
+    Se ignoran (NaN) casos intermedios.
+    """
     df = df.copy()
-    columns_to_use = [c for c in feature_cols if c in df.columns]
-    df = df[columns_to_use]
-    imputer = SimpleImputer(strategy='mean')
-    X_array = imputer.fit_transform(df)
-    X = pd.DataFrame(X_array, columns=df.columns, index=df.index)
-    return X
+    df["future_close"] = df["close"].shift(-look_ahead)
+    df.dropna(subset=["future_close"], inplace=True)
 
-# ====================== GENERAR SEÑALES ======================
-def generate_signals(model, X, threshold=THRESHOLD_HIGH):
-    """
-    Genera señales de compra (1) basándose en la probabilidad de la clase 1, 
-    usando el threshold establecido.
-    """
-    probabilities = model.predict_proba(X)[:, 1]
-    signals = np.where(probabilities > threshold, 1, 0)
-    return signals
+    change_pct = (df["future_close"] - df["close"]) / df["close"]
+    df["target"] = np.nan
+    df.loc[ change_pct >=  min_change, "target"] = 1
+    df.loc[ change_pct <= -min_change, "target"] = 0
 
-# ====================== BACKTEST CON MANEJO INTRABAR (MEJORADO) ======================
-def backtest_trades_risk_intrabar(df: pd.DataFrame,
-                                  signals: np.ndarray,
-                                  atr_stop_mult: float,
-                                  atr_tp_mult: float,
-                                  initial_capital: float,
-                                  risk_per_trade: float,
-                                  commission_rate: float,
-                                  max_dd_limit: float = 1.0,
-                                  max_consecutive_losses: int = 9999) -> (pd.DataFrame, pd.DataFrame):
+    # Elimina los casos "grises" donde la variación no llegó a ±min_change
+    df.dropna(subset=["target"], inplace=True)
+    return df
+
+def get_feature_columns() -> list:
     """
-    Ejecuta un backtest 'long only' con mejoras:
-      - Se abre el trade al cierre de la vela donde aparece la señal.
-      - En la siguiente vela se revisa si se alcanza SL, TP parcial, trailing stop, etc.
-      - Si se supera el drawdown global 'max_dd_limit' o la racha de pérdidas 'max_consecutive_losses', 
-        se deja de abrir nuevas posiciones.
+    Devuelve la lista de columnas a usar como features para el modelo.
+    Ajusta según tus indicadores reales.
+    """
+    return [
+        "open", "high", "low", "close", "volume",
+        "SMA_50", "SMA_200", "ATR", "ROC_14"
+    ]
+
+def prepare_dataset(df: pd.DataFrame):
+    """
+    Prepara X, y para entrenamiento. Aplica un pipeline con RobustScaler a las features.
+    """
+    # 1) Extraer features y label
+    features = get_feature_columns()
+    X = df[features].copy()
+    y = df["target"].copy()
+
+    # 2) Manejar NaN
+    X = handle_missing_data(X)
+    y = y.reindex(X.index).fillna(0)
+
+    return X, y
+
+def create_pipeline_xgb() -> Pipeline:
+    """
+    Crea un pipeline con RobustScaler + XGBoost (hiperparámetros ajustados).
+    Ajusta según tus necesidades o tu búsqueda con Optuna.
+    """
+    numeric_features = get_feature_columns()
+
+    # Preprocesamiento (ejemplo con RobustScaler)
+    preprocessor = ColumnTransformer(
+        transformers=[
+            ("num", RobustScaler(), numeric_features)
+        ],
+        remainder="passthrough"  # Deja intactas otras columnas, si las hubiera
+    )
+
+    # Modelo XGBoost con parámetros "razonables" (ajusta a tu gusto)
+    xgb_params = {
+        "objective": "binary:logistic",
+        "n_estimators": 150,
+        "learning_rate": 0.05,
+        "max_depth": 6,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "random_state": 42,
+        "eval_metric": "logloss",
+        "use_label_encoder": False
+    }
+
+    model = XGBClassifier(**xgb_params)
+
+    # Pipeline final
+    pipeline = Pipeline([
+        ("preprocessor", preprocessor),
+        ("model", model)
+    ])
+
+    return pipeline
+
+def train_model_on_window(df_train: pd.DataFrame) -> Pipeline:
+    """
+    Entrena el pipeline en la ventana de entrenamiento df_train.
+    Retorna el pipeline entrenado.
+    """
+    df_train = df_train.copy()
+
+    # 1) Añadir indicadores y target
+    df_train = add_technical_indicators(df_train)
+    df_train = generate_target_binary(df_train, look_ahead=3, min_change=0.03)
+    if len(df_train) < 50:
+        # Evitar entrenar con datos insuficientes
+        return None
+
+    # 2) Preparar X, y
+    X_train, y_train = prepare_dataset(df_train)
+
+    # 3) Crear pipeline y entrenar
+    pipeline = create_pipeline_xgb()
+    pipeline.fit(X_train, y_train)
+    return pipeline
+
+def generate_signals(df: pd.DataFrame, pipeline: Pipeline) -> pd.Series:
+    """
+    Genera señales de compra (1) o no-trade (0) a partir de la prob. predicha por el modelo.
+    """
+    if pipeline is None or len(df) == 0:
+        return pd.Series([0]*len(df), index=df.index)
+
+    # Extraer X
+    X = df[get_feature_columns()].copy()
+    X = handle_missing_data(X)
+
+    if len(X) == 0:
+        return pd.Series([0]*len(df), index=df.index)
+
+    # Probabilidad de ser clase=1
+    probs = pipeline.predict_proba(X)[:, 1]
+    signals = (probs > SIGNAL_THRESHOLD).astype(int)
+
+    return pd.Series(signals, index=X.index)
+
+def filter_signals_by_trend(df: pd.DataFrame, signals: pd.Series) -> pd.Series:
+    """
+    Filtra señales en largo sólo si SMA_50 > SMA_200.
+    """
+    if SHORT_MA_COL not in df.columns or LONG_MA_COL not in df.columns:
+        logger.warning("Faltan columnas de SMA_50 / SMA_200 para filtrar tendencia.")
+        return signals
+
+    trend_mask = (df[SHORT_MA_COL] > df[LONG_MA_COL])
+    filtered_signals = signals.where(trend_mask, other=0)
+    return filtered_signals
+
+def volatility_position_size(capital, entry_price, stop_loss, consecutive_losses=0) -> float:
+    """
+    Calcula tamaño de posición basado en RISK_PER_TRADE y distancia stop_loss.
+    Reduce el riesgo gradualmente si hay pérdidas consecutivas.
+    """
+    reduce_factor = 0.9 ** consecutive_losses
+    effective_risk = RISK_PER_TRADE * reduce_factor
+    if effective_risk < 0.002:
+        effective_risk = 0.002
+
+    risk_amount = capital * effective_risk
+    distance_sl = (entry_price - stop_loss)
+    if distance_sl <= 0:
+        return 0.0
+
+    size = risk_amount / distance_sl
+    # Evitar posiciones más grandes que todo el capital
+    max_size = capital / entry_price
+    size = min(size, max_size)
+    return size
+
+def backtest_on_period(df: pd.DataFrame, pipeline: Pipeline, initial_capital: float):
+    """
+    Backtest en la ventana df (con pipeline entrenado).
+    - Genera señales
+    - Aplica stop-loss, take-profit, trailing-stop
+    - Devuelve:
+        equity_df: DataFrame [time, equity_curve, drawdown]
+        trades_df: registro de operaciones
+        final_capital
     """
     df_bt = df.copy()
+    df_bt = add_technical_indicators(df_bt)
+    df_bt.dropna(subset=["close","high","low","SMA_50","SMA_200","ATR"], inplace=True)
+
+    # Generar señales y filtrar por tendencia
+    raw_signals = generate_signals(df_bt, pipeline)
+    signals = filter_signals_by_trend(df_bt, raw_signals)
     df_bt["signal"] = signals
-    df_bt["capital"] = np.nan
 
     capital = initial_capital
+    peak_capital = capital
     in_position = False
-    entry_price = 0.0
-    position_size = 0.0
+    trades = []
+    equity_curve = []
+    drawdowns = []
+    idxs = df_bt.index.to_list()
+    bars_in_trade = 0
     consecutive_losses = 0
 
-    # Lista donde se almacenarán los trades
-    trades = []
+    for i in range(len(idxs) - 1):
+        idx_now = idxs[i]
+        idx_next = idxs[i+1]
 
-    idx_list = df_bt.index.to_list()
-
-    # Para trackear drawdown en vivo
-    peak_capital = initial_capital
-
-    for i in range(len(idx_list) - 1):
-        idx_current = idx_list[i]
-        idx_next = idx_list[i + 1]
-
-        current_close = df_bt.at[idx_current, "close"]
-        signal = df_bt.at[idx_current, "signal"]
-        df_bt.at[idx_current, "capital"] = capital
-        
-        # Actualizar máximo de capital y drawdown
+        current_close = df_bt.at[idx_now, "close"]
+        df_bt.at[idx_now, "equity_curve"] = capital
         if capital > peak_capital:
             peak_capital = capital
-        current_dd = 1.0 - (capital / peak_capital)  # drawdown actual
-        # Si la cuenta supera el DD límite, no abrimos más posiciones
-        global_stop_active = (current_dd >= max_dd_limit)
+        current_dd = 1.0 - (capital / peak_capital)
+        df_bt.at[idx_now, "drawdown"] = current_dd
 
-        # Chequear racha de pérdidas
-        if consecutive_losses >= max_consecutive_losses:
-            # No abrir más operaciones hasta que reiniciemos manual o alguna condición.
-            pass_open_trades = True
+        # Si hay posición abierta:
+        if in_position:
+            bars_in_trade += 1
+            trade_open = trades[-1]
+            stop_loss    = trade_open["stop_loss"]
+            take_profit  = trade_open["take_profit"]
+            trailing_sl  = trade_open.get("trailing_stop", stop_loss)
+
+            next_low     = df_bt.at[idx_next, "low"]
+            next_high    = df_bt.at[idx_next, "high"]
+            next_close   = df_bt.at[idx_next, "close"]
+            atr_value    = df_bt.at[idx_now, "ATR"]
+
+            # Ajustar trailing-stop si el precio subió
+            new_trailing = next_close - (atr_value * TRAILING_MULT)
+            if new_trailing > trailing_sl:
+                trailing_sl = new_trailing
+
+            final_stop = max(stop_loss, trailing_sl)
+            trade_closed = False
+            exit_price = None
+
+            # 1) Stop-loss o trailing-stop
+            if next_low <= final_stop:
+                exit_price = final_stop
+                trade_closed = True
+
+            # 2) Take-profit
+            if (not trade_closed) and (next_high >= take_profit):
+                exit_price = take_profit
+                trade_closed = True
+
+            # 3) Cierre por tiempo máximo
+            if (not trade_closed) and bars_in_trade >= MAX_BARS_IN_TRADE:
+                exit_price = next_close
+                trade_closed = True
+
+            if trade_closed and exit_price is not None:
+                size = trade_open["size"]
+                gross_pnl = (exit_price - trade_open["entry_price"]) * size
+                commission_exit = exit_price * size * COMMISSION_RATE
+                net_pnl = gross_pnl - commission_exit
+                capital += net_pnl
+
+                trades[-1]["exit_time"]       = idx_next
+                trades[-1]["exit_price"]      = exit_price
+                trades[-1]["commission_exit"] = commission_exit
+                trades[-1]["pnl_$"]           = net_pnl
+                trades[-1]["pnl_%"]           = (exit_price / trade_open["entry_price"] - 1.0) * 100
+
+                if net_pnl < 0:
+                    consecutive_losses += 1
+                else:
+                    consecutive_losses = 0
+
+                in_position = False
+                bars_in_trade = 0
+            else:
+                # Actualizar trailing stop si sigue abierto
+                trades[-1]["trailing_stop"] = trailing_sl
+
         else:
-            pass_open_trades = False
-
-        # Si NO estamos en posición, evaluar si abrimos:
-        if (not in_position) and (not pass_open_trades) and (not global_stop_active):
+            # Checar si abrimos posición
+            signal = df_bt.at[idx_now, "signal"]
             if signal == 1:
-                # Abrir trade al cierre de esta vela
                 entry_price = current_close
-                atr_value = df_bt.at[idx_current, "ATR"]
-                if pd.isna(atr_value) or atr_value <= 0:
+                atr_value   = df_bt.at[idx_now, "ATR"]
+                stop_loss   = entry_price - (ATR_SL_MULT * atr_value)
+                take_profit = entry_price + (ATR_TP_MULT * atr_value)
+
+                if stop_loss >= entry_price:
                     continue
 
-                # Definir Stop Loss y Take Profit
-                stop_loss_price = entry_price - (atr_stop_mult * atr_value)
-                take_profit_price = entry_price + (atr_tp_mult * atr_value)
-
-                # Calcular tamaño de la posición basado en riesgo
-                loss_per_unit = (entry_price - stop_loss_price)
-                risk_amount = capital * risk_per_trade
-                position_size = risk_amount / loss_per_unit
-                max_size = capital / entry_price
-                if position_size > max_size:
-                    position_size = max_size
+                size = volatility_position_size(capital, entry_price, stop_loss, consecutive_losses)
+                if size <= 0:
+                    continue
 
                 # Comisión de entrada
-                commission_entry = entry_price * position_size * commission_rate
+                commission_entry = entry_price * size * COMMISSION_RATE
+                if capital < commission_entry:
+                    continue
+
                 capital -= commission_entry
-
-                in_position = True
-
-                current_trade = {
-                    "entry_time": idx_current,
+                trade_data = {
+                    "entry_time": idx_now,
                     "entry_price": entry_price,
-                    "stop_loss": stop_loss_price,
-                    "take_profit": take_profit_price,
-                    "size": position_size,
+                    "stop_loss": stop_loss,
+                    "take_profit": take_profit,
+                    "size": size,
                     "commission_entry": commission_entry,
-                    "partial_exit_done": False  # Para controlar si ya hicimos la salida parcial
+                    "trailing_stop": stop_loss
                 }
-                trades.append(current_trade)
+                trades.append(trade_data)
+                in_position = True
+                bars_in_trade = 0
 
-        else:
-            # Si estamos en posición, revisar la vela siguiente (datos intrabar)
-            if in_position:
-                bar_low = df_bt.at[idx_next, "low"]
-                bar_high = df_bt.at[idx_next, "high"]
+        equity_curve.append(capital)
+        drawdowns.append(current_dd)
 
-                current_trade = trades[-1]
-                stop_loss_price = current_trade["stop_loss"]
-                take_profit_price = current_trade["take_profit"]
-                partial_exit_done = current_trade["partial_exit_done"]
-
-                exit_price = None
-                exit_time = None
-                trade_closed = False
-
-                # 1) Revisión de STOP LOSS
-                if bar_low <= stop_loss_price:
-                    exit_price = stop_loss_price
-                    exit_time = idx_next
-                    trade_closed = True
-
-                # 2) Revisión de TAKE PROFIT PARCIAL (si no hemos salido y no se ha hecho)
-                if (not trade_closed) and (not partial_exit_done):
-                    # Si el precio toca al menos "entry_price + PARTIAL_EXIT_TRIGGER * ATR"
-                    # hacemos salida parcial y movemos el stop a trailing
-                    partial_exit_price = current_trade["entry_price"] + (PARTIAL_EXIT_TRIGGER * df_bt.at[idx_current, "ATR"])
-                    if bar_high >= partial_exit_price:
-                        # Salimos de una fracción de la posición
-                        size_to_close = current_trade["size"] * PARTIAL_EXIT_RATIO
-                        commission_exit_partial = partial_exit_price * size_to_close * commission_rate
-                        pnl_partial = (partial_exit_price - current_trade["entry_price"]) * size_to_close
-                        pnl_partial -= commission_exit_partial
-                        capital += pnl_partial
-
-                        # Marcar que ya hicimos salida parcial
-                        trades[-1]["partial_exit_done"] = True
-
-                        # Ajustar stop al trailing stop
-                        new_trailing_stop = bar_high - (TRAILING_STOP_BUFFER * df_bt.at[idx_current, "ATR"])
-                        # Si el trailing queda por debajo del stop original, mantenemos el más alto (protege más)
-                        trades[-1]["stop_loss"] = max(new_trailing_stop, stop_loss_price)
-
-                        # Reducir la size viva en el trade
-                        trades[-1]["size"] -= size_to_close
-
-                # 3) Revisión de TAKE PROFIT TOTAL (si no hemos cerrado)
-                if (not trade_closed) and (bar_high >= take_profit_price):
-                    exit_price = take_profit_price
-                    exit_time = idx_next
-                    trade_closed = True
-
-                # Si determinamos un cierre (SL o TP)
-                if trade_closed and exit_price is not None:
-                    final_size = trades[-1]["size"]
-                    commission_exit = exit_price * final_size * commission_rate
-                    trade_pnl = (exit_price - current_trade["entry_price"]) * final_size
-                    trade_pnl -= commission_exit
-                    capital += trade_pnl
-
-                    trades[-1]["exit_time"] = exit_time
-                    trades[-1]["exit_price"] = exit_price
-                    trades[-1]["commission_exit"] = commission_exit
-                    trades[-1]["pnl_$"] = trade_pnl
-                    trades[-1]["pnl_%"] = (exit_price - current_trade["entry_price"]) / current_trade["entry_price"]
-
-                    # Actualizar consecutivos
-                    if trade_pnl < 0:
-                        consecutive_losses += 1
-                    else:
-                        consecutive_losses = 0
-
-                    in_position = False
-
-    # Si queda una posición abierta, cerrarla en la última vela
-    if in_position:
-        last_idx = idx_list[-1]
-        last_close = df_bt.at[last_idx, "close"]
-        current_trade = trades[-1]
-        final_size = current_trade["size"]
-
-        exit_price = last_close
-        commission_exit = exit_price * final_size * commission_rate
-        trade_pnl = (exit_price - current_trade["entry_price"]) * final_size
-        trade_pnl -= commission_exit
-        capital += trade_pnl
-
-        trades[-1]["exit_time"] = last_idx
-        trades[-1]["exit_price"] = exit_price
-        trades[-1]["commission_exit"] = commission_exit
-        trades[-1]["pnl_$"] = trade_pnl
-        trades[-1]["pnl_%"] = (exit_price - current_trade["entry_price"]) / current_trade["entry_price"]
-
-        if trade_pnl < 0:
-            consecutive_losses += 1
-        else:
-            consecutive_losses = 0
-
-        in_position = False
-
-    df_bt.at[idx_list[-1], "capital"] = capital
-
-    # Equity curve y cálculo de drawdown
-    df_bt["equity_curve"] = df_bt["capital"].ffill()
-    df_bt["peak"] = df_bt["equity_curve"].cummax()
-    df_bt["drawdown"] = df_bt["equity_curve"] / df_bt["peak"] - 1
+    final_capital = capital
+    # Construir DF de equity
+    equity_df = pd.DataFrame({
+        "time": df_bt.index[:len(equity_curve)],
+        "equity_curve": equity_curve,
+        "drawdown": drawdowns
+    }).set_index("time")
 
     trades_df = pd.DataFrame(trades)
-    return df_bt, trades_df
+    return equity_df, trades_df, final_capital
 
-def calculate_metrics(df_bt: pd.DataFrame, trades_df: pd.DataFrame, initial_capital: float) -> dict:
-    """Calcula métricas clave a partir de la equity curve y el registro de trades."""
-    closed_trades = trades_df.dropna(subset=["exit_price"])
-    total_trades = len(closed_trades)
+def walk_forward_analysis(df: pd.DataFrame):
+    """
+    Aplica Walk-Forward:
+      - Toma TRAIN_SIZE_BARS de entrenamiento.
+      - Toma TEST_SIZE_BARS para backtest.
+      - Repite avanzando STEP_SIZE barras cada vez.
+      - Mantiene y arrastra capital final a la siguiente ventana.
+    """
+    start_index = 0
+    capital = INITIAL_CAPITAL
 
-    if total_trades == 0:
-        return {
-            "Total Trades": 0,
-            "Wins": 0,
-            "Losses": 0,
-            "Win Rate": 0.0,
-            "Final Capital": initial_capital,
-            "Profit Factor": 0.0,
-            "Max Drawdown": 0.0
-        }
+    all_equity_dfs = []
+    all_trades_dfs = []
 
-    wins = closed_trades[closed_trades["pnl_$"] > 0].shape[0]
-    losses = total_trades - wins
-    win_rate = wins / total_trades if total_trades > 0 else 0.0
+    while True:
+        train_end = start_index + TRAIN_SIZE_BARS
+        test_end  = train_end + TEST_SIZE_BARS
+        if test_end > len(df):
+            logger.info("No hay más datos para la siguiente ventana. Fin WFA.")
+            break
 
-    sum_wins = closed_trades[closed_trades["pnl_$"] > 0]["pnl_$"].sum()
-    sum_losses = abs(closed_trades[closed_trades["pnl_$"] <= 0]["pnl_$"].sum())
+        df_train = df.iloc[start_index:train_end].copy()
+        df_test  = df.iloc[train_end:test_end].copy()
+        if len(df_train) < 200:
+            logger.warning(f"Pocos datos en train: {len(df_train)}. Se detiene.")
+            break
 
-    profit_factor = sum_wins / sum_losses if sum_losses > 0 else 0.0
-    final_capital = df_bt["capital"].dropna().iloc[-1]
-    max_drawdown = df_bt["drawdown"].min()
+        # ENTRENAR MODELO
+        pipeline = train_model_on_window(df_train)
+        if pipeline is None:
+            logger.warning("No se pudo entrenar el modelo. Ventana con datos insuficientes.")
+            break
 
-    metrics = {
-        "Total Trades": total_trades,
-        "Wins": wins,
-        "Losses": losses,
-        "Win Rate": round(win_rate, 3),
-        "Final Capital": round(final_capital, 2),
-        "Profit Factor": round(profit_factor, 3),
-        "Max Drawdown": round(max_drawdown, 3)
-    }
-    return metrics
+        # BACKTEST
+        equity_df, trades_df, final_capital = backtest_on_period(df_test, pipeline, capital)
+        logger.info(f"WFA Ventana Train=({start_index}:{train_end}), "
+                    f"Test=({train_end}:{test_end}) => Capital final: {final_capital:.2f} "
+                    f"Trades: {len(trades_df)}")
+
+        all_equity_dfs.append(equity_df)
+        trades_df["train_range"] = f"{start_index}-{train_end}"
+        trades_df["test_range"]  = f"{train_end}-{test_end}"
+        all_trades_dfs.append(trades_df)
+
+        # Actualizar capital para la siguiente iteración
+        capital = final_capital
+        start_index += STEP_SIZE
+
+    # Combinar resultados
+    if all_equity_dfs:
+        all_equity = pd.concat(all_equity_dfs)
+    else:
+        all_equity = pd.DataFrame(columns=["equity_curve","drawdown"])
+
+    if all_trades_dfs:
+        all_trades = pd.concat(all_trades_dfs, ignore_index=True)
+    else:
+        all_trades = pd.DataFrame()
+
+    return all_equity, all_trades
 
 def main():
-    try:
-        logger.info("=== Iniciando Backtest Mejorado (con intrabar + mejoras) ===")
-        
-        # 1) Cargar y preparar datos
-        df = load_data(CSV_PATH)
-        df = add_technical_indicators(df)
-        X = prepare_dataset(df, FIXED_FEATURES)
-        
-        # 2) Cargar modelo entrenado
-        if not os.path.exists(MODEL_FILE):
-            logger.error(f"No se encontró el modelo entrenado: {MODEL_FILE}")
-            sys.exit(1)
-        model = joblib.load(MODEL_FILE)
-        logger.info("Modelo cargado exitosamente.")
-
-        # 3) Generar señales con el modelo (umbral más estricto = 0.7)
-        signals = generate_signals(model, X, threshold=THRESHOLD_HIGH)
-        df["signals"] = signals
-
-        # 4) Ejecutar backtest con nuevas mejoras
-        df_bt, trades_df = backtest_trades_risk_intrabar(
-            df,
-            signals,
-            atr_stop_mult=ATR_STOP_MULT,
-            atr_tp_mult=ATR_TP_MULT,
-            initial_capital=INITIAL_CAPITAL,
-            risk_per_trade=RISK_PER_TRADE,
-            commission_rate=COMMISSION_RATE,
-            max_dd_limit=MAX_DRAWDOWN_LIMIT,
-            max_consecutive_losses=MAX_CONSECUTIVE_LOSSES
-        )
-
-        # 5) Calcular métricas y guardar resultados
-        metrics = calculate_metrics(df_bt, trades_df, INITIAL_CAPITAL)
-        logger.info(f"Métricas del Backtest con mejoras:\n{metrics}")
-
-        out_csv = os.path.join(RESULTS_PATH, "backtest_intrabar_results.csv")
-        df_bt.to_csv(out_csv)
-        trades_csv = os.path.join(RESULTS_PATH, "backtest_intrabar_trades.csv")
-        trades_df.to_csv(trades_csv, index=False)
-        logger.info(f"Resultados guardados en {out_csv} y {trades_csv}")
-
-        # 6) Graficar Equity Curve
-        plt.figure(figsize=(10, 6))
-        plt.plot(df_bt.index, df_bt["equity_curve"], label="Equity Curve")
-        plt.title("Curva de Capital - Backtest Mejorado (Intrabar + mejoras)")
-        plt.xlabel("Fecha")
-        plt.ylabel("Capital (USD)")
-        plt.legend()
-        plt.tight_layout()
-        eq_file = os.path.join(RESULTS_PATH, "equity_curve_intrabar.png")
-        plt.savefig(eq_file)
-        plt.close()
-        logger.info(f"Curva de capital guardada en {eq_file}")
-
-        # 7) Graficar Drawdown
-        plt.figure(figsize=(10, 4))
-        plt.plot(df_bt.index, df_bt["drawdown"], label="Drawdown", color="red")
-        plt.title("Drawdown - Backtest Mejorado (Intrabar + mejoras)")
-        plt.xlabel("Fecha")
-        plt.ylabel("Drawdown")
-        plt.legend()
-        plt.tight_layout()
-        dd_file = os.path.join(RESULTS_PATH, "drawdown_intrabar.png")
-        plt.savefig(dd_file)
-        plt.close()
-        logger.info(f"Gráfica de Drawdown guardada en {dd_file}")
-
-        logger.info("=== Backtest Mejorado Finalizado con Éxito ===")
-    except Exception as e:
-        logger.error(f"Error en main(): {e}")
+    # Ajusta la ruta del CSV a tu proyecto
+    CSV_PATH = "ML/data/processed/BTCUSDT_15m_processed.csv"
+    if not os.path.exists(CSV_PATH):
+        logger.error(f"No existe el archivo {CSV_PATH}")
         sys.exit(1)
+
+    # Cargar y ordenar
+    df = pd.read_csv(CSV_PATH, parse_dates=["open_time"])
+    df.set_index("open_time", inplace=True)
+    df.sort_index(inplace=True)
+
+    # Limpieza preliminar
+    df = handle_missing_data(df)
+
+    # Iniciar Walk-Forward
+    equity_curve, trades_df = walk_forward_analysis(df)
+
+    # Guardar resultados
+    os.makedirs("results_wfa", exist_ok=True)
+    equity_curve.to_csv("results_wfa/equity_curve.csv")
+    trades_df.to_csv("results_wfa/trades.csv", index=False)
+
+    # Graficar Equity
+    if not equity_curve.empty:
+        plt.figure(figsize=(10,6))
+        plt.plot(equity_curve.index, equity_curve["equity_curve"], label="Equity Curve")
+        plt.title("Equity Curve - Walk Forward Analysis")
+        plt.xlabel("Fecha")
+        plt.ylabel("Capital")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig("results_wfa/equity_curve.png")
+        plt.close()
+        logger.info("Equity curve graficada en results_wfa/equity_curve.png")
+    else:
+        logger.warning("No se generó equity curve para graficar.")
+
+    # Opcional: métricas de performance con quantstats
+    # try:
+    #     returns = equity_curve["equity_curve"].pct_change().fillna(0)
+    #     qs.reports.html(returns, output="results_wfa/wfa_quantstats.html")
+    #     logger.info("Reporte QuantStats generado en results_wfa/wfa_quantstats.html")
+    # except Exception as e:
+    #     logger.error(f"Error al generar reporte quantstats: {e}")
+
+    logger.info("Proceso completado. Revisa la carpeta 'results_wfa' para resultados.")
 
 if __name__ == "__main__":
     main()

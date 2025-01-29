@@ -1,3 +1,0 @@
-2025-01-03 00:34:58 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251947
-2025-01-03 00:34:58 - INFO - Columnas de indicadores técnicos existentes eliminadas: ['OBV']
-2025-01-03 00:34:58 - ERROR - Error en la ejecución principal: 'BBU'

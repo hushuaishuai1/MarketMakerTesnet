@@ -1,4 +1,0 @@
-2025-01-03 00:42:20 - WARNING - === Cargando Datos ===
-2025-01-03 00:42:23 - WARNING - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 251947
-2025-01-03 00:42:23 - WARNING - === Agregando Indicadores Técnicos ===
-2025-01-03 00:42:24 - ERROR - Error al calcular 'BB_width': 'BBU_bb'
