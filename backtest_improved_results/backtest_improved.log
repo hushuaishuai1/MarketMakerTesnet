@@ -1,3 +1,0 @@
-2025-01-26 19:02:29,209 - INFO - === INICIANDO BACKTEST MEJORADO ===
-2025-01-26 19:02:30,468 - INFO - Modelo cargado correctamente.
-2025-01-26 19:02:30,468 - ERROR - Error en main(): name 'CSV_PATH' is not defined
