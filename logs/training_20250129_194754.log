@@ -1,0 +1,1929 @@
+2025-01-29 19:47:56 - INFO - Datos cargados desde ML/data/processed/BTCUSDT_15m_processed.csv, filas: 257756
+2025-01-29 19:47:56 - INFO - Columnas de indicadores existentes eliminadas: ['RSI', 'MACD', 'MACDs', 'MACDh', 'OBV', 'BBL', 'BBM', 'BBU', 'SMA_10', 'SMA_50', 'EMA_10', 'EMA_50']
+2025-01-29 19:47:56 - INFO - Indicadores técnicos agregados. Filas antes: 257756, después: 257557 (descartadas: 199)
+2025-01-29 19:47:56 - INFO - Columnas renombradas: {'RSI_14': 'RSI', 'MACD_12_26_9': 'MACD', 'MACDs_12_26_9': 'MACDs', 'MACDh_12_26_9': 'MACDh', 'BBL_20_2.0': 'BBL', 'BBM_20_2.0': 'BBM', 'BBU_20_2.0': 'BBU', 'STOCHk_14_3_3': 'STOCHk', 'STOCHd_14_3_3': 'STOCHd', 'CCI_14_0.015': 'CCI', 'SMA_10': 'SMA_10', 'SMA_50': 'SMA_50', 'SMA_200': 'SMA_200', 'EMA_10': 'EMA_10', 'EMA_50': 'EMA_50'}
+2025-01-29 19:47:56 - INFO - Target binario con look_ahead=3, min_change=0.031
+2025-01-29 19:47:56 - INFO - Distribución de clases (0=Vender, 1=Comprar):
+target
+0.0    986
+1.0    871
+Name: count, dtype: int64
+2025-01-29 19:47:56 - INFO - Muestra de datos con target:
+                        close  future_close  change_pct  target
+open_time                                                      
+2021-01-27 18:30:00  29672.18      30595.03    0.031102     1.0
+2018-02-06 12:45:00   6719.07       7050.00    0.049252     1.0
+2018-01-11 05:45:00  12868.84      13440.00    0.044383     1.0
+2018-01-16 13:00:00  11841.12      11288.82   -0.046643     0.0
+2021-01-03 04:30:00  32717.80      33984.27    0.038709     1.0
+2019-05-13 14:30:00   7455.52       7717.43    0.035130     1.0
+2017-12-10 01:00:00  13840.02      13400.00   -0.031793     0.0
+2018-02-07 07:00:00   7400.00       7669.97    0.036482     1.0
+2018-01-11 03:00:00  13687.01      12920.00   -0.056039     0.0
+2018-07-04 12:15:00   6540.01       6768.20    0.034891     1.0
+2025-01-29 19:47:56 - INFO - División de datos en Train/Test completada.
+2025-01-29 19:47:56 - INFO - === Búsqueda de hiperparámetros (Optuna) en muestra de Training ===
+2025-01-29 19:47:56 - INFO - No se han identificado características categóricas.
+2025-01-29 19:47:56 - INFO - Columnas extra eliminadas: ['future_close', 'change_pct']
+2025-01-29 19:47:56 - INFO - Dataset preparado: 1086 filas, 21 features (después de imputación).
+2025-01-29 19:47:56 - INFO - Iniciando optimización en Optuna (precisión clase=1)...
+2025-01-29 19:47:56 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:47:57 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:47:57 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:47:57 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:47:57 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:47:57 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:47:57 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:47:58 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:47:58 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:47:58 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:47:59 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:47:59 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:00 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:01 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:01 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:48:01 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:48:02 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:03 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:03 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:04 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:48:05 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:48:05 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:05 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:05 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:06 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:48:06 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:48:07 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:07 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:08 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:09 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:48:10 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:48:10 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:10 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:10 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:11 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:48:11 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:48:12 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:13 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:15 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:16 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:48:17 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:48:17 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:17 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:18 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:18 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:48:18 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:48:19 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:21 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:22 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:23 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:48:25 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:48:26 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:26 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:26 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:27 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:48:27 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:48:28 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:28 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:29 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:29 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:48:30 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:48:30 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:31 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:32 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:32 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:48:33 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:48:34 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:35 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:35 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:36 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:48:37 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:48:37 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:37 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:38 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:38 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:48:38 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:48:39 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:40 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:41 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:42 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:48:43 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:48:43 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:44 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:45 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:46 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:48:46 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:48:47 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:48 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:48 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:49 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:48:50 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:48:50 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:51 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:51 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:52 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:48:52 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:48:53 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:54 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:54 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:55 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:48:56 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:48:56 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:48:57 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:48:58 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:48:59 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:00 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:49:00 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:49:01 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:49:02 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:49:02 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:03 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:49:04 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:49:04 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:49:05 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:49:06 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:06 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:49:07 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:49:07 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:49:08 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:49:08 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:09 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:49:09 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:49:09 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:49:10 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:49:10 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:11 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:49:11 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:49:12 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:49:13 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:49:13 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:14 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:49:15 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:49:17 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:49:18 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:49:20 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:21 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:49:22 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:49:22 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:49:23 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:49:24 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:25 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:49:25 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:49:26 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:49:27 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:49:28 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:29 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:49:29 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:49:29 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:49:29 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:49:29 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:30 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:49:30 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:49:30 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:49:31 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:49:31 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:32 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:49:32 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:49:33 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:49:34 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:49:35 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:36 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:49:37 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:49:38 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:49:38 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:49:39 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:40 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:49:40 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:49:41 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:49:41 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:49:42 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:42 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:49:43 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:49:43 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:49:44 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:49:45 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:45 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:49:46 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:49:46 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:49:47 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:49:47 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:48 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:49:49 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:49:50 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:49:51 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:49:52 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:53 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:49:53 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:49:54 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:49:55 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:49:56 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:57 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:49:57 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:49:58 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:49:58 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:49:58 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:49:59 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:50:00 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:50:01 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:50:03 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:50:04 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:50:05 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:50:05 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:50:06 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:50:06 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:50:06 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:50:07 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:50:07 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:50:08 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:50:08 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:50:09 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:50:09 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:50:10 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:50:10 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:50:10 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:50:11 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:50:11 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:50:12 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:50:12 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:50:12 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:50:13 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:50:13 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:50:14 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:50:14 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:50:15 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:50:16 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:50:17 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:50:17 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:50:18 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:50:18 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:50:19 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:50:19 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:50:20 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:50:21 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:50:22 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:50:23 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:50:24 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:50:25 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:50:25 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:50:26 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:50:26 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:50:27 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:50:28 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:50:29 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:50:30 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:50:31 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:50:32 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:50:33 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:50:33 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:50:33 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:50:34 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:50:34 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:50:36 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:50:37 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:50:38 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:50:40 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:50:41 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:50:42 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:50:43 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:50:45 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:50:46 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:50:47 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:50:49 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:50:50 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:50:51 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:50:53 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:50:54 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:50:56 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:50:57 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:50:58 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:50:59 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:51:01 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:51:02 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:51:03 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:51:04 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:51:05 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:51:06 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:51:08 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:51:09 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:51:10 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:51:12 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:51:13 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:51:14 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:51:14 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:51:15 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:51:15 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:51:16 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:51:17 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:51:18 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:51:19 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:51:20 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:51:21 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:51:22 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:51:23 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:51:24 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:51:25 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:51:26 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:51:27 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:51:27 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:51:28 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:51:28 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:51:29 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:51:30 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:51:31 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:51:31 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:51:32 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:51:33 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:51:34 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:51:35 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:51:36 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:51:36 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:51:37 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:51:38 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:51:38 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:51:39 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:51:39 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:51:40 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:51:41 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:51:41 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:51:42 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:51:42 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:51:43 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:51:44 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:51:45 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:51:45 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:51:46 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:51:47 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:51:48 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:51:49 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:51:50 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:51:51 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:51:52 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:51:53 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:51:54 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:51:54 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:51:55 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:51:55 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:51:56 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:51:58 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:51:59 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:52:00 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:52:01 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:52:01 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:52:02 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:52:03 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:52:03 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:52:04 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:52:05 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:52:05 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:52:06 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:52:07 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:52:07 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:52:08 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:52:08 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:52:09 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:52:10 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:52:11 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:52:11 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:52:12 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:52:13 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:52:14 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:52:14 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:52:15 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:52:15 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:52:15 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:52:16 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:52:16 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:52:17 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:52:17 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:52:18 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:52:18 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:52:19 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:52:19 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:52:20 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:52:21 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:52:22 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64
+2025-01-29 19:52:22 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    420
+0.0    420
+Name: count, dtype: int64
+2025-01-29 19:52:23 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    424
+0.0    424
+Name: count, dtype: int64
+2025-01-29 19:52:23 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    418
+0.0    418
+Name: count, dtype: int64
+2025-01-29 19:52:24 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    428
+0.0    428
+Name: count, dtype: int64
+2025-01-29 19:52:24 - INFO - Balance de clases tras SMOTETomek:
+target
+1.0    422
+0.0    422
+Name: count, dtype: int64

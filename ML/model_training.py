@@ -36,13 +36,13 @@ from datetime import datetime
 # =========================== PARÁMETROS FIJOS ================================
 CSV_PATH = "ML/data/processed/BTCUSDT_15m_processed.csv"
 TEST_SIZE = 0.35
-RANDOM_SEED = 62
+RANDOM_SEED = 44
 
 # Tamaño de la muestra del train para búsqueda de hiperparámetros (Optuna)
 SAMPLE_FRAC = 0.9
 
 # Cantidad de trials de Optuna
-N_TRIALS = 12
+N_TRIALS =22
 N_JOBS_OPTUNA = 1
 
 # ¿Usar PCA?
@@ -57,8 +57,9 @@ MODEL_NAME = "XGBoost_Binario"
 FIXED_LOOK_AHEAD = 3
 FIXED_MIN_CHANGE = 0.031
 
+
 # Umbral para señal de compra
-PROB_THRESHOLD_HIGH = 0.61
+PROB_THRESHOLD_HIGH = 0.6
 
 # Lista fija de características (indicadores + OHLC + volumen)
 # === Se eliminaron VWAP y ATR para evitar problemas ===
