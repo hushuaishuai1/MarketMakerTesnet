@@ -16,8 +16,8 @@ config = {
         'symbols': ['BTCUSDT'],
         'interval': '15m',
         'start_date': '2016-06-07',
-        'end_date': '2025-01-10',
-        'max_candles': 400000
+        'end_date': '2025-01-29',
+        'max_candles': 800000
     },
     'output': {
         'processed_data_dir': 'ML/data/processed',

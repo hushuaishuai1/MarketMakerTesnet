@@ -140,3 +140,11 @@
 2025-01-20 23:04:55,777 - INFO - Datos procesados (sin VWAP/ATR) guardados en ML/data/processed/BTCUSDT_15m_processed.csv
 2025-01-21 20:28:17,319 - INFO - Obteniendo datos para BTCUSDT desde 2016-06-07 00:00:00 hasta 2025-01-10
 2025-01-21 20:30:50,629 - INFO - Datos procesados (sin VWAP/ATR) guardados en ML/data/processed/BTCUSDT_15m_processed.csv
+2025-02-12 19:27:29,201 - INFO - Obteniendo datos para BTCUSDT desde 2017-06-07 00:00:00 hasta 2025-01-29
+2025-02-12 19:34:31,125 - INFO - Datos procesados (sin VWAP/ATR) guardados en ML/data/processed/BTCUSDT_5m_processed.csv
+2025-02-12 19:51:56,508 - INFO - Obteniendo datos para XRPUSDT desde 2017-06-07 00:00:00 hasta 2025-01-29
+2025-02-12 19:57:55,799 - INFO - Datos procesados (sin VWAP/ATR) guardados en ML/data/processed/XRPUSDT_5m_processed.csv
+2025-02-20 20:45:19,437 - INFO - Obteniendo datos para BTCUSDT desde 2024-12-29 00:00:00 hasta 2025-01-29
+2025-02-20 20:45:37,877 - INFO - Datos procesados (sin VWAP/ATR) guardados en ML/data/processed/BTCUSDT_15m_processed.csv
+2025-02-20 20:50:50,082 - INFO - Obteniendo datos para BTCUSDT desde 2016-06-07 00:00:00 hasta 2025-01-29
+2025-02-20 20:53:18,427 - INFO - Datos procesados (sin VWAP/ATR) guardados en ML/data/processed/BTCUSDT_15m_processed.csv

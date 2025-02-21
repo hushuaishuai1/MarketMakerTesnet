@@ -1,17 +1,3 @@
-# ====================================================================================
-# BACKTESTING WALK-FORWARD CON XGBOOST + ROBUST SCALER + INDICADORES MOMENTUM
-# ====================================================================================
-# Este script muestra un flujo completo para entrenar y backtestear un modelo ML
-# (XGBoost) con un pipeline que incluye RobustScaler. Añade lógica de:
-#   - Generación de un target binario basado en el cambio futuro de precio.
-#   - Indicadores técnicos, incluyendo momentum (ROC) y otros.
-#   - Stops basados en ATR (stop-loss, take-profit y trailing-stop).
-#   - Filtrado por tendencia (SMA_50 vs. SMA_200).
-#   - Walk-Forward Analysis para evaluar robustez en múltiples ventanas temporales.
-#
-# AJUSTA ESTOS PARÁMETROS A TU PROPIO CASO (features, horizonte, min_change, etc.).
-# Usa Optuna o la librería de tu preferencia para optimizar hiperparámetros.
-# ====================================================================================
 
 import os
 import sys
@@ -21,15 +7,14 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import logging
 
+
 from sklearn.preprocessing import RobustScaler
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
-from sklearn.model_selection import train_test_split
 from xgboost import XGBClassifier
 
-# Para métricas avanzadas (Sharpe, Sortino, etc.) con quantstats:
-# pip install quantstats
-# import quantstats as qs
+
+import quantstats as qs
 
 # =============== CONFIGURACIÓN DE LOGGING ===============
 logging.basicConfig(
@@ -40,26 +25,30 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # =============== PARÁMETROS GLOBALES ===============
-TRAIN_SIZE_BARS   = 25280   # Aprox. 6 meses si el timeframe es 15 min
-TEST_SIZE_BARS    = 5880    # Aprox. 1 mes
-STEP_SIZE         = 1880    # Se avanza 1 mes en cada ciclo
+TRAIN_SIZE_BARS   = 18580   # Aprox. 3 meses si el timeframe es 15 min
+TEST_SIZE_BARS    = 12400   # Aprox. 2 mes
+STEP_SIZE         = 5680    # Avanzamos 1 mes exacto para cada ciclo WFA
 INITIAL_CAPITAL   = 1000.0
-COMMISSION_RATE   = 0.0003  # 0.03% por trade (ejemplo)
+COMMISSION_RATE   = 0.0002  # 0.03% por trade
 RISK_PER_TRADE    = 0.01    # 1% del capital por operación
-MAX_BARS_IN_TRADE = 14    # Máx. velas manteniendo una posición
+MAX_BARS_IN_TRADE = 14 # Máx. velas manteniendo una posición
 
 # Parámetros ATR y stops
 ATR_PERIOD     = 14
-ATR_SL_MULT    = 0.2   # stop-loss = precio entrada - (ATR * 0.5)
-ATR_TP_MULT    = 0.6   # take-profit = precio entrada + (ATR * 1.0)
-TRAILING_MULT  = 0.2   # trailing-stop dinámico
+ATR_SL_MULT    = 0.23  # stop-loss = precio entrada - (ATR * 0.3)
+ATR_TP_MULT    = 0.46 # take-profit = precio entrada + (ATR * 1.0)
+TRAILING_MULT  = 0.24 # trailing-stop dinámico
 
 # Filtrado de tendencia
 SHORT_MA_COL = "SMA_50"
 LONG_MA_COL  = "SMA_200"
 
-# Umbral de probabilidad para señal de compra
-SIGNAL_THRESHOLD = 0.82
+# Umbral de probabilida
+#  para señal de compra
+SIGNAL_THRESHOLD = 0.74
+
+# Slippage
+SLIPPAGE_PCT = 0.0001  # 0.01% de slippage aprox
 
 # =============== FUNCIONES AUXILIARES ===============
 
@@ -117,7 +106,7 @@ def add_technical_indicators(df: pd.DataFrame) -> pd.DataFrame:
     df["ROC_14"]  = compute_roc(df["close"], 14)  # momentum
     return df
 
-def generate_target_binary(df: pd.DataFrame, look_ahead: int = 3, min_change: float = 0.03) -> pd.DataFrame:
+def generate_target_binary(df: pd.DataFrame, look_ahead: int = 5, min_change: float = 0.01) -> pd.DataFrame:
     """
     Genera un target binario basado en cambio futuro:
       1 => si el precio sube al menos min_change% en 'look_ahead' velas,
@@ -186,8 +175,7 @@ def create_pipeline_xgb() -> Pipeline:
         "subsample": 0.8,
         "colsample_bytree": 0.8,
         "random_state": 42,
-        "eval_metric": "logloss",
-        "use_label_encoder": False
+        "eval_metric": "logloss"
     }
 
     model = XGBClassifier(**xgb_params)
@@ -209,7 +197,7 @@ def train_model_on_window(df_train: pd.DataFrame) -> Pipeline:
 
     # 1) Añadir indicadores y target
     df_train = add_technical_indicators(df_train)
-    df_train = generate_target_binary(df_train, look_ahead=3, min_change=0.03)
+    df_train = generate_target_binary(df_train, look_ahead=5, min_change=0.01)
     if len(df_train) < 50:
         # Evitar entrenar con datos insuficientes
         return None
@@ -270,9 +258,9 @@ def volatility_position_size(capital, entry_price, stop_loss, consecutive_losses
         return 0.0
 
     size = risk_amount / distance_sl
-    # Evitar posiciones más grandes que todo el capital
-    max_size = capital / entry_price
-    size = min(size, max_size)
+    # Evitar posiciones más grandes que el 30% del capital
+    max_notional = capital * 0.3
+    size = min(size, max_notional / entry_price)
     return size
 
 def backtest_on_period(df: pd.DataFrame, pipeline: Pipeline, initial_capital: float):
@@ -339,17 +327,17 @@ def backtest_on_period(df: pd.DataFrame, pipeline: Pipeline, initial_capital: fl
 
             # 1) Stop-loss o trailing-stop
             if next_low <= final_stop:
-                exit_price = final_stop
+                exit_price = final_stop - (next_close * SLIPPAGE_PCT)  # Aplicar slippage
                 trade_closed = True
 
             # 2) Take-profit
             if (not trade_closed) and (next_high >= take_profit):
-                exit_price = take_profit
+                exit_price = take_profit + (next_close * SLIPPAGE_PCT)  # Aplicar slippage
                 trade_closed = True
 
             # 3) Cierre por tiempo máximo
             if (not trade_closed) and bars_in_trade >= MAX_BARS_IN_TRADE:
-                exit_price = next_close
+                exit_price = next_close - (next_close * SLIPPAGE_PCT)  # Aplicar slippage
                 trade_closed = True
 
             if trade_closed and exit_price is not None:
@@ -357,6 +345,7 @@ def backtest_on_period(df: pd.DataFrame, pipeline: Pipeline, initial_capital: fl
                 gross_pnl = (exit_price - trade_open["entry_price"]) * size
                 commission_exit = exit_price * size * COMMISSION_RATE
                 net_pnl = gross_pnl - commission_exit
+
                 capital += net_pnl
 
                 trades[-1]["exit_time"]       = idx_next
@@ -380,7 +369,7 @@ def backtest_on_period(df: pd.DataFrame, pipeline: Pipeline, initial_capital: fl
             # Checar si abrimos posición
             signal = df_bt.at[idx_now, "signal"]
             if signal == 1:
-                entry_price = current_close
+                entry_price = current_close + (current_close * SLIPPAGE_PCT)  # Aplicar slippage
                 atr_value   = df_bt.at[idx_now, "ATR"]
                 stop_loss   = entry_price - (ATR_SL_MULT * atr_value)
                 take_profit = entry_price + (ATR_TP_MULT * atr_value)
@@ -465,9 +454,10 @@ def walk_forward_analysis(df: pd.DataFrame):
                     f"Trades: {len(trades_df)}")
 
         all_equity_dfs.append(equity_df)
-        trades_df["train_range"] = f"{start_index}-{train_end}"
-        trades_df["test_range"]  = f"{train_end}-{test_end}"
-        all_trades_dfs.append(trades_df)
+        if not trades_df.empty:
+            trades_df["train_range"] = f"{start_index}-{train_end}"
+            trades_df["test_range"]  = f"{train_end}-{test_end}"
+            all_trades_dfs.append(trades_df)
 
         # Actualizar capital para la siguiente iteración
         capital = final_capital

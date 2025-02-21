@@ -9,7 +9,7 @@ import uvicorn
 import asyncio
 from api.backtesting import run_backtesting
 from api.binance_connector import get_historical_data
-from ML.model_training import train_model
+
 from ML.ml_strategy import run_ml_backtesting
 
 from ML.data_insert import insert_data
@@ -19,7 +19,7 @@ import logging
 import pandas as pd
 from typing import Dict, Any
 from datetime import datetime
-from settings import settings 
+
 # Cargar variables de entorno desde un archivo .env
 load_dotenv()
 

@@ -42,7 +42,7 @@ RANDOM_SEED = 44
 SAMPLE_FRAC = 0.9
 
 # Cantidad de trials de Optuna
-N_TRIALS =22
+N_TRIALS = 100
 N_JOBS_OPTUNA = 1
 
 # ¿Usar PCA?
@@ -51,7 +51,7 @@ PCA_N_COMPONENTS = 8
 
 # Directorio para resultados
 RESULTS_PATH = ".ML/results"
-MODEL_NAME = "XGBoost_Binario"
+MODEL_NAME = "XGBoost_Binario5m"
 
 # Parámetros fijos del target binario
 FIXED_LOOK_AHEAD = 3

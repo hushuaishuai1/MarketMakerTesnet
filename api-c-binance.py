@@ -44,9 +44,13 @@
 #python -m r_bot.data_revers
 # python -m r_bot.analysis
 # 
-# 
-# 
+# API_KEY = "FGapi1ruTsIvwGkUkcZqCBjU"    
+# API_SECRET = "BFla66ZOV29A-We4hJqbfn0JPfz0uYH5WaIbpdcmj3d6E464"
 
+# binance futures tesnet 
+# : API Key:  98dd90555b64331d55025f91e333ac0a55e127247dc3737d13e69461b420db44
+
+#   API Secret: b205aad519990488f3750b1fccda3c3473b6f54b618db0b2bda104bce46bea1b
 
 # #     start_date: "01 Jan, 2023"
 #   end_date: "01 Jul, 2024" 
