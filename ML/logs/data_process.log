@@ -148,3 +148,26 @@
 2025-02-20 20:45:37,877 - INFO - Datos procesados (sin VWAP/ATR) guardados en ML/data/processed/BTCUSDT_15m_processed.csv
 2025-02-20 20:50:50,082 - INFO - Obteniendo datos para BTCUSDT desde 2016-06-07 00:00:00 hasta 2025-01-29
 2025-02-20 20:53:18,427 - INFO - Datos procesados (sin VWAP/ATR) guardados en ML/data/processed/BTCUSDT_15m_processed.csv
+2025-02-25 19:18:35,953 - INFO - Obteniendo datos para BTCUSDT desde 2020-01-01 hasta 2025-01-01
+2025-02-25 19:19:41,352 - INFO - Obteniendo datos para BTCUSDT desde 2020-01-01 hasta 2025-01-01
+2025-02-25 19:45:15,518 - INFO - Obteniendo datos para ETH desde 2023-01-01 hasta 2024-01-01
+2025-02-25 19:45:21,099 - ERROR - Error al obtener datos para ETH (Intento 1/5): 400, message='Bad Request', url='https://api.binance.com/api/v3/klines?symbol=ETH&interval=5m&startTime=1672531200000&endTime=1704067200000&limit=1000'
+2025-02-25 19:45:23,627 - ERROR - Error al obtener datos para ETH (Intento 2/5): 400, message='Bad Request', url='https://api.binance.com/api/v3/klines?symbol=ETH&interval=5m&startTime=1672531200000&endTime=1704067200000&limit=1000'
+2025-02-25 19:45:26,130 - ERROR - Error al obtener datos para ETH (Intento 3/5): 400, message='Bad Request', url='https://api.binance.com/api/v3/klines?symbol=ETH&interval=5m&startTime=1672531200000&endTime=1704067200000&limit=1000'
+2025-02-25 19:45:28,341 - ERROR - Error al obtener datos para ETH (Intento 4/5): 400, message='Bad Request', url='https://api.binance.com/api/v3/klines?symbol=ETH&interval=5m&startTime=1672531200000&endTime=1704067200000&limit=1000'
+2025-02-25 19:45:30,552 - ERROR - Error al obtener datos para ETH (Intento 5/5): 400, message='Bad Request', url='https://api.binance.com/api/v3/klines?symbol=ETH&interval=5m&startTime=1672531200000&endTime=1704067200000&limit=1000'
+2025-02-25 19:45:32,553 - ERROR - No se pudo obtener datos para ETH después de 5 intentos.
+2025-02-25 19:45:32,554 - WARNING - No se obtuvieron datos para ETH en ese rango.
+2025-02-25 19:45:59,731 - INFO - Obteniendo datos para BTC desde 2023-01-01 hasta 2024-01-01
+2025-02-25 19:46:05,073 - ERROR - Error al obtener datos para BTC (Intento 1/5): 400, message='Bad Request', url='https://api.binance.com/api/v3/klines?symbol=BTC&interval=5m&startTime=1672531200000&endTime=1704067200000&limit=1000'
+2025-02-25 19:46:07,270 - ERROR - Error al obtener datos para BTC (Intento 2/5): 400, message='Bad Request', url='https://api.binance.com/api/v3/klines?symbol=BTC&interval=5m&startTime=1672531200000&endTime=1704067200000&limit=1000'
+2025-02-25 19:46:09,467 - ERROR - Error al obtener datos para BTC (Intento 3/5): 400, message='Bad Request', url='https://api.binance.com/api/v3/klines?symbol=BTC&interval=5m&startTime=1672531200000&endTime=1704067200000&limit=1000'
+2025-02-25 19:46:11,663 - ERROR - Error al obtener datos para BTC (Intento 4/5): 400, message='Bad Request', url='https://api.binance.com/api/v3/klines?symbol=BTC&interval=5m&startTime=1672531200000&endTime=1704067200000&limit=1000'
+2025-02-25 19:46:13,856 - ERROR - Error al obtener datos para BTC (Intento 5/5): 400, message='Bad Request', url='https://api.binance.com/api/v3/klines?symbol=BTC&interval=5m&startTime=1672531200000&endTime=1704067200000&limit=1000'
+2025-02-25 19:46:15,857 - ERROR - No se pudo obtener datos para BTC después de 5 intentos.
+2025-02-25 19:46:15,859 - WARNING - No se obtuvieron datos para BTC en ese rango.
+2025-02-25 19:47:18,641 - INFO - Obteniendo datos para BTCUSDT desde 2020-01-01 hasta 2025-01-01
+2025-02-25 19:49:42,234 - INFO - Obteniendo datos para BTCUSDT desde 2020-01-01 hasta 2025-01-01
+2025-02-25 19:56:11,451 - INFO - Obteniendo datos para BTCUSDT desde 2020-01-01 hasta 2025-01-01
+2025-02-25 19:58:03,408 - INFO - Obteniendo datos para BTCUSDT desde 2020-01-01 hasta 2025-01-01
+2025-02-25 20:01:58,235 - INFO - Obteniendo datos para BTCUSDT desde 2022-01-01 hasta 2025-01-01
