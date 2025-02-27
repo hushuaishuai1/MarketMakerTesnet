@@ -1,3 +1,0 @@
-2024-12-10 12:36:33,068 INFO Cargando datos desde caché: data/raw/BTCUSDT_15m_590000.csv
-2024-12-10 12:36:33,737 INFO Caché insuficiente. Actualizando datos...
-2024-12-10 12:36:33,738 INFO Obteniendo datos desde Binance para BTCUSDT, intervalo 15m, limit=590000
